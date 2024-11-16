@@ -1,0 +1,452 @@
+<!-- Dialog Template for Adding Teacher -->
+<mat-card class="mat-elevation-z12 hidden-scrollbar">
+  <h2 mat-dialog-title class="popup-title">Add Teacher</h2>
+  <div mat-dialog-content>
+    <!-- Joining Details Section -->
+    <div class="joining-details">
+      <h3 class="details-title first">Joining Details:</h3>
+      <div class="grid">
+        <mat-form-field class="input-field">
+          <mat-label>Staff ID No.</mat-label>
+          <input matInput [(ngModel)]="teacher.staffID" name="staffID" />
+        </mat-form-field>
+
+        <mat-form-field class="input-field">
+          <mat-label>Joining Date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            [(ngModel)]="joiningDateTemp"
+            (ngModelChange)="onJoiningDateChange()"
+            name="admissionDate"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <div class="cards input-field">
+          <ul class="upld">
+            <li
+              class="upload-card"
+              *ngFor="let item of teacherImage; let i = index"
+            >
+              <div
+                class="upload-card-brd"
+                (click)="selectFile('teacherImage')"
+                id="{{ i }}"
+                *ngIf="item == ''"
+              >
+                <input
+                  type="file"
+                  id="teacherFileUpload"
+                  name="teacherFileUpload"
+                  (change)="selectImage($event, 'teacherImageUpload')"
+                  style="display: none"
+                  multiple
+                />
+                <div>
+                  <div class="upload-image-txt">Add Teacher Image:</div>
+                  <button class="camera">
+                    <span class="add-photo">Upload Image</span>
+                  </button>
+                </div>
+              </div>
+              <div class="upload-card-brd" *ngIf="item != ''">
+                <div class="preview">
+                  <button
+                    class="delete-button"
+                    (click)="deleteBackgroundImage(i, 'teacherImageUpload')"
+                  >
+                    <span class="delete-icon">&#10006;</span>
+                  </button>
+                  <img [src]="item" height="80px" width="80px" alt="" />
+                </div>
+                <div class="preview-txt">Teacher Image</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <!-- Designation Dropdown -->
+        <mat-form-field class="input-field">
+          <mat-label>Designation</mat-label>
+          <mat-select
+            [(ngModel)]="selectedDesignationId"
+            (selectionChange)="onDesignationSelect($event.value)"
+          >
+            <mat-option
+              *ngFor="let designation of designations"
+              [value]="designation.id"
+            >
+              {{ designation.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Department Dropdown -->
+        <mat-form-field class="input-field">
+          <mat-label>Department</mat-label>
+          <mat-select
+            [(ngModel)]="selectedDepartmentId"
+            (selectionChange)="onDepartmentSelect($event.value)"
+          >
+            <mat-option
+              *ngFor="let department of departments"
+              [value]="department.id"
+            >
+              {{ department.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Personal Details Section -->
+    <div class="personal-details">
+      <h3 class="details-title">Personal Details:</h3>
+      <div class="grid">
+        <mat-form-field class="input-field">
+          <mat-label>First Name</mat-label>
+          <input matInput [(ngModel)]="teacher.firstName" />
+        </mat-form-field>
+        <mat-form-field class="input-field">
+          <mat-label>Last Name</mat-label>
+          <input matInput [(ngModel)]="teacher.lastName" />
+        </mat-form-field>
+        <mat-form-field class="input-field">
+          <mat-label>Mobile No.</mat-label>
+          <input matInput type="tel" [(ngModel)]="teacher.mobileNo" />
+        </mat-form-field>
+        <mat-form-field class="input-field">
+          <mat-label>Alternate Number</mat-label>
+          <input matInput type="tel" [(ngModel)]="teacher.alternateMobileNo" />
+        </mat-form-field>
+        <mat-form-field class="input-field">
+          <mat-label>WhatsApp No.</mat-label>
+          <input matInput type="tel" [(ngModel)]="teacher.whatsAppNo" />
+        </mat-form-field>
+        <mat-form-field class="input-field">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" [(ngModel)]="teacher.email" />
+        </mat-form-field>
+        <div class="input-field">
+          <div class="input-field-title">Gender*</div>
+          <mat-radio-group [(ngModel)]="teacher.gender">
+            <mat-radio-button value="male">Male</mat-radio-button>
+            <mat-radio-button value="female">Female</mat-radio-button>
+            <mat-radio-button value="other">Other</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <mat-form-field class="input-field">
+          <mat-label>Date of Birth</mat-label>
+          <input
+            matInput
+            [matDatepicker]="dobPicker"
+            [(ngModel)]="dobDateTemp"
+            (ngModelChange)="onDOBDateChange()"
+            name="dobDate"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="dobPicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #dobPicker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="input-field">
+          <mat-label>Martial Status</mat-label>
+          <mat-select [(ngModel)]="teacher.maritalStatus">
+            <mat-option value="Unmarried">Unmarried</mat-option>
+            <mat-option value="Married">Married</mat-option>
+            <mat-option value="Widowed">Widowed</mat-option>
+            <mat-option value="Divorced">Divorced</mat-option>
+            <mat-option value="Seperated">Seperated</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="input-field">
+          <mat-label>Spouse Name</mat-label>
+          <input matInput [(ngModel)]="teacher.spouseName" />
+        </mat-form-field>
+        <mat-form-field class="input-field">
+          <mat-label>Father Name</mat-label>
+          <input matInput [(ngModel)]="teacher.fatherName" />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Experience Section -->
+    <div class="personal-details">
+      <h3 class="details-title">Experience (If Any):</h3>
+      <div class="grid">
+        <mat-form-field class="input-field">
+          <mat-label>Last Organization Name</mat-label>
+          <input
+            matInput
+            [(ngModel)]="teacher.teacherExperience[0].lastOrganisation"
+          />
+        </mat-form-field>
+        <mat-form-field class="input-field">
+          <mat-label>Last Job Position</mat-label>
+          <input
+            matInput
+            [(ngModel)]="teacher.teacherExperience[0].lastJobPosition"
+          />
+        </mat-form-field>
+        <mat-form-field class="input-field">
+          <mat-label>How many Years of Experience?</mat-label>
+          <input
+            matInput
+            type="tel"
+            [(ngModel)]="teacher.teacherExperience[0].yearsOfExperience"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Religion Details Section -->
+    <div class="religion-details">
+      <h3 class="details-title">Religion and Category:</h3>
+      <div class="grid">
+        <mat-form-field class="input-field">
+          <mat-label>Nationality</mat-label>
+          <input matInput [(ngModel)]="teacher.nationality" />
+        </mat-form-field>
+
+        <mat-form-field class="input-field">
+          <mat-label>Religion</mat-label>
+          <input matInput [(ngModel)]="teacher.religion" />
+        </mat-form-field>
+
+        <mat-form-field class="input-field">
+          <mat-label>Caste Category</mat-label>
+          <input matInput [(ngModel)]="teacher.castCategory" />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Display Qualification Rows -->
+    <div class="qualifications-details">
+      <h3 class="details-title">Qualification:</h3>
+
+      <!-- Row for Headings -->
+      <div class="qual-details-row header-row">
+        <div class="detail-header">Qualification</div>
+        <div class="parent-header">College</div>
+        <div class="parent-header">Pass. Year</div>
+      </div>
+
+      <!-- No Qualification Fields Initially -->
+      <div *ngIf="teacher.teacherQualification.length === 0" class="add-button">
+        <button mat-icon-button (click)="addQualification()" class="btn">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+
+      <!-- Input Fields for Each Qualification Row -->
+      <div
+        class="qual-details-row"
+        *ngFor="
+          let qualification of teacher.teacherQualification;
+          let i = index
+        "
+      >
+        <!-- Delete Button -->
+        <button
+          mat-icon-button
+          (click)="removeQualification(i)"
+          class="remove-btn"
+        >
+          <mat-icon>cancel</mat-icon>
+        </button>
+
+        <!-- Input Fields -->
+        <div class="form-field">
+          <mat-form-field appearance="outline">
+            <mat-label>Qualification</mat-label>
+            <input matInput [(ngModel)]="qualification.qualification" />
+          </mat-form-field>
+        </div>
+        <div class="form-field">
+          <mat-form-field appearance="outline">
+            <mat-label>College</mat-label>
+            <input matInput [(ngModel)]="qualification.college" />
+          </mat-form-field>
+        </div>
+        <div class="form-field">
+          <mat-form-field appearance="outline">
+            <mat-label>Pass Year</mat-label>
+            <input
+              matInput
+              [matDatepicker]="picker"
+              [(ngModel)]="passingDates[i]"
+              (ngModelChange)="onPassingYearChange(i)"
+            />
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- Add Button for New Rows -->
+      <div class="add-button" *ngIf="teacher.teacherQualification.length > 0">
+        <button mat-icon-button (click)="addQualification()" class="btn">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <!-- Aaddhar Card Details Section -->
+    <div class="aadhar-card-details">
+      <h3 class="details-title">Aadhar Card Details:</h3>
+      <div class="grid">
+        <mat-form-field class="input-field">
+          <mat-label>Aadhar Card No.</mat-label>
+          <input matInput [(ngModel)]="teacher.aadharNo" />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Bank Details Section -->
+    <div class="bank-details">
+      <h3 class="details-title">Bank Account Details:</h3>
+      <div class="grid">
+        <mat-form-field class="input-field">
+          <mat-label>Bank Name</mat-label>
+          <input
+            matInput
+            [(ngModel)]="teacher.teacherBankAccountDetail[0].bankName"
+          />
+        </mat-form-field>
+        <mat-form-field class="input-field">
+          <mat-label>Bank Branch</mat-label>
+          <input
+            matInput
+            [(ngModel)]="teacher.teacherBankAccountDetail[0].branchName"
+          />
+        </mat-form-field>
+        <mat-form-field class="input-field">
+          <mat-label>IFSC Code</mat-label>
+          <input
+            matInput
+            [(ngModel)]="teacher.teacherBankAccountDetail[0].ifscCode"
+          />
+        </mat-form-field>
+        <mat-form-field class="input-field">
+          <mat-label>Account No.</mat-label>
+          <input
+            matInput
+            [(ngModel)]="teacher.teacherBankAccountDetail[0].accountNo"
+          />
+        </mat-form-field>
+        <mat-form-field class="input-field">
+          <mat-label>PAN No.</mat-label>
+          <input
+            matInput
+            [(ngModel)]="teacher.teacherBankAccountDetail[0].panNo"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Permanent Address Section -->
+    <div class="address-details">
+      <h3 class="details-title">Permanent Address:</h3>
+      <div class="grid">
+        <mat-form-field class="input-field">
+          <mat-label>Address</mat-label>
+          <input
+            matInput
+            [(ngModel)]="teacher.teacherPermanentAddress[0].address"
+          />
+        </mat-form-field>
+        <mat-form-field class="input-field">
+          <mat-label>Country</mat-label>
+          <input
+            matInput
+            [(ngModel)]="teacher.teacherPermanentAddress[0].country"
+          />
+        </mat-form-field>
+        <mat-form-field class="input-field">
+          <mat-label>Pincode</mat-label>
+          <input
+            matInput
+            [(ngModel)]="teacher.teacherPermanentAddress[0].pincode"
+          />
+        </mat-form-field>
+        <mat-form-field class="input-field">
+          <mat-label>State</mat-label>
+          <input
+            matInput
+            [(ngModel)]="teacher.teacherPermanentAddress[0].state"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="input-field">
+          <mat-label>City</mat-label>
+          <input
+            matInput
+            [(ngModel)]="teacher.teacherPermanentAddress[0].city"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Temporary Address Section -->
+    <div class="address-details">
+      <h3 class="details-title">Temporary Address:</h3>
+      <div class="grid">
+        <mat-form-field class="input-field">
+          <mat-label>Address</mat-label>
+          <input
+            matInput
+            [(ngModel)]="teacher.teacherTemporaryAddress[0].address"
+          />
+        </mat-form-field>
+        <mat-form-field class="input-field">
+          <mat-label>Country</mat-label>
+          <input
+            matInput
+            [(ngModel)]="teacher.teacherTemporaryAddress[0].country"
+          />
+        </mat-form-field>
+        <mat-form-field class="input-field">
+          <mat-label>Pincode</mat-label>
+          <input
+            matInput
+            [(ngModel)]="teacher.teacherTemporaryAddress[0].pincode"
+          />
+        </mat-form-field>
+        <mat-form-field class="input-field">
+          <mat-label>State</mat-label>
+          <input
+            matInput
+            [(ngModel)]="teacher.teacherTemporaryAddress[0].state"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="input-field">
+          <mat-label>City</mat-label>
+          <input
+            matInput
+            [(ngModel)]="teacher.teacherTemporaryAddress[0].city"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+
+  <div mat-dialog-actions>
+    <button
+      mat-button
+      color="primary"
+      class="add-teacher-btn"
+      (click)="addTeacher()"
+    >
+      Add Teacher
+    </button>
+  </div>
+</mat-card>

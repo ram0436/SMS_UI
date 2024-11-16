@@ -1,0 +1,530 @@
+<div class="student-details-container">
+  <div *ngIf="isLoading" class="loading-spinner">
+    <!-- Loading Spinner or Text -->
+    <mat-spinner></mat-spinner>
+  </div>
+  <div *ngIf="!isLoading">
+    <!-- Full width container -->
+    <div class="student-header">
+      <img
+        [src]="studentDetails.studentAdmissionDetail[0]?.studentImageURL"
+        alt="Student Image"
+        class="student-image"
+      />
+      <div class="student-info">
+        <h2 class="student-name" style="text-transform: capitalize">
+          {{ studentDetails.name }}
+        </h2>
+        <p class="info">
+          <strong class="info-title">Admission No.</strong>
+          <span>:</span>
+          <span>{{
+            studentDetails.studentAdmissionDetail[0]?.admissionNo
+          }}</span>
+        </p>
+        <p class="info">
+          <strong class="info-title">Username</strong>
+          <span>:</span>
+          <span>{{ studentDetails.studentAdmissionDetail[0]?.srNo }}</span>
+        </p>
+        <p class="info">
+          <strong class="info-title">Father Name </strong>
+          <span>:</span>
+          <span>{{ studentDetails.studentFatherDetail[0]?.name }} </span>
+        </p>
+        <p class="info">
+          <strong class="info-title">Class</strong>
+          <span>:</span>
+          <span>{{
+            getClassName(studentDetails.studentAdmissionDetail[0]?.classId)
+          }}</span>
+        </p>
+      </div>
+      <!-- Material Icon Button for Edit/Delete -->
+      <button mat-icon-button [matMenuTriggerFor]="menu" class="menu-button">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="editStudent()">Edit</button>
+        <button mat-menu-item (click)="deleteStudent()">Delete</button>
+      </mat-menu>
+    </div>
+
+    <!-- Two column container -->
+    <div class="details-container">
+      <!-- Left Column -->
+      <div class="details-column">
+        <div class="box">
+          <h3 class="title-box">Admission Details</h3>
+          <table>
+            <tr>
+              <td>ID</td>
+              <td>{{ studentDetails.studentAdmissionDetail[0]?.id }}</td>
+            </tr>
+            <tr>
+              <td>PEN No.</td>
+              <td>{{ studentDetails.studentAdmissionDetail[0]?.penNo }}</td>
+            </tr>
+            <tr>
+              <td>Admission No.</td>
+              <td>
+                {{ studentDetails.studentAdmissionDetail[0]?.admissionNo }}
+              </td>
+            </tr>
+            <tr>
+              <td>Enrollment No.</td>
+              <td>
+                {{ studentDetails.studentAdmissionDetail[0]?.enrollmentNo }}
+              </td>
+            </tr>
+            <tr>
+              <td>Registration No.</td>
+              <td>
+                {{ studentDetails.studentAdmissionDetail[0]?.registrationNo }}
+              </td>
+            </tr>
+            <tr>
+              <td>SR No.</td>
+              <td>{{ studentDetails.studentAdmissionDetail[0]?.srNo }}</td>
+            </tr>
+            <tr>
+              <td>Roll No.</td>
+              <td>{{ studentDetails.studentAdmissionDetail[0]?.rollNo }}</td>
+            </tr>
+            <tr>
+              <td>Admission Date</td>
+              <td>
+                {{
+                  studentDetails.studentAdmissionDetail[0]?.admissionDate
+                    | date : "short" || "-"
+                }}
+              </td>
+            </tr>
+            <tr>
+              <td>Class Name</td>
+              <td>
+                {{
+                  getClassName(
+                    studentDetails.studentAdmissionDetail[0]?.classId
+                  )
+                }}
+              </td>
+            </tr>
+            <tr>
+              <td>Section</td>
+              <td>
+                {{
+                  getSectionName(
+                    studentDetails.studentAdmissionDetail[0]?.sectionId
+                  )
+                }}
+              </td>
+            </tr>
+            <tr>
+              <td>Medium</td>
+              <td>
+                {{ studentDetails.studentAdmissionDetail[0]?.educationMedium }}
+              </td>
+            </tr>
+            <tr>
+              <td>Stream</td>
+              <td>
+                {{
+                  getStreamName(
+                    studentDetails.studentAdmissionDetail[0]?.streamId
+                  )
+                }}
+              </td>
+            </tr>
+            <tr>
+              <td>Is RTE?</td>
+              <td>
+                {{
+                  studentDetails.studentAdmissionDetail[0]?.isRTEStudent
+                    ? "Yes"
+                    : "No"
+                }}
+              </td>
+            </tr>
+            <tr>
+              <td>Referred By</td>
+              <td>
+                {{ studentDetails.studentAdmissionDetail[0]?.referredBy }}
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="box">
+          <h3 class="title-box">Parents Details</h3>
+          <table
+            style="width: 100%; text-align: left; border-collapse: collapse"
+          >
+            <tbody>
+              <!-- Key-Value Pairs for each attribute -->
+              <tr>
+                <td><strong>Detail</strong></td>
+                <td><strong>Father</strong></td>
+                <td><strong>Mother</strong></td>
+                <td><strong>Guardian</strong></td>
+              </tr>
+              <tr>
+                <td><strong>Name</strong></td>
+                <td>{{ studentDetails.studentFatherDetail[0]?.name }}</td>
+                <td>{{ studentDetails.studentMotherDetail[0]?.name }}</td>
+                <td>{{ studentDetails.studentGuardianDetail[0]?.name }}</td>
+              </tr>
+              <tr>
+                <td><strong>Residential Address</strong></td>
+                <td>
+                  {{
+                    studentDetails.studentFatherDetail[0]?.residentialAddress
+                  }}
+                </td>
+                <td>
+                  {{
+                    studentDetails.studentMotherDetail[0]?.residentialAddress
+                  }}
+                </td>
+                <td>
+                  {{
+                    studentDetails.studentGuardianDetail[0]?.residentialAddress
+                  }}
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Official Address</strong></td>
+                <td>
+                  {{ studentDetails.studentFatherDetail[0]?.officialAddress }}
+                </td>
+                <td>
+                  {{ studentDetails.studentMotherDetail[0]?.officialAddress }}
+                </td>
+                <td>
+                  {{ studentDetails.studentGuardianDetail[0]?.officialAddress }}
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Annual Income</strong></td>
+                <td>
+                  {{ studentDetails.studentFatherDetail[0]?.annualIncome }}
+                </td>
+                <td>
+                  {{ studentDetails.studentMotherDetail[0]?.annualIncome }}
+                </td>
+                <td>
+                  {{ studentDetails.studentGuardianDetail[0]?.annualIncome }}
+                </td>
+              </tr>
+              <tr class="email-row">
+                <td><strong>Email</strong></td>
+                <td>
+                  {{
+                    truncateEmail(studentDetails.studentFatherDetail[0]?.email)
+                  }}
+                </td>
+                <td>
+                  {{
+                    truncateEmail(studentDetails.studentMotherDetail[0]?.email)
+                  }}
+                </td>
+                <td>
+                  {{
+                    truncateEmail(
+                      studentDetails.studentGuardianDetail[0]?.email
+                    )
+                  }}
+                </td>
+              </tr>
+
+              <tr>
+                <td><strong>Mobile No</strong></td>
+                <td>{{ studentDetails.studentFatherDetail[0]?.mobileNo }}</td>
+                <td>{{ studentDetails.studentMotherDetail[0]?.mobileNo }}</td>
+                <td>{{ studentDetails.studentGuardianDetail[0]?.mobileNo }}</td>
+              </tr>
+              <tr>
+                <td><strong>Aadhar No</strong></td>
+                <td>{{ studentDetails.studentFatherDetail[0]?.aadharNo }}</td>
+                <td>{{ studentDetails.studentMotherDetail[0]?.aadharNo }}</td>
+                <td>{{ studentDetails.studentGuardianDetail[0]?.aadharNo }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="box">
+          <h3 class="title-box">Previous Qualifications</h3>
+          <table>
+            <tr>
+              <td>Qualification</td>
+              <td>
+                {{
+                  studentDetails.studentPreviousQualification[0]?.qualification
+                }}
+              </td>
+            </tr>
+            <tr>
+              <td>Passing Year</td>
+              <td>
+                {{
+                  studentDetails.studentPreviousQualification[0]?.passingYear
+                    | date : "short" || "-"
+                }}
+              </td>
+            </tr>
+            <tr>
+              <td>School</td>
+              <td>
+                {{ studentDetails.studentPreviousQualification[0]?.schoolName }}
+              </td>
+            </tr>
+            <tr>
+              <td>Board</td>
+              <td>
+                {{ studentDetails.studentPreviousQualification[0]?.boardName }}
+              </td>
+            </tr>
+            <tr>
+              <td>Roll No.</td>
+              <td>
+                {{ studentDetails.studentPreviousQualification[0]?.rollNo }}
+              </td>
+            </tr>
+            <tr>
+              <td>Percent</td>
+              <td>
+                {{ studentDetails.studentPreviousQualification[0]?.percent }}%
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="box">
+          <h3 class="title-box">Enrolled Details</h3>
+          <table>
+            <tr>
+              <td>School Branch</td>
+              <td>
+                {{
+                  getSchoolBranchName(
+                    studentDetails.studentAdmissionDetail[0]?.schoolBranchId
+                  )
+                }}
+              </td>
+            </tr>
+            <tr>
+              <td>Session</td>
+              <td>
+                {{ studentDetails.studentAdmissionDetail[0]?.schoolSessionId }}
+              </td>
+            </tr>
+            <tr>
+              <td>Class Name</td>
+              <td>
+                {{
+                  getClassName(
+                    studentDetails.studentAdmissionDetail[0]?.classId
+                  )
+                }}
+              </td>
+            </tr>
+            <tr>
+              <td>Section</td>
+              <td>
+                {{
+                  getSectionName(
+                    studentDetails.studentAdmissionDetail[0]?.sectionId
+                  )
+                }}
+              </td>
+            </tr>
+            <tr>
+              <td>Stream</td>
+              <td>
+                {{
+                  getStreamName(
+                    studentDetails.studentAdmissionDetail[0]?.streamId
+                  )
+                }}
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="box">
+          <h3 class="title-box">Dropout Details</h3>
+          <table>
+            <tr>
+              <td>Is Dropout?</td>
+              <td>
+                {{
+                  studentDetails.studentLastSchoolDetail[0]?.isDropout
+                    ? "Yes"
+                    : "No"
+                }}
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- Right Column -->
+      <div class="details-column">
+        <div class="box">
+          <h3 class="title-box">Personal Details</h3>
+          <table>
+            <tr>
+              <td>Gender</td>
+              <td>{{ studentDetails.gender }}</td>
+            </tr>
+            <tr>
+              <td>Blood Group</td>
+              <td>{{ studentDetails.bloodGroup }}</td>
+            </tr>
+            <tr>
+              <td>Height</td>
+              <td>{{ studentDetails.height }}</td>
+            </tr>
+            <tr>
+              <td>Weight</td>
+              <td>{{ studentDetails.weight }}</td>
+            </tr>
+            <tr>
+              <td>DOB</td>
+              <td>{{ studentDetails.dob | date : "short" || "-" }}</td>
+            </tr>
+          </table>
+        </div>
+        <div class="box">
+          <h3 class="title-box">Certificate Details</h3>
+          <table>
+            <tr>
+              <td>PEN No.</td>
+              <td>{{ studentDetails.studentAdmissionDetail[0].penNo }}</td>
+            </tr>
+            <tr>
+              <td>Aadhar No.</td>
+              <td>{{ studentDetails.studentFatherDetail[0].aadharNo }}</td>
+            </tr>
+            <tr>
+              <td>DOB Certificate No.</td>
+              <td>{{ studentDetails.dobCertificateNo }}</td>
+            </tr>
+            <tr>
+              <td>Income Certificate No.</td>
+              <td>{{ studentDetails.studentFatherDetail[0].annualIncome }}</td>
+            </tr>
+            <tr>
+              <td>Caste Certificate No.</td>
+              <td>
+                {{ studentDetails.studentReligionAndCastCategory[0].caste }}
+              </td>
+            </tr>
+            <tr>
+              <td>Domicile Certificate No.</td>
+              <td>{{ studentDetails.studentPermanentAddress[0].state }}</td>
+            </tr>
+            <tr>
+              <td>Scholarship ID & Password</td>
+              <td>
+                {{ studentDetails.studentAdmissionDetail[0].registrationNo }}
+                &nbsp;{{
+                  studentDetails.studentAdmissionDetail[0].enrollmentNo
+                }}
+              </td>
+            </tr>
+            <tr>
+              <td>Govt. Student ID</td>
+              <td>{{ studentDetails.studentAdmissionDetail[0].srNo }}</td>
+            </tr>
+            <tr>
+              <td>Govt. Family ID</td>
+              <td>
+                {{ studentDetails.studentAdmissionDetail[0].admissionNo }}
+              </td>
+            </tr>
+            <tr>
+              <td>Transfer Certificate No.</td>
+              <td>
+                {{ studentDetails.studentTransferCertificate[0].certificateNo }}
+              </td>
+            </tr>
+            <tr>
+              <td>PAN No.</td>
+              <td>{{ studentDetails.studentBankAccountDetail[0].panNo }}</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="box">
+          <h3 class="title-box">Last School Details</h3>
+          <table>
+            <tr>
+              <td>School Name</td>
+              <td>
+                {{ studentDetails.studentLastSchoolDetail[0]?.schoolName }}
+              </td>
+            </tr>
+            <tr>
+              <td>Address</td>
+              <td>{{ studentDetails.studentLastSchoolDetail[0]?.address }}</td>
+            </tr>
+            <tr>
+              <td>Attended Class</td>
+              <td>
+                {{ studentDetails.studentLastSchoolDetail[0]?.attendentClass }}
+              </td>
+            </tr>
+            <tr>
+              <td>Affiliated To</td>
+              <td>
+                {{ studentDetails.studentLastSchoolDetail[0]?.affiliatedTo }}
+              </td>
+            </tr>
+            <tr>
+              <td>Last Session</td>
+              <td>
+                {{ studentDetails.studentLastSchoolDetail[0]?.lastSession }}
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="box">
+          <h3 class="title-box">Bank Details</h3>
+          <table>
+            <tr>
+              <td>Bank Name</td>
+              <td>
+                {{ studentDetails.studentBankAccountDetail[0]?.bankName }}
+              </td>
+            </tr>
+            <tr>
+              <td>Branch Name</td>
+              <td>
+                {{ studentDetails.studentBankAccountDetail[0]?.branchName }}
+              </td>
+            </tr>
+            <tr>
+              <td>Account No.</td>
+              <td>
+                {{ studentDetails.studentBankAccountDetail[0]?.accountNo }}
+              </td>
+            </tr>
+            <tr>
+              <td>IFSC Code</td>
+              <td>
+                {{ studentDetails.studentBankAccountDetail[0]?.ifscCode }}
+              </td>
+            </tr>
+            <tr>
+              <td>PAN No.</td>
+              <td>{{ studentDetails.studentBankAccountDetail[0]?.panNo }}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

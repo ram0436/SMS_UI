@@ -1,0 +1,109 @@
+.student-details-container {
+  padding: 20px 20px;
+  position: relative;
+}
+
+.student-header {
+  display: flex;
+  gap: 20px;
+  background-color: #fff;
+  align-items: center;
+  margin-bottom: 20px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  position: relative;
+}
+
+.student-header .student-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.student-info {
+  padding-left: 20px;
+  border-left: 1px solid #ddd;
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.student-info .student-name {
+  color: #0099fe;
+}
+
+.student-info p {
+  margin-bottom: 10px;
+}
+
+.menu-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+::ng-deep .mat-icon {
+  color: #0099fe;
+}
+
+.details-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.details-column {
+  width: 49%;
+}
+
+.box {
+  background-color: #fff;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  padding: 15px;
+  width: 100%;
+}
+
+.title-box {
+  background-color: #eff6ec;
+}
+
+h3 {
+  font-size: 18px;
+  padding: 10px 10px;
+  margin-bottom: 0px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table td {
+  padding: 8px;
+  border: 1px solid #ddd;
+  text-transform: capitalize;
+}
+
+/* Table Header and Cells */
+th,
+td {
+  text-align: left;
+  border: 1px solid #ddd;
+  overflow: hidden; /* Hides overflow text */
+  text-overflow: ellipsis; /* Truncates long text with ellipsis */
+}
+
+.loading-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.email-row td {
+  text-transform: lowercase !important;
+}

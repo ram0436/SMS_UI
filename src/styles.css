@@ -1,0 +1,29 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: "Montserrat", serif;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+.mat-mdc-radio-button.mat-accent {
+  --mdc-radio-disabled-selected-icon-color: black;
+  --mdc-radio-disabled-unselected-icon-color: black;
+  --mdc-radio-unselected-hover-icon-color: #212121;
+  --mdc-radio-unselected-focus-icon-color: #212121;
+  --mdc-radio-unselected-icon-color: rgba(0, 0, 0, 0.54);
+  --mdc-radio-unselected-pressed-icon-color: rgba(0, 0, 0, 0.54);
+  --mdc-radio-selected-focus-icon-color: #0099fe !important;
+  --mdc-radio-selected-hover-icon-color: #0099fe !important;
+  --mdc-radio-selected-icon-color: #0099fe !important;
+  --mdc-radio-selected-pressed-icon-color: #0099fe !important;
+  --mat-radio-ripple-color: black;
+  --mat-radio-checked-ripple-color: #0099fe !important;
+}
+
+.mat-mdc-form-field-subscript-wrapper {
+  display: none !important;
+}

@@ -1,0 +1,11 @@
+<div *ngIf="showSidebar">
+  <app-header></app-header>
+</div>
+<div class="layout-container">
+  <div class="sidebar" *ngIf="showSidebar">
+    <app-sidebar></app-sidebar>
+  </div>
+  <div class="main-content" [ngClass]="{ 'full-content': !showSidebar }">
+    <router-outlet></router-outlet>
+  </div>
+</div>

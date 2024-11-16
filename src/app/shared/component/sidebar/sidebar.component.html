@@ -1,0 +1,46 @@
+<div class="sidebar-container">
+  <input type="text" class="search-bar" placeholder="Search..." />
+
+  <ul class="menu-list">
+    <li
+      *ngFor="let item of menuItems"
+      [class.active]="item === selectedItem"
+      (click)="selectItem(item)"
+      class="menu-item"
+    >
+      <div class="main-item">
+        <div class="right">
+          <span class="material-symbols-outlined menu-icon">{{
+            item.icon
+          }}</span>
+          <span>{{ item.name }}</span>
+        </div>
+
+        <div class="left">
+          <!-- Right "Show More" Icon -->
+          <span
+            *ngIf="item.hasDropdown"
+            class="material-symbols-outlined icon-show-more"
+          >
+            chevron_right
+          </span>
+        </div>
+      </div>
+
+      <!-- Dropdown for items that have it -->
+      <ul *ngIf="item.hasDropdown && item.dropdownOpen" class="dropdown-list">
+        <li
+          *ngFor="let subItem of item.subItems"
+          class="dropdown-item"
+          [class.active]="subItem === selectedSubItem && item === selectedItem"
+          (click)="selectSubItem($event, subItem, item)"
+        >
+          <span class="material-symbols-outlined menu-icon">{{
+            subItem.icon
+          }}</span>
+          <span>{{ subItem.name }}</span>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>

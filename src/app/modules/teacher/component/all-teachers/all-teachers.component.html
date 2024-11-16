@@ -1,0 +1,141 @@
+<div class="all-teachers-container">
+  <div *ngIf="isLoading" class="loading-spinner">
+    <!-- Loading Spinner or Text -->
+    <mat-spinner></mat-spinner>
+  </div>
+  <div *ngIf="!isLoading">
+    <div class="container-about">
+      <div class="title">Teachers</div>
+      <div class="description">Following table shows all teachers</div>
+    </div>
+    <div class="main-grid">
+      <div class="grid-options">
+        <div class="grid-btns">
+          <span
+            class="material-symbols-outlined grid-btn"
+            (click)="openAddTeacherDialog()"
+          >
+            add
+          </span>
+          <span class="material-symbols-outlined grid-btn delete-btn">
+            delete
+          </span>
+          <span class="material-symbols-outlined grid-btn"> filter_alt </span>
+          <span class="material-symbols-outlined grid-btn"> search </span>
+        </div>
+        <div class="grid-total">
+          <span class="total"
+            ><span class="total-text">Total Teachers:</span>
+            {{ teacherList.length }}</span
+          >
+        </div>
+      </div>
+      <div class="grid-table">
+        <table mat-table [dataSource]="dataSource" matSort>
+          <ng-container matColumnDef="no">
+            <th mat-header-cell *matHeaderCellDef>#</th>
+            <td mat-cell *matCellDef="let teacher; let i = index">
+              <b>{{ i + 1 }}.</b>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="staffID">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Staff ID</th>
+            <td mat-cell *matCellDef="let teacher">
+              {{ teacher.staffID }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="profile">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Profile</th>
+            <td mat-cell *matCellDef="let teacher">
+              <img
+                [src]="teacher.profilePicURL"
+                alt=""
+                width="80"
+                height="80"
+                style="position: relative !important; left: auto !important"
+              />
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="nationality">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Nationality
+            </th>
+            <td mat-cell *matCellDef="let teacher">
+              {{ teacher.nationality || "-" }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="teacherDetails">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Teacher Details
+            </th>
+            <td mat-cell *matCellDef="let teacher" class="teacher-info">
+              <a
+                class="teacher-info-link"
+                [routerLink]="['/teacher/view', teacher.tableRefGuid]"
+              >
+                <div class="teacher-details">
+                  <span
+                    ><b>Name: </b>
+                    <span class="color-blue">{{
+                      teacher.firstName || "-"
+                    }}</span></span
+                  >
+                  <span><b>Email: </b> {{ teacher.email }}</span>
+                  <span
+                    ><b>Mobile: </b>
+                    <span class="color-blue">{{
+                      teacher.mobileNo || "-"
+                    }}</span></span
+                  >
+                </div>
+              </a>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="joiningTime">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Joining Time
+            </th>
+            <td mat-cell *matCellDef="let teacher">
+              {{ teacher.joiningDate | date : "short" || "-" }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="gender">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Gender</th>
+            <td mat-cell *matCellDef="let teacher">
+              {{ teacher.gender }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+            <td mat-cell *matCellDef="let teacher">
+              <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="editTeacher()">Edit</button>
+                <button mat-menu-item (click)="deleteTeacher()">Delete</button>
+              </mat-menu>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+
+        <!-- Paginator -->
+        <mat-paginator
+          [pageSize]="10"
+          [pageSizeOptions]="[5, 10, 20]"
+          showFirstLastButtons
+        ></mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,248 @@
+<div class="teacher-details-container">
+  <div *ngIf="isLoading" class="loading-spinner">
+    <!-- Loading Spinner or Text -->
+    <mat-spinner></mat-spinner>
+  </div>
+  <div *ngIf="!isLoading">
+    <!-- Full width container -->
+    <div class="teacher-header">
+      <img
+        [src]="teacherDetails.profilePicURL"
+        alt="Teacher Image"
+        class="teacher-image"
+      />
+      <div class="teacher-info">
+        <h2 class="teacher-name" style="text-transform: capitalize">
+          {{ teacherDetails.firstName }} {{ teacherDetails.lastName }}
+        </h2>
+        <p class="info">
+          <strong class="info-title">Staff ID.</strong>
+          <span>:</span>
+          <span>{{ teacherDetails.staffID }}</span>
+        </p>
+        <p class="info">
+          <strong class="info-title">Email</strong>
+          <span>:</span>
+          <span>{{ teacherDetails.email }}</span>
+        </p>
+        <p class="info">
+          <strong class="info-title">Father Name </strong>
+          <span>:</span>
+          <span>{{ teacherDetails.fatherName }} </span>
+        </p>
+        <p class="info">
+          <strong class="info-title">Class</strong>
+          <span>:</span>
+          <span></span>
+        </p>
+      </div>
+      <!-- Material Icon Button for Edit/Delete -->
+      <button mat-icon-button [matMenuTriggerFor]="menu" class="menu-button">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="editTeacher()">Edit</button>
+        <button mat-menu-item (click)="deleteTeacher()">Delete</button>
+      </mat-menu>
+    </div>
+
+    <!-- Two column container -->
+    <div class="details-container">
+      <!-- Left Column -->
+      <div class="details-column">
+        <div class="box">
+          <h3 class="title-box">Employment Details</h3>
+          <table>
+            <tr>
+              <td>Staff ID</td>
+              <td>{{ teacherDetails.staffID }}</td>
+            </tr>
+            <tr>
+              <td>Joining Date</td>
+              <td>{{ teacherDetails.joiningDate | date : "short" || "-" }}</td>
+            </tr>
+            <tr>
+              <td>Designation</td>
+              <td>
+                {{ getDesignationName(teacherDetails.designationId) }}
+              </td>
+            </tr>
+            <tr>
+              <td>Department</td>
+              <td>
+                {{ getDepartmentName(teacherDetails.departmentId) }}
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="box">
+          <h3 class="title-box">Experience</h3>
+          <table
+            style="width: 100%; text-align: left; border-collapse: collapse"
+          >
+            <tbody>
+              <tr>
+                <td>Last Organization</td>
+                <td>
+                  {{ teacherDetails.teacherExperience[0].lastOrganisation }}
+                </td>
+              </tr>
+              <tr>
+                <td>Position</td>
+                <td>
+                  {{ teacherDetails.teacherExperience[0].lastJobPosition }}
+                </td>
+              </tr>
+              <tr>
+                <td>Experience</td>
+                <td>
+                  {{ teacherDetails.teacherExperience[0].yearsOfExperience }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="box">
+          <h3 class="title-box">Qualification:</h3>
+          <table>
+            <!-- Key-Value Pairs for each attribute -->
+            <tr>
+              <td><strong>Qualification</strong></td>
+              <td><strong>College/University</strong></td>
+              <td><strong>Passing Year</strong></td>
+            </tr>
+            <tr>
+              <td>
+                {{ teacherDetails.teacherQualification[0]?.qualification }}
+              </td>
+              <td>{{ teacherDetails.teacherQualification[0]?.college }}</td>
+              <td>
+                {{
+                  teacherDetails.teacherQualification[0]?.passingYear
+                    | date : "short" || "-"
+                }}
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- Right Column -->
+      <div class="details-column">
+        <div class="box">
+          <h3 class="title-box">Personal Details</h3>
+          <table>
+            <tr>
+              <td>Name</td>
+              <td>
+                {{ teacherDetails.firstName }} {{ teacherDetails.lastName }}
+              </td>
+            </tr>
+            <tr>
+              <td>Marital Status</td>
+              <td>{{ teacherDetails.maritalStatus }}</td>
+            </tr>
+            <tr></tr>
+            <tr>
+              <td>Spouse Name</td>
+              <td>{{ teacherDetails.spouseName }}</td>
+            </tr>
+            <tr>
+              <td>Father Name</td>
+              <td>{{ teacherDetails.fatherName }}</td>
+            </tr>
+
+            <tr class="email-row">
+              <td>Email</td>
+              <td>{{ teacherDetails.email }}</td>
+            </tr>
+            <tr>
+              <td>Mobile</td>
+              <td>{{ teacherDetails.mobileNo }}</td>
+            </tr>
+            <tr>
+              <td>Alternate No.</td>
+              <td>{{ teacherDetails.alternateMobileNo }}</td>
+            </tr>
+            <tr>
+              <td>Whatsapp No.</td>
+              <td>{{ teacherDetails.whatsappNo }}</td>
+            </tr>
+            <tr>
+              <td>Gender</td>
+              <td>{{ teacherDetails.gender }}</td>
+            </tr>
+            <tr>
+              <td>DOB</td>
+              <td>{{ teacherDetails.dob | date : "short" || "-" }}</td>
+            </tr>
+            <tr>
+              <td>Religion</td>
+              <td>{{ teacherDetails.religion }}</td>
+            </tr>
+            <tr>
+              <td>Category</td>
+              <td>{{ teacherDetails.castCategory }}</td>
+            </tr>
+            <tr>
+              <td>Address</td>
+              <td>{{ teacherDetails.teacherPermanentAddress[0].address }}</td>
+            </tr>
+            <tr>
+              <td>City</td>
+              <td>{{ teacherDetails.teacherPermanentAddress[0].city }}</td>
+            </tr>
+            <tr>
+              <td>State</td>
+              <td>{{ teacherDetails.teacherPermanentAddress[0].state }}</td>
+            </tr>
+            <tr>
+              <td>Pincode</td>
+              <td>{{ teacherDetails.teacherPermanentAddress[0].pincode }}</td>
+            </tr>
+            <tr>
+              <td>Aadhar No</td>
+              <td>{{ teacherDetails.aadharNo }}</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="box">
+          <h3 class="title-box">Bank Details</h3>
+          <table>
+            <tr>
+              <td>Bank Name</td>
+              <td>
+                {{ teacherDetails.teacherBankAccountDetail[0]?.bankName }}
+              </td>
+            </tr>
+            <tr>
+              <td>Branch Name</td>
+              <td>
+                {{ teacherDetails.teacherBankAccountDetail[0]?.branchName }}
+              </td>
+            </tr>
+            <tr>
+              <td>Account No.</td>
+              <td>
+                {{ teacherDetails.teacherBankAccountDetail[0]?.accountNo }}
+              </td>
+            </tr>
+            <tr>
+              <td>IFSC Code</td>
+              <td>
+                {{ teacherDetails.teacherBankAccountDetail[0]?.ifscCode }}
+              </td>
+            </tr>
+            <tr>
+              <td>PAN No.</td>
+              <td>{{ teacherDetails.teacherBankAccountDetail[0]?.panNo }}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

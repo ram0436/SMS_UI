@@ -1,0 +1,1163 @@
+<!-- Dialog Template for Adding Student -->
+<mat-card class="mat-elevation-z12 hidden-scrollbar">
+  <h2 mat-dialog-title class="popup-title">Add Student</h2>
+  <div mat-dialog-content>
+    <!-- Admission Details Section -->
+    <div class="admission-details">
+      <h3 class="details-title first">Admission Details:</h3>
+      <div class="grid">
+        <mat-form-field class="input-field">
+          <mat-label>School Branch</mat-label>
+          <mat-select
+            [(ngModel)]="student.studentAdmissionDetail[0].schoolBranchId"
+            name="schoolBranch"
+          >
+            <mat-option *ngFor="let branch of branches" [value]="branch.id">
+              {{ branch.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="input-field">
+          <mat-label>Session</mat-label>
+          <mat-select [(ngModel)]="selectedSessionId" name="session">
+            <mat-option value="1">2025-2026</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="input-field">
+          <mat-label>PEN No.</mat-label>
+          <input
+            matInput
+            [(ngModel)]="student.studentAdmissionDetail[0].penNo"
+            name="penNo"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="input-field">
+          <mat-label>Registration No.</mat-label>
+          <input
+            matInput
+            [(ngModel)]="student.studentAdmissionDetail[0].registrationNo"
+            name="registrationNo"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="input-field">
+          <mat-label>Enrollment No.</mat-label>
+          <input
+            matInput
+            [(ngModel)]="student.studentAdmissionDetail[0].enrollmentNo"
+            name="enrollmentNo"
+            type="tel"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="input-field">
+          <mat-label>Sr No.</mat-label>
+          <input
+            matInput
+            [(ngModel)]="student.studentAdmissionDetail[0].srNo"
+            name="srNo"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="input-field">
+          <mat-label>Admission No.</mat-label>
+          <input
+            matInput
+            [(ngModel)]="student.studentAdmissionDetail[0].admissionNo"
+            name="admissionNo"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="input-field">
+          <mat-label>Admission Date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            [(ngModel)]="admissionDateTemp"
+            (ngModelChange)="onAdmissionDateChange()"
+            name="admissionDate"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="input-field">
+          <mat-label>Roll No.</mat-label>
+          <input
+            matInput
+            [(ngModel)]="student.studentAdmissionDetail[0].rollNo"
+            name="rollNo"
+            type="tel"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="input-field">
+          <mat-label>Class</mat-label>
+          <mat-select
+            [(ngModel)]="selectedClassId"
+            name="class"
+            (selectionChange)="onClassSelected($event.value)"
+          >
+            <mat-option *ngFor="let class of classes" [value]="class.id">
+              {{ class.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="input-field">
+          <mat-label>Section</mat-label>
+          <mat-select [(ngModel)]="selectedSectionId" name="section">
+            <mat-option *ngFor="let section of sections" [value]="section.id">
+              {{ section.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="input-field">
+          <mat-label>Stream</mat-label>
+          <mat-select [(ngModel)]="selectedStreamId" name="stream">
+            <mat-option *ngFor="let stream of streams" [value]="stream.id">
+              {{ stream.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="input-field">
+          <mat-label>Education Medium</mat-label>
+          <mat-select
+            [(ngModel)]="student.studentAdmissionDetail[0].educationMedium"
+            name="educationMedium"
+          >
+            <mat-option value="Hindi">Hindi</mat-option>
+            <mat-option value="English">English</mat-option>
+            <mat-option value="Sanskrit">Sanskrit</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="input-field">
+          <mat-label>Referred By</mat-label>
+          <mat-select
+            [(ngModel)]="student.studentAdmissionDetail[0].referredBy"
+            name="referredBy"
+          >
+            <mat-option value="Ram">Ram</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div class="input-field">
+          <div class="input-field-title">Is RTE Student?</div>
+          <mat-radio-group
+            [(ngModel)]="student.studentAdmissionDetail[0].isRTEStudent"
+            name="isRTEStudent"
+            (change)="setRTEStudent($event.value)"
+          >
+            <mat-radio-button value="yes">Yes</mat-radio-button>
+            <mat-radio-button value="no">No</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+        <div class="cards input-field">
+          <ul class="upld">
+            <li
+              class="upload-card"
+              *ngFor="let item of studentImage; let i = index"
+            >
+              <div
+                class="upload-card-brd"
+                (click)="selectFile('studentImage')"
+                id="{{ i }}"
+                *ngIf="item == ''"
+              >
+                <input
+                  type="file"
+                  id="studentFileUpload"
+                  name="studentFileUpload"
+                  (change)="selectImage($event, 'studentImageUpload')"
+                  style="display: none"
+                  multiple
+                />
+                <div>
+                  <div class="upload-image-txt">Add Student Image:</div>
+                  <button class="camera">
+                    <span class="add-photo">Upload Image</span>
+                  </button>
+                </div>
+              </div>
+              <div class="upload-card-brd" *ngIf="item != ''">
+                <div class="preview">
+                  <button
+                    class="delete-button"
+                    (click)="deleteBackgroundImage(i, 'studentImageUpload')"
+                  >
+                    <span class="delete-icon">&#10006;</span>
+                  </button>
+                  <img [src]="item" height="80px" width="80px" alt="" />
+                </div>
+                <div class="preview-txt">Student Image</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Personal Details Section -->
+    <div class="personal-details">
+      <h3 class="details-title">Personal Details:</h3>
+      <div class="grid">
+        <mat-form-field class="input-field">
+          <mat-label>First Name</mat-label>
+          <input matInput [(ngModel)]="student.firstName" />
+        </mat-form-field>
+        <mat-form-field class="input-field">
+          <mat-label>Last Name</mat-label>
+          <input matInput [(ngModel)]="student.lastName" />
+        </mat-form-field>
+        <mat-form-field class="input-field">
+          <mat-label>Mobile No.</mat-label>
+          <input matInput type="tel" [(ngModel)]="student.mobileNo" />
+        </mat-form-field>
+        <mat-form-field class="input-field">
+          <mat-label>Alternate Number</mat-label>
+          <input matInput type="tel" [(ngModel)]="student.alternateNo" />
+        </mat-form-field>
+        <mat-form-field class="input-field">
+          <mat-label>WhatsApp No.</mat-label>
+          <input matInput type="tel" [(ngModel)]="student.whatsAppNo" />
+        </mat-form-field>
+        <mat-form-field class="input-field">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" [(ngModel)]="student.email" />
+        </mat-form-field>
+        <mat-form-field class="input-field">
+          <mat-label>Blood Group</mat-label>
+          <mat-select [(ngModel)]="student.bloodGroup">
+            <mat-option value="A+">A+</mat-option>
+            <mat-option value="A-">A-</mat-option>
+            <mat-option value="B+">B+</mat-option>
+            <mat-option value="B-">B-</mat-option>
+            <mat-option value="O+">O+</mat-option>
+            <mat-option value="O-">O-</mat-option>
+            <mat-option value="AB+">AB+</mat-option>
+            <mat-option value="AB-">AB-</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="input-field">
+          <mat-label>Height</mat-label>
+          <input matInput [(ngModel)]="student.height" />
+        </mat-form-field>
+        <mat-form-field class="input-field">
+          <mat-label>Weight</mat-label>
+          <input matInput [(ngModel)]="student.weight" />
+        </mat-form-field>
+        <mat-form-field class="input-field">
+          <mat-label>Date of Birth</mat-label>
+          <input
+            matInput
+            [matDatepicker]="dobPicker"
+            [(ngModel)]="dobDateTemp"
+            (ngModelChange)="onDOBDateChange()"
+            name="dobDate"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="dobPicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #dobPicker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="input-field">
+          <mat-label>DOB Certificate No.</mat-label>
+          <input matInput [(ngModel)]="student.dobCertificateNo" />
+        </mat-form-field>
+        <div class="input-field">
+          <div class="input-field-title">Gender*</div>
+          <mat-radio-group [(ngModel)]="student.gender">
+            <mat-radio-button value="male">Male</mat-radio-button>
+            <mat-radio-button value="female">Female</mat-radio-button>
+            <mat-radio-button value="other">Other</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="cards input-field">
+          <ul class="upld">
+            <li
+              class="upload-card"
+              *ngFor="let item of dobCertificateImage; let i = index"
+            >
+              <div
+                class="upload-card-brd"
+                (click)="selectFile('dobImage')"
+                id="{{ i }}"
+                *ngIf="item == ''"
+              >
+                <input
+                  type="file"
+                  id="dobFileUpload"
+                  name="dobFileUpload"
+                  (change)="selectImage($event, 'dobCertificateImageUpload')"
+                  style="display: none"
+                  multiple
+                />
+                <div>
+                  <div class="upload-image-txt">Add DOB Certificate:</div>
+                  <button class="camera">
+                    <span class="add-photo">Upload Image</span>
+                  </button>
+                </div>
+              </div>
+              <div class="upload-card-brd" *ngIf="item != ''">
+                <div class="preview">
+                  <button
+                    class="delete-button"
+                    (click)="
+                      deleteBackgroundImage(i, 'dobCertificateImageUpload')
+                    "
+                  >
+                    <span class="delete-icon">&#10006;</span>
+                  </button>
+                  <img [src]="item" height="80px" width="80px" alt="" />
+                </div>
+                <div class="preview-txt">DOB Certificate</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Display Qualification Rows -->
+    <div class="qualifications-details">
+      <h3 class="details-title">Previous Qualifications Details:</h3>
+
+      <!-- Row for Headings -->
+      <div class="qual-details-row header-row">
+        <div class="detail-header">Qualification</div>
+        <div class="parent-header">Pass. Year</div>
+        <div class="parent-header">Roll No.</div>
+        <div class="parent-header">%</div>
+        <div class="parent-header">Subject</div>
+        <div class="parent-header">School Name</div>
+        <div class="parent-header">Board Name</div>
+      </div>
+
+      <!-- No Qualification Fields Initially -->
+      <div
+        *ngIf="student.studentPreviousQualification.length === 0"
+        class="add-button"
+      >
+        <button mat-icon-button (click)="addQualification()" class="btn">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+
+      <!-- Input Fields for Each Qualification Row -->
+      <div
+        class="qual-details-row"
+        *ngFor="
+          let qualification of student.studentPreviousQualification;
+          let i = index
+        "
+      >
+        <!-- Delete Button -->
+        <button
+          mat-icon-button
+          (click)="removeQualification(i)"
+          class="remove-btn"
+        >
+          <mat-icon>cancel</mat-icon>
+        </button>
+
+        <!-- Input Fields -->
+        <div class="form-field">
+          <mat-form-field appearance="outline">
+            <mat-label>Qualification</mat-label>
+            <input matInput [(ngModel)]="qualification.qualification" />
+          </mat-form-field>
+        </div>
+        <div class="form-field">
+          <mat-form-field appearance="outline">
+            <mat-label>Pass Year</mat-label>
+            <input
+              matInput
+              [matDatepicker]="picker"
+              [(ngModel)]="passingDates[i]"
+              (ngModelChange)="onPassingYearChange(i)"
+            />
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="form-field">
+          <mat-form-field appearance="outline">
+            <mat-label>Roll No.</mat-label>
+            <input matInput [(ngModel)]="qualification.rollNo" />
+          </mat-form-field>
+        </div>
+        <div class="form-field">
+          <mat-form-field appearance="outline">
+            <mat-label>Marks Percentage</mat-label>
+            <input matInput [(ngModel)]="qualification.percent" />
+          </mat-form-field>
+        </div>
+        <div class="form-field">
+          <mat-form-field appearance="outline">
+            <mat-label>Subject</mat-label>
+            <input matInput [(ngModel)]="qualification.subject" />
+          </mat-form-field>
+        </div>
+        <mat-form-field class="input-field" appearance="outline">
+          <mat-label>School Name</mat-label>
+          <mat-select
+            [(ngModel)]="qualification.schoolName"
+            (selectionChange)="onSchoolSelect(i, $event.value)"
+          >
+            <mat-option *ngFor="let school of schools" [value]="school">
+              {{ school.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="form-field board-field">
+          <mat-form-field appearance="outline">
+            <mat-label>Board Name</mat-label>
+            <input matInput [(ngModel)]="qualification.boardName" />
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- Add Button for New Rows -->
+      <div
+        class="add-button"
+        *ngIf="student.studentPreviousQualification.length > 0"
+      >
+        <button mat-icon-button (click)="addQualification()" class="btn">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <div class="parent-details-container">
+      <h3 class="details-title">Parent Details</h3>
+
+      <!-- Row for Headings -->
+      <div class="details-row header-row">
+        <div class="detail-header">Details</div>
+        <div class="parent-header">Father</div>
+        <div class="parent-header">Mother</div>
+        <div class="parent-header">Guardian</div>
+      </div>
+
+      <!-- Rows for Each Field -->
+      <div
+        class="details-row"
+        *ngFor="let field of detailLabels; let i = index"
+      >
+        <div class="detail-label">{{ field.label }}</div>
+
+        <!-- Occupation Dropdowns -->
+        <div class="form-field" *ngIf="field.label === 'Occupation'">
+          <!-- Father Occupation Dropdown -->
+          <mat-form-field appearance="outline" class="form-field-item">
+            <mat-label>{{ field.label }}</mat-label>
+            <mat-select [(ngModel)]="fatherDetails['occupationId']">
+              <mat-option
+                *ngFor="let option of guardianOccupations"
+                [value]="option.id"
+              >
+                {{ option.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="form-field" *ngIf="field.label === 'Occupation'">
+          <!-- Mother Occupation Dropdown -->
+          <mat-form-field appearance="outline" class="form-field-item">
+            <mat-label>{{ field.label }}</mat-label>
+            <mat-select [(ngModel)]="motherDetails['occupationId']">
+              <mat-option
+                *ngFor="let option of guardianOccupations"
+                [value]="option.id"
+              >
+                {{ option.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="form-field" *ngIf="field.label === 'Occupation'">
+          <!-- Guardian Occupation Dropdown -->
+          <mat-form-field appearance="outline" class="form-field-item">
+            <mat-label>{{ field.label }}</mat-label>
+            <mat-select [(ngModel)]="guardianDetails['occupationId']">
+              <mat-option
+                *ngFor="let option of guardianOccupations"
+                [value]="option.id"
+              >
+                {{ option.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <!-- Qualification Dropdowns -->
+        <div class="form-field" *ngIf="field.label === 'Qualification'">
+          <!-- Father Qualification Dropdown -->
+          <mat-form-field appearance="outline" class="form-field-item">
+            <mat-label>{{ field.label }}</mat-label>
+            <mat-select [(ngModel)]="fatherDetails['qualificationId']">
+              <mat-option
+                *ngFor="let option of guardianQualifications"
+                [value]="option.id"
+              >
+                {{ option.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="form-field" *ngIf="field.label === 'Qualification'">
+          <!-- Mother Qualification Dropdown -->
+          <mat-form-field appearance="outline" class="form-field-item">
+            <mat-label>{{ field.label }}</mat-label>
+            <mat-select [(ngModel)]="motherDetails['qualificationId']">
+              <mat-option
+                *ngFor="let option of guardianQualifications"
+                [value]="option.id"
+              >
+                {{ option.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="form-field" *ngIf="field.label === 'Qualification'">
+          <!-- Guardian Qualification Dropdown -->
+          <mat-form-field appearance="outline" class="form-field-item">
+            <mat-label>{{ field.label }}</mat-label>
+            <mat-select [(ngModel)]="guardianDetails['qualificationId']">
+              <mat-option
+                *ngFor="let option of guardianQualifications"
+                [value]="option.id"
+              >
+                {{ option.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <!-- Father Input Field -->
+        <div
+          class="form-field"
+          *ngIf="
+            field.label !== 'Occupation' &&
+            field.label !== 'Qualification' &&
+            field.label !== 'Photo'
+          "
+        >
+          <mat-form-field appearance="outline">
+            <mat-label>{{ field.label }}</mat-label>
+            <input matInput [(ngModel)]="fatherDetails[field.key]" />
+          </mat-form-field>
+        </div>
+
+        <!-- Mother Input Field -->
+        <div
+          class="form-field"
+          *ngIf="
+            field.label !== 'Occupation' &&
+            field.label !== 'Qualification' &&
+            field.label !== 'Photo'
+          "
+        >
+          <mat-form-field appearance="outline">
+            <mat-label>{{ field.label }}</mat-label>
+            <input matInput [(ngModel)]="motherDetails[field.key]" />
+          </mat-form-field>
+        </div>
+
+        <!-- Guardian Input Field -->
+        <div
+          class="form-field"
+          *ngIf="
+            field.label !== 'Occupation' &&
+            field.label !== 'Qualification' &&
+            field.label !== 'Photo'
+          "
+        >
+          <mat-form-field appearance="outline">
+            <mat-label>{{ field.label }}</mat-label>
+            <input matInput [(ngModel)]="guardianDetails[field.key]" />
+          </mat-form-field>
+        </div>
+
+        <!-- Image Upload for Father Photo -->
+        <div class="form-field" *ngIf="field.label === 'Photo'">
+          <div class="cards input-field">
+            <ul class="upld">
+              <li
+                class="upload-card"
+                *ngFor="let item of fatherImage; let i = index"
+              >
+                <div
+                  class="upload-card-brd"
+                  (click)="selectFile('fatherImage')"
+                  id="{{ i }}"
+                  *ngIf="item == ''"
+                >
+                  <input
+                    type="file"
+                    id="fatherFileUpload"
+                    name="fatherFileUpload"
+                    (change)="selectImage($event, 'fatherImage')"
+                    style="display: none"
+                    multiple
+                  />
+                  <div>
+                    <div class="upload-image-txt">Upload Father Photo:</div>
+                    <button class="camera">
+                      <span class="add-photo">Upload Image</span>
+                    </button>
+                  </div>
+                </div>
+                <div class="upload-card-brd" *ngIf="item != ''">
+                  <div class="preview guardian">
+                    <button
+                      class="delete-button"
+                      (click)="deleteBackgroundImage(i, 'fatherImage')"
+                    >
+                      <span class="delete-icon">&#10006;</span>
+                    </button>
+                    <img [src]="item" height="80px" width="80px" alt="" />
+                  </div>
+                  <div class="preview-txt">Father Photo</div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Image Upload for Mother Photo -->
+        <div class="form-field" *ngIf="field.label === 'Photo'">
+          <div class="cards input-field">
+            <ul class="upld">
+              <li
+                class="upload-card"
+                *ngFor="let item of motherImage; let i = index"
+              >
+                <div
+                  class="upload-card-brd"
+                  (click)="selectFile('motherImage')"
+                  id="{{ i }}"
+                  *ngIf="item == ''"
+                >
+                  <input
+                    type="file"
+                    id="motherFileUpload"
+                    name="motherFileUpload"
+                    (change)="selectImage($event, 'motherImage')"
+                    style="display: none"
+                    multiple
+                  />
+                  <div>
+                    <div class="upload-image-txt">Upload Mother Photo:</div>
+                    <button class="camera">
+                      <span class="add-photo">Upload Image</span>
+                    </button>
+                  </div>
+                </div>
+                <div class="upload-card-brd" *ngIf="item != ''">
+                  <div class="preview guardian">
+                    <button
+                      class="delete-button"
+                      (click)="deleteBackgroundImage(i, 'motherImage')"
+                    >
+                      <span class="delete-icon">&#10006;</span>
+                    </button>
+                    <img [src]="item" height="80px" width="80px" alt="" />
+                  </div>
+                  <div class="preview-txt">Mother Photo</div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Image Upload for Guardian Photo -->
+        <div class="form-field" *ngIf="field.label === 'Photo'">
+          <div class="cards input-field">
+            <ul class="upld">
+              <li
+                class="upload-card"
+                *ngFor="let item of guardianImage; let i = index"
+              >
+                <div
+                  class="upload-card-brd"
+                  (click)="selectFile('guardianImage')"
+                  id="{{ i }}"
+                  *ngIf="item == ''"
+                >
+                  <input
+                    type="file"
+                    id="guardianFileUpload"
+                    name="guardianFileUpload"
+                    (change)="selectImage($event, 'guardianImage')"
+                    style="display: none"
+                    multiple
+                  />
+                  <div>
+                    <div class="upload-image-txt">Upload Guardian Photo:</div>
+                    <button class="camera">
+                      <span class="add-photo">Upload Image</span>
+                    </button>
+                  </div>
+                </div>
+                <div class="upload-card-brd" *ngIf="item != ''">
+                  <div class="preview guardian">
+                    <button
+                      class="delete-button"
+                      (click)="deleteBackgroundImage(i, 'guardianImage')"
+                    >
+                      <span class="delete-icon">&#10006;</span>
+                    </button>
+                    <img [src]="item" height="80px" width="80px" alt="" />
+                  </div>
+                  <div class="preview-txt">Guardian Photo</div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Religion Details Section -->
+    <div class="religion-details">
+      <h3 class="details-title">Religion and Category:</h3>
+      <div class="grid">
+        <mat-form-field class="input-field">
+          <mat-label>Nationality</mat-label>
+          <input
+            matInput
+            [(ngModel)]="student.studentReligionAndCastCategory[0].nationality"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="input-field">
+          <mat-label>Religion</mat-label>
+          <input
+            matInput
+            [(ngModel)]="student.studentReligionAndCastCategory[0].religion"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="input-field">
+          <mat-label>Category</mat-label>
+          <input
+            matInput
+            [(ngModel)]="student.studentReligionAndCastCategory[0].category"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="input-field">
+          <mat-label>Caste</mat-label>
+          <input
+            matInput
+            [(ngModel)]="student.studentReligionAndCastCategory[0].caste"
+          />
+        </mat-form-field>
+
+        <div class="cards input-field">
+          <ul class="upld">
+            <li
+              class="upload-card"
+              *ngFor="let item of castCertificateImage; let i = index"
+            >
+              <div
+                class="upload-card-brd"
+                (click)="selectFile('castImage')"
+                id="{{ i }}"
+                *ngIf="item == ''"
+              >
+                <input
+                  type="file"
+                  id="castFileUpload"
+                  name="castFileUpload"
+                  (change)="selectImage($event, 'castImageUpload')"
+                  style="display: none"
+                  multiple
+                />
+                <div>
+                  <div class="upload-image-txt">Add Cast Certificate:</div>
+                  <button class="camera">
+                    <span class="add-photo">Upload Image</span>
+                  </button>
+                </div>
+              </div>
+              <div class="upload-card-brd" *ngIf="item != ''">
+                <div class="preview">
+                  <button
+                    class="delete-button"
+                    (click)="deleteBackgroundImage(i, 'castImageUpload')"
+                  >
+                    <span class="delete-icon">&#10006;</span>
+                  </button>
+                  <img [src]="item" height="80px" width="80px" alt="" />
+                </div>
+
+                <div class="preview-txt">Cast Certificate</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Aaddhar Card Details Section -->
+    <div class="aadhar-card-details">
+      <h3 class="details-title">Aadhar Card Details:</h3>
+      <div class="grid">
+        <mat-form-field class="input-field">
+          <mat-label>Aadhar Card No.</mat-label>
+          <input
+            matInput
+            [(ngModel)]="student.studentAadharCard[0].adharCardNo"
+          />
+        </mat-form-field>
+
+        <div class="cards input-field">
+          <ul class="upld">
+            <li
+              class="upload-card"
+              *ngFor="let item of aadharCardImage; let i = index"
+            >
+              <div
+                class="upload-card-brd"
+                (click)="selectFile('aadharImage')"
+                id="{{ i }}"
+                *ngIf="item == ''"
+              >
+                <input
+                  type="file"
+                  id="aadharFileUpload"
+                  name="aadharFileUpload"
+                  (change)="selectImage($event, 'aadharCardImageUpload')"
+                  style="display: none"
+                  multiple
+                />
+                <div>
+                  <div class="upload-image-txt">Add Aadhar Card:</div>
+                  <button class="camera">
+                    <span class="add-photo">Upload Image</span>
+                  </button>
+                </div>
+              </div>
+              <div class="upload-card-brd" *ngIf="item != ''">
+                <div class="preview">
+                  <button
+                    class="delete-button"
+                    (click)="deleteBackgroundImage(i, 'aadharCardImageUpload')"
+                  >
+                    <span class="delete-icon">&#10006;</span>
+                  </button>
+                  <img [src]="item" height="80px" width="80px" alt="" />
+                </div>
+                <div class="preview-txt">Aadhar Card</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Transfer Certificate Section -->
+    <div class="religion-details">
+      <h3 class="details-title">Transfer Certificate:</h3>
+      <div class="grid">
+        <mat-form-field class="input-field">
+          <mat-label>Transfer Certificate No.</mat-label>
+          <input
+            matInput
+            [(ngModel)]="student.studentTransferCertificate[0].certificateNo"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="input-field">
+          <mat-label>Date of Issue</mat-label>
+          <input
+            matInput
+            [matDatepicker]="issueDatePicker"
+            [(ngModel)]="issueDateTemp"
+            (ngModelChange)="onIssueDateChange()"
+            name="issueDate"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="issueDatePicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #issueDatePicker></mat-datepicker>
+        </mat-form-field>
+
+        <div class="cards input-field">
+          <ul class="upld">
+            <li
+              class="upload-card"
+              *ngFor="let item of transferCertificateImage; let i = index"
+            >
+              <div
+                class="upload-card-brd"
+                (click)="selectFile('transferImage')"
+                id="{{ i }}"
+                *ngIf="item == ''"
+              >
+                <input
+                  type="file"
+                  id="transferFileUpload"
+                  name="transferFileUpload"
+                  (change)="selectImage($event, 'transferImageUpload')"
+                  style="display: none"
+                  multiple
+                />
+                <div>
+                  <div class="upload-image-txt">Add Transfer Certificate:</div>
+                  <button class="camera">
+                    <span class="add-photo">Upload Image</span>
+                  </button>
+                </div>
+              </div>
+              <div class="upload-card-brd" *ngIf="item != ''">
+                <div class="preview">
+                  <button
+                    class="delete-button"
+                    (click)="deleteBackgroundImage(i, 'transferImageUpload')"
+                  >
+                    <span class="delete-icon">&#10006;</span>
+                  </button>
+                  <img [src]="item" height="80px" width="80px" alt="" />
+                </div>
+
+                <div class="preview-txt">Transfer Certificate</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bank Details Section -->
+    <div class="bank-details">
+      <h3 class="details-title">Bank Account Details:</h3>
+      <div class="grid">
+        <mat-form-field class="input-field">
+          <mat-label>Bank Name</mat-label>
+          <input
+            matInput
+            [(ngModel)]="student.studentBankAccountDetail[0].bankName"
+          />
+        </mat-form-field>
+        <mat-form-field class="input-field">
+          <mat-label>Bank Branch</mat-label>
+          <input
+            matInput
+            [(ngModel)]="student.studentBankAccountDetail[0].branchName"
+          />
+        </mat-form-field>
+        <mat-form-field class="input-field">
+          <mat-label>IFSC Code</mat-label>
+          <input
+            matInput
+            [(ngModel)]="student.studentBankAccountDetail[0].ifscCode"
+          />
+        </mat-form-field>
+        <mat-form-field class="input-field">
+          <mat-label>Account No.</mat-label>
+          <input
+            matInput
+            [(ngModel)]="student.studentBankAccountDetail[0].accountNo"
+          />
+        </mat-form-field>
+        <mat-form-field class="input-field">
+          <mat-label>PAN No.</mat-label>
+          <input
+            matInput
+            [(ngModel)]="student.studentBankAccountDetail[0].panNo"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Last School Details Section -->
+    <div class="last-school-details">
+      <h3 class="details-title">Last School Details (If Any):</h3>
+      <div class="grid">
+        <!-- <mat-form-field class="input-field">
+          <mat-label>School Name</mat-label>
+          <input
+            matInput
+            [(ngModel)]="student.studentLastSchoolDetail[0].schoolName"
+          />
+        </mat-form-field> -->
+
+        <mat-form-field class="input-field">
+          <mat-label>School Name</mat-label>
+          <mat-select
+            [(ngModel)]="student.studentLastSchoolDetail[0].schoolName"
+            (selectionChange)="onLastSchoolSelect($event.value)"
+          >
+            <mat-option *ngFor="let school of schools" [value]="school">
+              {{ school.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="input-field">
+          <mat-label>School Address</mat-label>
+          <input
+            matInput
+            [(ngModel)]="student.studentLastSchoolDetail[0].address"
+          />
+        </mat-form-field>
+        <!-- <mat-form-field class="input-field">
+          <mat-label>School Code</mat-label>
+          <input
+            matInput
+            [(ngModel)]="student.studentLastSchoolDetail[0].schoolCode"
+          />
+        </mat-form-field> -->
+        <mat-form-field class="input-field">
+          <mat-label>Student Class</mat-label>
+          <input
+            matInput
+            [(ngModel)]="student.studentLastSchoolDetail[0].attendentClass"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="input-field">
+          <mat-label>Affiliated to</mat-label>
+          <input
+            matInput
+            [(ngModel)]="student.studentLastSchoolDetail[0].affiliatedTo"
+          />
+        </mat-form-field>
+        <mat-form-field class="input-field">
+          <mat-label>Last Session</mat-label>
+          <input
+            matInput
+            [(ngModel)]="student.studentLastSchoolDetail[0].lastSession"
+          />
+        </mat-form-field>
+        <div class="input-field">
+          <div class="input-field-title">Is dropout?</div>
+          <mat-radio-group
+            name="isDropoutStudent"
+            (change)="setDropout($event.value)"
+          >
+            <mat-radio-button value="true">Yes</mat-radio-button>
+            <mat-radio-button value="false">No</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+    </div>
+
+    <!-- Permanent Address Section -->
+    <div class="address-details">
+      <h3 class="details-title">Permanent Address:</h3>
+      <div class="grid">
+        <mat-form-field class="input-field">
+          <mat-label>Address</mat-label>
+          <input
+            matInput
+            [(ngModel)]="student.studentPermanentAddress[0].address"
+          />
+        </mat-form-field>
+        <mat-form-field class="input-field">
+          <mat-label>Country</mat-label>
+          <input
+            matInput
+            [(ngModel)]="student.studentPermanentAddress[0].country"
+          />
+        </mat-form-field>
+        <mat-form-field class="input-field">
+          <mat-label>Pincode</mat-label>
+          <input
+            matInput
+            [(ngModel)]="student.studentPermanentAddress[0].pincode"
+          />
+        </mat-form-field>
+        <mat-form-field class="input-field">
+          <mat-label>State</mat-label>
+          <input
+            matInput
+            [(ngModel)]="student.studentPermanentAddress[0].state"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="input-field">
+          <mat-label>City</mat-label>
+          <input
+            matInput
+            [(ngModel)]="student.studentPermanentAddress[0].city"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Temporary Address Section -->
+    <div class="address-details">
+      <h3 class="details-title">Temporary Address:</h3>
+      <div class="grid">
+        <mat-form-field class="input-field">
+          <mat-label>Address</mat-label>
+          <input
+            matInput
+            [(ngModel)]="student.studentTemporaryAddress[0].address"
+          />
+        </mat-form-field>
+        <mat-form-field class="input-field">
+          <mat-label>Country</mat-label>
+          <input
+            matInput
+            [(ngModel)]="student.studentTemporaryAddress[0].country"
+          />
+        </mat-form-field>
+        <mat-form-field class="input-field">
+          <mat-label>Pincode</mat-label>
+          <input
+            matInput
+            [(ngModel)]="student.studentTemporaryAddress[0].pincode"
+          />
+        </mat-form-field>
+        <mat-form-field class="input-field">
+          <mat-label>State</mat-label>
+          <input
+            matInput
+            [(ngModel)]="student.studentTemporaryAddress[0].state"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="input-field">
+          <mat-label>City</mat-label>
+          <input
+            matInput
+            [(ngModel)]="student.studentTemporaryAddress[0].city"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+
+  <div mat-dialog-actions>
+    <button
+      mat-button
+      color="primary"
+      class="add-student-btn"
+      (click)="addStudent()"
+    >
+      Add Student
+    </button>
+  </div>
+</mat-card>

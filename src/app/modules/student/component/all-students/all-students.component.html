@@ -1,0 +1,204 @@
+<div class="all-students-container">
+  <div *ngIf="isLoading" class="loading-spinner">
+    <!-- Loading Spinner or Text -->
+    <mat-spinner></mat-spinner>
+  </div>
+  <div *ngIf="!isLoading">
+    <div class="container-about">
+      <div class="title">Students</div>
+      <div class="description">Following table shows all students</div>
+    </div>
+    <div class="main-grid">
+      <div class="grid-options">
+        <div class="grid-btns">
+          <span
+            class="material-symbols-outlined grid-btn"
+            (click)="openAddStudentDialog()"
+          >
+            add
+          </span>
+          <span class="material-symbols-outlined grid-btn delete-btn">
+            delete
+          </span>
+          <span class="material-symbols-outlined grid-btn"> filter_alt </span>
+          <span class="material-symbols-outlined grid-btn"> search </span>
+        </div>
+        <div class="grid-total">
+          <span class="total"
+            ><span class="total-text">Total Students:</span>
+            {{ studentList.length }}</span
+          >
+        </div>
+      </div>
+      <div class="grid-table">
+        <table mat-table [dataSource]="dataSource" matSort>
+          <!-- No Column -->
+          <ng-container matColumnDef="no">
+            <th mat-header-cell *matHeaderCellDef>#</th>
+            <td mat-cell *matCellDef="let student; let i = index">
+              <b>{{ i + 1 }}.</b>
+            </td>
+          </ng-container>
+
+          <!-- Admission No Column -->
+          <ng-container matColumnDef="admissionNo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Admission No
+            </th>
+            <td mat-cell *matCellDef="let student">
+              {{ student.studentAdmissionDetailList[0]?.admissionNo || "-" }}
+            </td>
+          </ng-container>
+
+          <!-- Roll No Column -->
+          <ng-container matColumnDef="rollNo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Roll No</th>
+            <td mat-cell *matCellDef="let student">
+              {{ student.studentAdmissionDetailList[0]?.rollNo || "-" }}
+            </td>
+          </ng-container>
+
+          <!-- Serial Number Column -->
+          <ng-container matColumnDef="serialNo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Serial No</th>
+            <td mat-cell *matCellDef="let student">
+              {{ student.studentAdmissionDetailList[0]?.srNo || "-" }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="profile">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Profile</th>
+            <td mat-cell *matCellDef="let student">
+              <img
+                [src]="student.studentAdmissionDetailList[0]?.studentImageURL"
+                alt=""
+                width="80"
+                height="80"
+                style="position: relative !important; left: auto !important"
+              />
+            </td>
+          </ng-container>
+
+          <!-- Student Info Column -->
+          <ng-container matColumnDef="studentInfo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Student</th>
+            <td mat-cell *matCellDef="let student" class="student-info">
+              <a
+                [routerLink]="['/student/view', student.tableRefGuid]"
+                target="_self"
+                class="student-info-link"
+              >
+                <!-- <img
+                  [src]="student.studentAdmissionDetailList[0]?.studentImageURL"
+                  alt=""
+                  width="40"
+                  height="40"
+                /> -->
+                <div class="student-details">
+                  <span
+                    ><b>Name: </b>
+                    <span class="color-blue">{{
+                      student.name || "-"
+                    }}</span></span
+                  >
+                  <span
+                    ><b>Class: </b>
+                    {{
+                      getClassName(
+                        student.studentAdmissionDetailList[0]?.classId
+                      )
+                    }}</span
+                  >
+                  <span
+                    ><b>Mobile: </b>
+                    <span class="color-blue">{{
+                      student.mobileNo || "-"
+                    }}</span></span
+                  >
+                  <span
+                    ><b>Medium: </b>
+                    {{
+                      student.studentAdmissionDetailList[0]?.educationMedium ||
+                        "-"
+                    }}</span
+                  >
+                </div>
+              </a>
+            </td>
+          </ng-container>
+
+          <!-- RTE Status Column -->
+          <ng-container matColumnDef="isRTE">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Is RTE?</th>
+            <td
+              mat-cell
+              *matCellDef="let student"
+              [ngClass]="{
+                'green-text':
+                  student.studentAdmissionDetailList[0]?.isRTEStudent,
+                'red-text': !student.studentAdmissionDetailList[0]?.isRTEStudent
+              }"
+            >
+              {{
+                student.studentAdmissionDetailList[0]?.isRTEStudent
+                  ? "Yes"
+                  : "No"
+              }}
+            </td>
+          </ng-container>
+
+          <!-- Created At Column -->
+          <ng-container matColumnDef="createdAt">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Created At
+            </th>
+            <td mat-cell *matCellDef="let student">
+              {{
+                student.studentAdmissionDetailList[0]?.createdOn
+                  | date : "short" || "-"
+              }}
+            </td>
+          </ng-container>
+
+          <!-- Updated At Column -->
+          <ng-container matColumnDef="updatedAt">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Updated At
+            </th>
+            <td mat-cell *matCellDef="let student">
+              {{
+                student.studentAdmissionDetailList[0]?.modifiedOn
+                  | date : "short" || "-"
+              }}
+            </td>
+          </ng-container>
+
+          <!-- Action Column -->
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+            <td mat-cell *matCellDef="let student">
+              <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="editStudent()">Edit</button>
+                <button mat-menu-item (click)="deleteStudent()">Delete</button>
+              </mat-menu>
+            </td>
+          </ng-container>
+
+          <!-- Header and Row Definitions -->
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+
+        <!-- Paginator -->
+        <mat-paginator
+          [pageSize]="10"
+          [pageSizeOptions]="[5, 10, 20]"
+          showFirstLastButtons
+        ></mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>

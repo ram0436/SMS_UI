@@ -1,0 +1,56 @@
+.layout-container {
+  display: flex;
+  margin-top: 75px;
+  min-height: calc(100vh - 75px);
+  padding: 0px;
+}
+
+/* Sidebar styles */
+.sidebar {
+  width: 15%;
+  border-right: 1px solid #ccc;
+  overflow-y: auto;
+  position: fixed;
+  top: 75px;
+  /* padding: 20px; */
+  bottom: 0;
+}
+
+/* Hide scrollbar for Chrome, Safari, and newer versions of Edge */
+.sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for Firefox */
+.sidebar {
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Main content area */
+.main-content {
+  margin-left: 15%;
+  width: 85%;
+  padding: 20px;
+  background-color: #fafafa;
+}
+
+.full-content {
+  margin-left: 0% !important;
+  width: 100%;
+  padding: 0px !important;
+}
+
+::ng-deep .mat-mdc-progress-spinner {
+  width: 60px !important;
+  height: 60px !important;
+}
+
+::ng-deep
+  .mat-mdc-progress-spinner
+  .mdc-circular-progress__indeterminate-circle-graphic {
+  stroke: #0099fe !important;
+}
+
+table {
+  text-transform: capitalize !important;
+}
