@@ -69,7 +69,7 @@ export class AllStudentsComponent {
   getAllStudentList() {
     this.isLoading = true;
     this.studentService.getStudentList().subscribe((data: any) => {
-      this.studentList = data.reverse();
+      this.studentList = data;
       this.dataSource.data = data;
       this.isLoading = false;
     });

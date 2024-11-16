@@ -65,7 +65,7 @@ export class AllTeachersComponent {
   getAllTeacherList() {
     this.isLoading = true;
     this.teacherService.getTeacherList().subscribe((data: any) => {
-      this.teacherList = data.reverse();
+      this.teacherList = data;
       this.dataSource.data = data;
       this.isLoading = false;
     });

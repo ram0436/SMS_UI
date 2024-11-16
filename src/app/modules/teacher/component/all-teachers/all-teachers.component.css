@@ -135,3 +135,9 @@ img {
 .color-blue {
   color: #0059ff;
 }
+
+.loading-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
