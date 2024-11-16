@@ -17,52 +17,52 @@ export class MasterService {
   private baseUrl = environment.baseUrl;
 
   getDepartment() {
-    return this.http.get(`${this.baseUrl}/Master/GetDepartment`);
+    return this.http.get(`${this.baseUrl}Master/GetDepartment`);
   }
 
   getDesignation() {
-    return this.http.get(`${this.baseUrl}/Master/GetDesignation`);
+    return this.http.get(`${this.baseUrl}Master/GetDesignation`);
   }
 
   getSchool() {
-    return this.http.get(`${this.baseUrl}/Master/GetSchool`);
+    return this.http.get(`${this.baseUrl}Master/GetSchool`);
   }
 
   getSchoolBranch() {
-    return this.http.get(`${this.baseUrl}/Master/GetSchoolBranch`);
+    return this.http.get(`${this.baseUrl}Master/GetSchoolBranch`);
   }
 
   getAllClass() {
-    return this.http.get(`${this.baseUrl}/Master/GetAllClass`);
+    return this.http.get(`${this.baseUrl}Master/GetAllClass`);
   }
 
   getAllCourseStream() {
-    return this.http.get(`${this.baseUrl}/Master/GetAllCourseStream`);
+    return this.http.get(`${this.baseUrl}Master/GetAllCourseStream`);
   }
 
   getAllQualification() {
-    return this.http.get(`${this.baseUrl}/Master/GetAllQualification`);
+    return this.http.get(`${this.baseUrl}Master/GetAllQualification`);
   }
 
   getAllOccupation() {
-    return this.http.get(`${this.baseUrl}/Master/GetAllOccupation`);
+    return this.http.get(`${this.baseUrl}Master/GetAllOccupation`);
   }
 
   getAllSchool() {
-    return this.http.get(`${this.baseUrl}/Master/GetSchool`);
+    return this.http.get(`${this.baseUrl}Master/GetSchool`);
   }
 
   getAllDesignations() {
-    return this.http.get(`${this.baseUrl}/Master/GetDesignation`);
+    return this.http.get(`${this.baseUrl}Master/GetDesignation`);
   }
 
   getAllDepartments() {
-    return this.http.get(`${this.baseUrl}/Master/GetDepartment`);
+    return this.http.get(`${this.baseUrl}Master/GetDepartment`);
   }
 
   getSectionByClassId(classId: number) {
     return this.http.get(
-      `${this.baseUrl}/Master/GetSectionByClassId?classId=${classId}`
+      `${this.baseUrl}Master/GetSectionByClassId?classId=${classId}`
     );
   }
 }

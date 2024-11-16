@@ -35,9 +35,7 @@
         <p class="info">
           <strong class="info-title">Class</strong>
           <span>:</span>
-          <span>{{
-            getClassName(studentDetails.studentAdmissionDetail[0]?.classId)
-          }}</span>
+          <span>{{ className }}</span>
         </p>
       </div>
       <!-- Material Icon Button for Edit/Delete -->
@@ -103,21 +101,13 @@
             <tr>
               <td>Class Name</td>
               <td>
-                {{
-                  getClassName(
-                    studentDetails.studentAdmissionDetail[0]?.classId
-                  )
-                }}
+                {{ className }}
               </td>
             </tr>
             <tr>
               <td>Section</td>
               <td>
-                {{
-                  getSectionName(
-                    studentDetails.studentAdmissionDetail[0]?.sectionId
-                  )
-                }}
+                {{ sectionName }}
               </td>
             </tr>
             <tr>
@@ -129,11 +119,7 @@
             <tr>
               <td>Stream</td>
               <td>
-                {{
-                  getStreamName(
-                    studentDetails.studentAdmissionDetail[0]?.streamId
-                  )
-                }}
+                {{ streamName }}
               </td>
             </tr>
             <tr>
@@ -306,11 +292,7 @@
             <tr>
               <td>School Branch</td>
               <td>
-                {{
-                  getSchoolBranchName(
-                    studentDetails.studentAdmissionDetail[0]?.schoolBranchId
-                  )
-                }}
+                {{ branchName }}
               </td>
             </tr>
             <tr>
@@ -322,31 +304,19 @@
             <tr>
               <td>Class Name</td>
               <td>
-                {{
-                  getClassName(
-                    studentDetails.studentAdmissionDetail[0]?.classId
-                  )
-                }}
+                {{ className }}
               </td>
             </tr>
             <tr>
               <td>Section</td>
               <td>
-                {{
-                  getSectionName(
-                    studentDetails.studentAdmissionDetail[0]?.sectionId
-                  )
-                }}
+                {{ sectionName }}
               </td>
             </tr>
             <tr>
               <td>Stream</td>
               <td>
-                {{
-                  getStreamName(
-                    studentDetails.studentAdmissionDetail[0]?.streamId
-                  )
-                }}
+                {{ streamName }}
               </td>
             </tr>
           </table>

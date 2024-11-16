@@ -6,6 +6,7 @@ import { MasterService } from "../../../service/master.service";
 import { provideNativeDateAdapter } from "@angular/material/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Teacher } from "../../../../shared/model/teacher.payload";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-add-teacher",
@@ -35,6 +36,8 @@ export class AddTeacherComponent implements OnInit {
 
   passingDates: any[] = [];
 
+  private subscriptions: Subscription = new Subscription();
+
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private teacherService: TeacherService,
@@ -43,8 +46,13 @@ export class AddTeacherComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getAllDepartments();
-    this.getAllDesignations();
+    this.subscriptions.add(this.getAllDepartments());
+    this.subscriptions.add(this.getAllDesignations());
+  }
+
+  ngOnDestroy(): void {
+    // Unsubscribe from all subscriptions to prevent memory leaks
+    this.subscriptions.unsubscribe();
   }
 
   // Method to add a new qualification row

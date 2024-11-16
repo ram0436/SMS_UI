@@ -5,6 +5,7 @@ import { MasterService } from "../../../service/master.service";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
 import { TeacherService } from "../../service/teacher.service";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-all-teachers",
@@ -34,6 +35,8 @@ export class AllTeachersComponent {
     "action",
   ];
 
+  private subscriptions: Subscription = new Subscription();
+
   constructor(
     public dialog: MatDialog,
     private teacherService: TeacherService,
@@ -41,18 +44,28 @@ export class AllTeachersComponent {
   ) {}
 
   ngOnInit() {
-    this.getAllTeacherList();
-    this.getAllClass();
+    this.subscriptions.add(this.getAllTeacherList());
+    this.subscriptions.add(this.getAllClass());
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
 
+  ngOnDestroy(): void {
+    // Unsubscribe from all subscriptions
+    this.subscriptions.unsubscribe();
+
+    // Close the dialog if it is still open
+    if (this.dialogRef) {
+      this.dialogRef.close();
+    }
+  }
+
   getAllTeacherList() {
     this.isLoading = true;
     this.teacherService.getTeacherList().subscribe((data: any) => {
-      this.teacherList = data.reverse();
+      this.teacherList = data;
       this.dataSource.data = data;
       this.isLoading = false;
     });

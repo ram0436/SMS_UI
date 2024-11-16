@@ -4,6 +4,7 @@ import { TeacherService } from "../../service/teacher.service";
 import { MasterService } from "../../../service/master.service";
 import { ActivatedRoute } from "@angular/router";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-teacher-details",
@@ -19,6 +20,8 @@ export class TeacherDetailsComponent {
 
   departments: any[] = [];
   designations: any[] = [];
+
+  private subscriptions: Subscription = new Subscription();
 
   constructor(
     private dialog: MatDialog,
@@ -40,6 +43,17 @@ export class TeacherDetailsComponent {
     }
     this.getAllDepartments();
     this.getAllDesignations();
+  }
+
+
+  ngOnDestroy(): void {
+    // Clean up all active subscriptions
+    this.subscriptions.unsubscribe();
+
+    // Close dialog if still open
+    if (this.dialogRef) {
+      this.dialogRef.close();
+    }
   }
 
   getPostDetails(guid: any) {

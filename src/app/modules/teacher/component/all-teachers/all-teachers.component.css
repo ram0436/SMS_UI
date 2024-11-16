@@ -112,12 +112,6 @@ img {
   left: auto !important; */
 }
 
-table .teacher-info {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
 .teacher-info .teacher-details {
   display: flex;
   flex-direction: column;
@@ -140,4 +134,10 @@ table .teacher-info {
 
 .color-blue {
   color: #0059ff;
+}
+
+.loading-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
