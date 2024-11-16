@@ -112,12 +112,6 @@ img {
   left: auto !important; */
 }
 
-table .teacher-info {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
 .teacher-info .teacher-details {
   display: flex;
   flex-direction: column;

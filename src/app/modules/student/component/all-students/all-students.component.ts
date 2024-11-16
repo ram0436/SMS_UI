@@ -5,6 +5,7 @@ import { StudentService } from "../../service/student.service";
 import { MasterService } from "../../../service/master.service";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-all-students",
@@ -23,6 +24,8 @@ export class AllStudentsComponent {
   classes: any[] = [];
   sections: any[] = [];
 
+  className: string = "";
+
   displayedColumns: string[] = [
     "no",
     "admissionNo",
@@ -36,6 +39,8 @@ export class AllStudentsComponent {
     "action",
   ];
 
+  private subscriptions: Subscription = new Subscription();
+
   constructor(
     public dialog: MatDialog,
     private studentService: StudentService,
@@ -43,12 +48,22 @@ export class AllStudentsComponent {
   ) {}
 
   ngOnInit() {
-    this.getAllStudentList();
-    this.getAllClass();
+    this.subscriptions.add(this.getAllStudentList());
+    this.subscriptions.add(this.getAllClass());
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+  }
+
+  ngOnDestroy(): void {
+    // Unsubscribe from all subscriptions
+    this.subscriptions.unsubscribe();
+
+    // Close the dialog if it is still open
+    if (this.dialogRef) {
+      this.dialogRef.close();
+    }
   }
 
   getAllStudentList() {

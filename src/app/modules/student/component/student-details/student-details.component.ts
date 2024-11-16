@@ -4,6 +4,7 @@ import { StudentService } from "../../service/student.service";
 import { MasterService } from "../../../service/master.service";
 import { ActivatedRoute } from "@angular/router";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-student-details",
@@ -21,6 +22,12 @@ export class StudentDetailsComponent {
   sections: any[] = [];
   schoolBranches: any[] = [];
   streams: any[] = [];
+  className: string = "-";
+  sectionName: string = "-";
+  streamName: string = "-";
+  branchName: string = "-";
+
+  private subscriptions = new Subscription();
 
   constructor(
     private dialog: MatDialog,
@@ -32,23 +39,49 @@ export class StudentDetailsComponent {
   ) {}
 
   ngOnInit() {
-    var tableRefGuid;
-    this.route.paramMap.subscribe((params) => {
-      tableRefGuid = params.get("id");
-      this.targetRoute = params.get("targetRoute");
-    });
-    if (tableRefGuid != null) {
-      this.getPostDetails(tableRefGuid);
-    }
+    this.subscriptions.add(
+      this.route.paramMap.subscribe((params) => {
+        const tableRefGuid = params.get("id");
+        this.targetRoute = params.get("targetRoute");
+        if (tableRefGuid != null) {
+          this.getPostDetails(tableRefGuid);
+        }
+      })
+    );
+
     this.getAllClass();
     this.getAllSchoolBranches();
     this.getAllStreams();
   }
 
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
+  }
+
   getPostDetails(guid: any) {
     this.studentService.getStudentDetailByGuid(guid).subscribe((res: any) => {
       this.studentDetails = res;
-      this.isLoading = false;
+      // Fetch class name if student details are available
+      const classId = this.studentDetails?.studentAdmissionDetail[0]?.classId;
+      const sectionId =
+        this.studentDetails?.studentAdmissionDetail[0]?.sectionId;
+      const streamId = this.studentDetails?.studentAdmissionDetail[0]?.streamId;
+      const branchId =
+        this.studentDetails?.studentAdmissionDetail[0]?.schoolBranchId;
+
+      if (classId) {
+        this.className = this.getClassName(classId);
+        this.getSection(classId).then(() => {
+          this.sectionName = sectionId ? this.getSectionName(sectionId) : "-";
+
+          // After section data is fetched, fetch stream and branch names
+          this.streamName = streamId ? this.getStreamName(streamId) : "-";
+          this.branchName = branchId ? this.getSchoolBranchName(branchId) : "-";
+
+          // Set loading to false once everything is loaded
+          this.isLoading = false;
+        });
+      }
     });
   }
 
@@ -78,13 +111,11 @@ export class StudentDetailsComponent {
   }
 
   getClassName(classId: number): string {
-    this.getSection(classId);
     const matchedClass = this.classes.find((cls) => cls.id === classId);
     return matchedClass ? matchedClass.name : "-";
   }
 
   getSchoolBranchName(branchId: number): string {
-    console.log(this.schoolBranches);
     const matchedBranch = this.schoolBranches.find(
       (branch) => branch.id === branchId
     );
@@ -96,9 +127,12 @@ export class StudentDetailsComponent {
     return matchedStream ? matchedStream.name : "-";
   }
 
-  getSection(classId: number) {
-    this.masterService.getSectionByClassId(classId).subscribe((data: any) => {
-      this.sections = data;
+  getSection(classId: number): Promise<void> {
+    return new Promise((resolve) => {
+      this.masterService.getSectionByClassId(classId).subscribe((data: any) => {
+        this.sections = data;
+        resolve(); // Resolve the promise when sections are fetched
+      });
     });
   }
 

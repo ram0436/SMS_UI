@@ -5,6 +5,7 @@ import { StudentService } from "../../service/student.service";
 import { MasterService } from "../../../service/master.service";
 import { provideNativeDateAdapter } from "@angular/material/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-add-student",
@@ -110,6 +111,8 @@ export class AddStudentComponent implements OnInit {
     { label: "Photo", key: "imageUrl", type: "text" },
   ];
 
+  private subscriptions: Subscription = new Subscription();
+
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private studentService: StudentService,
@@ -124,6 +127,10 @@ export class AddStudentComponent implements OnInit {
     this.getAllOccupation();
     this.getAllQualifications();
     this.getAllSchools();
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 
   onAdmissionDateChange() {
