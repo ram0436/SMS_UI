@@ -29,6 +29,14 @@ const routes: Routes = [
       import("./modules/teacher/teacher.module").then((m) => m.TeacherModule),
     // canActivate: [AuthGuard],
   },
+  {
+    path: "attendance",
+    loadChildren: () =>
+      import("./modules/attendance/attendance.module").then(
+        (m) => m.AttendanceModule
+      ),
+    // canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({
