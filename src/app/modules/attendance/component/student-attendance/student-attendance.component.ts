@@ -115,7 +115,7 @@ export class StudentAttendanceComponent {
 
     const classId = this.selectedClassId;
     const sectionId = this.selectedSectionId;
-    const attendanceDate = this.attendanceDateTemp?.toLocaleDateString("en-CA");
+    const attendanceDate = this.attendanceDateTemp?.toLocaleDateString("en-US");
 
     this.isAttendanceLoading = true; // Show loader
     this.attendanceService

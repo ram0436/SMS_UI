@@ -1,0 +1,165 @@
+.student-attendance-container {
+  padding: 20px 20px;
+  position: relative;
+}
+
+.student-attendance-container .container-about {
+  margin-bottom: 20px;
+}
+
+.student-attendance-container .container-about .title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.student-attendance-container .container-about .descrpition {
+  font-size: 16px;
+  font-weight: normal;
+  margin-bottom: 10px;
+}
+
+.mark-txt {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.main-grid {
+  background: #fff;
+  padding: 0;
+  border-radius: 8px;
+  box-shadow: 0 0 19px -3px rgba(128, 117, 117, 0.4);
+  transition: 0.5s;
+}
+
+.main-grid .attendance-grid-options {
+  border-bottom: 2px solid #e8e2e2;
+  background: #f6f6ff;
+  padding: 15px 20px;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+  color: #000;
+  position: relative;
+}
+
+.attendance-grid-options .grid-btns {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.attendance-grid-options .grid-btns .grid-btn {
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0099fe;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.grid-btn.delete-btn {
+  background-color: red !important;
+}
+
+.attendance-grid-options .grid-total .total {
+  font-size: 16px;
+}
+
+.attendance-grid-options .grid-total .total .total-text {
+  font-weight: 600 !important;
+}
+
+.input-fields {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.input-fields .fields {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+::ng-deep
+  .input-fields
+  .fields
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: #fff;
+}
+
+.grid-table {
+  margin: 10px 20px;
+}
+
+.no-records {
+  margin: 10px 20px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+table {
+  width: 100%;
+}
+
+td {
+  font-size: 14px !important;
+}
+
+.mat-cell,
+.mat-header-cell {
+  text-align: left !important;
+  vertical-align: top !important;
+}
+
+.mat-mdc-cell,
+th {
+  padding: 10px;
+}
+
+th {
+  background-color: #eff6ec !important;
+}
+
+mat-mdc-header-row {
+  border-radius: 12px !important;
+}
+
+.mdc-data-table__row {
+  vertical-align: top !important;
+}
+
+img {
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.green-text {
+  color: rgb(0, 128, 15);
+}
+
+.red-text {
+  color: red;
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.color-blue {
+  color: #0059ff;
+}
+
+.loading-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

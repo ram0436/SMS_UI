@@ -60,6 +60,10 @@ export class MasterService {
     return this.http.get(`${this.baseUrl}Master/GetDepartment`);
   }
 
+  getStaffCategories() {
+    return this.http.get(`${this.baseUrl}Master/GetStaffCategories`);
+  }
+
   getSectionByClassId(classId: number) {
     return this.http.get(
       `${this.baseUrl}Master/GetSectionByClassId?classId=${classId}`

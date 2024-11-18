@@ -23,6 +23,25 @@ export class AttendanceService {
     }Attendance/GetStudentAttendanceDashboard?classId=${classId}&sectionId=${sectionId}&attendanceDate=${encodeURIComponent(
       attendanceDate
     )}`;
+    return this.http.get<any>(url);
+  }
+
+  getStaffAttendanceDashboard(
+    staffCategoryId: number,
+    attendanceDate: string
+  ): Observable<any> {
+    // Construct the URL with query parameters
+    const url = `${
+      this.baseUrl
+    }Attendance/GetStaffAttendanceDashboard?staffCategoryId=${staffCategoryId}&attendanceDate=${encodeURIComponent(
+      attendanceDate
+    )}`;
+    return this.http.get<any>(url);
+  }
+
+  getStaffListByStaffCategoryId(staffCategoryId: number): Observable<any> {
+    // Construct the URL with query parameters
+    const url = `${this.baseUrl}/Attendance/GetStaffListByStaffCategoryId?staffCategoryId=${staffCategoryId}`;
 
     return this.http.get<any>(url);
   }
@@ -50,9 +69,9 @@ export class AttendanceService {
     );
   }
 
-  addStaffAttendance(payload: any): Observable<any> {
+  addBulkStaffAttendance(payload: any): Observable<any> {
     return this.http.post(
-      `${this.baseUrl}Attendance/AddStaffAttendance`,
+      `${this.baseUrl}Attendance/AddBulkStaffAttendance`,
       payload
     );
   }

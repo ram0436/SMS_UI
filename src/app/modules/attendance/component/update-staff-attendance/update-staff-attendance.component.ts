@@ -8,12 +8,12 @@ import { MatTableDataSource } from "@angular/material/table";
 import { provideNativeDateAdapter } from "@angular/material/core";
 
 @Component({
-  selector: "app-update-attendance",
+  selector: "app-update-staff-attendance",
   providers: [provideNativeDateAdapter()],
-  templateUrl: "./update-attendance.component.html",
-  styleUrl: "./update-attendance.component.css",
+  templateUrl: "./update-staff-attendance.component.html",
+  styleUrl: "./update-staff-attendance.component.css",
 })
-export class UpdateAttendanceComponent {
+export class UpdateStaffAttendanceComponent {
   dialogRef: MatDialogRef<any> | null = null;
   dataSource = new MatTableDataSource<any>([]);
   isLoading: boolean = false;
@@ -21,24 +21,22 @@ export class UpdateAttendanceComponent {
 
   selectAll: boolean = false;
 
-  classes: any[] = [];
-  sections: any[] = [];
+  staffCategories: any[] = [];
   statuses: any[] = [];
 
-  studentList: any = [];
+  staffList: any = [];
 
   noRecordsFound: boolean = false;
 
-  selectedClassId: number = 0;
-  selectedSectionId: number = 0;
+  selectedStaffCategoryId: number = 0;
 
   attendanceDateTemp: Date | null = new Date();
 
   displayedColumns: string[] = [
-    "rollNo",
+    "employeeId",
     "profilePic",
-    "studentName",
     "fatherName",
+    "designation",
     "mobileNo",
     "status",
     "remark",
@@ -54,9 +52,9 @@ export class UpdateAttendanceComponent {
   ) {}
 
   ngOnInit() {
-    this.subscriptions.add(this.getAllClass());
+    this.subscriptions.add(this.getAllStaffCategories());
     this.subscriptions.add(this.getAllStatus());
-    this.dataSource.data = this.studentList;
+    this.dataSource.data = this.staffList;
   }
 
   ngOnDestroy(): void {
@@ -69,9 +67,9 @@ export class UpdateAttendanceComponent {
     }
   }
 
-  getAllClass() {
-    this.masterService.getAllClass().subscribe((data: any) => {
-      this.classes = data;
+  getAllStaffCategories() {
+    this.masterService.getStaffCategories().subscribe((data: any) => {
+      this.staffCategories = data;
     });
   }
 
@@ -83,40 +81,23 @@ export class UpdateAttendanceComponent {
 
   toggleAllStatus(): void {
     const statusToSet = this.selectAll ? "Present" : "";
-    this.studentList.forEach((student: any) => {
+    this.staffList.forEach((student: any) => {
       student.status = statusToSet;
     });
   }
 
   onAttendanceDateChange() {}
 
-  getClassName(classId: number): string {
-    const matchedClass = this.classes.find((cls) => cls.id === classId);
-    return matchedClass ? matchedClass.name : "-";
-  }
-
-  getSection(classId: number) {
-    if (!classId) {
-      this.sections = [];
-      return;
-    }
-    this.masterService.getSectionByClassId(classId).subscribe((data: any) => {
-      this.sections = data;
-    });
-  }
-
-  getStudentList() {
-    if (!this.selectedClassId || !this.selectedSectionId) {
-      this.showNotification("Please select class, and section.");
+  getStaffList() {
+    if (!this.selectedStaffCategoryId) {
+      this.showNotification("Please select staff category.");
       return;
     }
 
-    const classId = this.selectedClassId;
-    const sectionId = this.selectedSectionId;
-
+    const staffCategoryId = this.selectedStaffCategoryId;
     this.isAttendanceLoading = true;
     this.attendanceService
-      .getStudentListByClassSectionId(classId, sectionId)
+      .getStaffListByStaffCategoryId(staffCategoryId)
       .subscribe(
         (data: any) => {
           if (data.length === 0) {
@@ -124,7 +105,7 @@ export class UpdateAttendanceComponent {
             this.showNotification("No Records Found");
           }
           this.isAttendanceLoading = false;
-          this.studentList = data;
+          this.staffList = data;
           this.dataSource.data = data;
         },
         (error) => {
@@ -135,28 +116,26 @@ export class UpdateAttendanceComponent {
 
   addAttendance() {
     // Check if there are students to process
-    if (!this.studentList || this.studentList.length === 0) {
-      this.showNotification("No students to update attendance.");
+    if (!this.staffList || this.staffList.length === 0) {
+      this.showNotification("No Staff to update attendance.");
       return;
     }
 
     // Create the payload for the API
-    const payload = this.studentList.map((student: any) => ({
+    const payload = this.staffList.map((staff: any) => ({
       createdBy: 1,
       createdOn: new Date().toISOString(),
       modifiedBy: 1,
       modifiedOn: new Date().toISOString(),
-      id: student.id || 0,
-      studentId: student.studentId,
-      classId: this.selectedClassId,
-      sectionId: this.selectedSectionId,
+      id: staff.id || 0,
+      employeeId: staff.employeeId,
+      staffCategoryId: this.selectedStaffCategoryId,
       attendanceDate: this.attendanceDateTemp?.toLocaleDateString("en-CA"),
-      rollNo: student.rollNo,
-      attendanceStatusId: this.getAttendanceStatusId(student.status),
-      remark: student.remark || "",
+      attendanceStatusId: this.getAttendanceStatusId(staff.status),
+      remark: staff.remark || "",
     }));
 
-    this.attendanceService.addBulkStudentAttendance(payload).subscribe(
+    this.attendanceService.addBulkStaffAttendance(payload).subscribe(
       (response) => {
         this.showNotification("Attendance updated successfully.");
       },

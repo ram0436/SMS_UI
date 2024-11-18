@@ -29,12 +29,14 @@ import { AttendanceRoutingModule } from "./attendance-routing.module";
 import { StudentAttendanceComponent } from "./component/student-attendance/student-attendance.component";
 import { StaffAttendanceComponent } from "./component/staff-attendance/staff-attendance.component";
 import { UpdateAttendanceComponent } from "./component/update-attendance/update-attendance.component";
+import { UpdateStaffAttendanceComponent } from "./component/update-staff-attendance/update-staff-attendance.component";
 
 @NgModule({
   declarations: [
     StudentAttendanceComponent,
     StaffAttendanceComponent,
     UpdateAttendanceComponent,
+    UpdateStaffAttendanceComponent,
   ],
   imports: [
     SharedModule,
