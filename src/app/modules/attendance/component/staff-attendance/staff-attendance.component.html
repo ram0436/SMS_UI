@@ -1,0 +1,131 @@
+<div class="student-attendance-container">
+  <div *ngIf="isLoading" class="loading-spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+  <div *ngIf="!isLoading">
+    <div class="container-about">
+      <div class="title">Staff Attendance</div>
+    </div>
+    <div class="main-grid">
+      <div class="attendance-grid-options">
+        <div class="grid-btns">
+          <span class="mark-txt">Mark Attendance</span>
+          <span
+            class="material-symbols-outlined grid-btn"
+            (click)="openUpdateAttendanceDialog()"
+          >
+            add
+          </span>
+        </div>
+        <div class="input-fields">
+          <span
+            >Select a staff category & date to view the attendance report.</span
+          >
+          <div class="fields">
+            <mat-form-field class="input-field">
+              <mat-label>Staff Category</mat-label>
+              <mat-select [(ngModel)]="selectedStaffCategoryId" name="class">
+                <mat-option
+                  *ngFor="let staffCategory of staffCategories"
+                  [value]="staffCategory.id"
+                >
+                  {{ staffCategory.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="input-field">
+              <mat-label>Select Date</mat-label>
+              <input
+                matInput
+                [matDatepicker]="attendanceDatePicker"
+                [(ngModel)]="attendanceDateTemp"
+                (ngModelChange)="onAttendanceDateChange()"
+                name="attendanceDate"
+              />
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="attendanceDatePicker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #attendanceDatePicker></mat-datepicker>
+            </mat-form-field>
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="getStaffAttendance()"
+            >
+              Get Attendance
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        *ngIf="!noRecordsFound && studentAttendanceList.length > 0"
+        class="grid-table"
+      >
+        <table mat-table [dataSource]="dataSource">
+          <!-- Table columns as before -->
+          <ng-container matColumnDef="employeeId">
+            <th mat-header-cell *matHeaderCellDef>Employee ID</th>
+            <td mat-cell *matCellDef="let row">{{ row.employeeId || "-" }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="profilePic">
+            <th mat-header-cell *matHeaderCellDef>Profile Picture</th>
+            <td mat-cell *matCellDef="let row">
+              <img
+                *ngIf="row.profilePicURL"
+                [src]="row.profilePicURL"
+                alt="Profile Pic"
+                width="50"
+                height="50"
+              />
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="fatherName">
+            <th mat-header-cell *matHeaderCellDef>Father Name</th>
+            <td mat-cell *matCellDef="let row">{{ row.fatherName || "-" }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="designation">
+            <th mat-header-cell *matHeaderCellDef>Designation</th>
+            <td mat-cell *matCellDef="let row">{{ row.designation || "-" }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="mobileNo">
+            <th mat-header-cell *matHeaderCellDef>Mobile No</th>
+            <td mat-cell *matCellDef="let row">{{ row.mobileNo || "-" }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>Status</th>
+            <td mat-cell *matCellDef="let row">{{ row.status || "-" }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="remark">
+            <th mat-header-cell *matHeaderCellDef>Remark</th>
+            <td mat-cell *matCellDef="let row">{{ row.remark || "-" }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef>Action</th>
+            <td mat-cell *matCellDef="let row">
+              <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item>Edit</button>
+                <button mat-menu-item>View</button>
+              </mat-menu>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

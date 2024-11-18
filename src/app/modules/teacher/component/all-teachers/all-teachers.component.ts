@@ -26,7 +26,7 @@ export class AllTeachersComponent {
 
   displayedColumns: string[] = [
     "no",
-    "staffID",
+    "employeeID",
     "profile",
     "nationality",
     "teacherDetails",

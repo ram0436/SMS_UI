@@ -1,0 +1,171 @@
+.row {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.mat-elevation-z12 {
+  scrollbar-width: 0px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.popup-title {
+  padding: 20px 24px 0px 24px;
+  margin-bottom: 10px !important;
+}
+
+.hidden-scrollbar {
+  overflow: hidden;
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hidden-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.mat-mdc-dialog-content.mdc-dialog__content {
+  overflow: hidden;
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.mat-mdc-dialog-content.mdc-dialog__content::-webkit-scrollbar {
+  display: none;
+}
+
+.mat-elevation-z12::-webkit-scrollbar {
+  display: none !important; /* Chrome, Safari, Edge */
+}
+
+.details-title {
+  font-weight: 500;
+  font-size: 16px;
+  color: #000;
+}
+
+.fields {
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.attendance-content {
+  margin-top: -20px;
+}
+
+/* ::ng-deep .attendance-content.mat-mdc-dialog-container .mat-mdc-dialog-content {
+    padding-top: 0px !important;
+  } */
+
+.grid-table {
+  margin: 20px 0px;
+}
+
+.no-records {
+  margin: 10px 20px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+table {
+  width: 100%;
+}
+
+td {
+  font-size: 14px !important;
+}
+
+.mat-cell,
+.mat-header-cell {
+  text-align: left !important;
+  vertical-align: center !important;
+}
+
+.mat-mdc-cell,
+th {
+  padding: 10px;
+}
+
+th {
+  background-color: #eff6ec !important;
+}
+
+mat-mdc-header-row {
+  border-radius: 12px !important;
+}
+
+.mdc-data-table__row {
+  vertical-align: center !important;
+}
+
+img {
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.green-text {
+  color: rgb(0, 128, 15);
+}
+
+.red-text {
+  color: red;
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.color-blue {
+  color: #0059ff;
+}
+
+.loading-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-attendance-btn {
+  width: 20%;
+  background: #0099fe;
+  color: #fff !important;
+  margin-left: auto;
+}
+
+::ng-deep .mat-mdc-dialog-actions.mdc-dialog__actions {
+  padding: 20px !important;
+}
+
+/* Change checkbox color */
+::ng-deep .select-all-checkbox .mat-checkbox-frame,
+::ng-deep .select-all-checkbox .mat-checkbox-checkmark-path {
+  border-color: #0099fe !important;
+  stroke: #0099fe !important;
+}
+
+::ng-deep .student-checkbox .mat-checkbox-frame,
+::ng-deep .student-checkbox .mat-checkbox-checkmark-path {
+  border-color: #0099fe !important;
+  stroke: #0099fe !important;
+}
+
+/* Change label text color */
+::ng-deep .select-all-checkbox .mat-checkbox-label,
+::ng-deep .student-checkbox .mat-checkbox-label {
+  color: #0099fe !important;
+}
+
+::ng-deep .mdc-checkbox__background {
+  border-color: #0099fe;
+  background-color: #0099fe;
+}

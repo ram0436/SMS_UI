@@ -7,7 +7,8 @@ export class Teacher {
   id: number = 0;
   tableRefGuid: string = "";
 
-  staffID: string = "";
+  employeeId: string = "";
+  staffCategoryId: number = 0;
   joiningDate: string = new Date().toISOString();
   profilePicURL: string = "";
 

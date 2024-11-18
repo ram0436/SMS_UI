@@ -7,8 +7,13 @@
       <h3 class="details-title first">Joining Details:</h3>
       <div class="grid">
         <mat-form-field class="input-field">
-          <mat-label>Staff ID No.</mat-label>
-          <input matInput [(ngModel)]="teacher.staffID" name="staffID" />
+          <mat-label>Employee ID</mat-label>
+          <input
+            matInput
+            [(ngModel)]="teacher.employeeId"
+            name="employeeId"
+            disabled
+          />
         </mat-form-field>
 
         <mat-form-field class="input-field">
