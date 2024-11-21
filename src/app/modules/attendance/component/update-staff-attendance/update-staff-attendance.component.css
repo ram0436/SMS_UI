@@ -12,7 +12,8 @@
 }
 
 .popup-title {
-  padding: 20px 24px 0px 24px;
+  padding: 10px 24px 10px 24px;
+  background-color: var(--secondary-app-color);
   margin-bottom: 10px !important;
 }
 
@@ -96,7 +97,7 @@ th {
 }
 
 th {
-  background-color: #eff6ec !important;
+  background-color: var(--secondary-app-color) !important;
 }
 
 mat-mdc-header-row {
@@ -137,7 +138,7 @@ img {
 
 .add-attendance-btn {
   width: 20%;
-  background: #0099fe;
+  background: var(--primary-app-color);
   color: #fff !important;
   margin-left: auto;
 }
@@ -149,23 +150,23 @@ img {
 /* Change checkbox color */
 ::ng-deep .select-all-checkbox .mat-checkbox-frame,
 ::ng-deep .select-all-checkbox .mat-checkbox-checkmark-path {
-  border-color: #0099fe !important;
-  stroke: #0099fe !important;
+  border-color: var(--primary-app-color) !important;
+  stroke: var(--primary-app-color) !important;
 }
 
 ::ng-deep .student-checkbox .mat-checkbox-frame,
 ::ng-deep .student-checkbox .mat-checkbox-checkmark-path {
-  border-color: #0099fe !important;
-  stroke: #0099fe !important;
+  border-color: var(--primary-app-color) !important;
+  stroke: var(--primary-app-color) !important;
 }
 
 /* Change label text color */
 ::ng-deep .select-all-checkbox .mat-checkbox-label,
 ::ng-deep .student-checkbox .mat-checkbox-label {
-  color: #0099fe !important;
+  color: var(--primary-app-color) !important;
 }
 
 ::ng-deep .mdc-checkbox__background {
-  border-color: #0099fe;
-  background-color: #0099fe;
+  border-color: var(--primary-app-color);
+  background-color: var(--primary-app-color);
 }
