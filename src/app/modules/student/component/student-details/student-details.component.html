@@ -6,46 +6,56 @@
   <div *ngIf="!isLoading">
     <!-- Full width container -->
     <div class="student-header">
-      <img
-        [src]="studentDetails.studentAdmissionDetail[0]?.studentImageURL"
-        alt="Student Image"
-        class="student-image"
-      />
-      <div class="student-info">
-        <h2 class="student-name" style="text-transform: capitalize">
-          {{ studentDetails.name }}
-        </h2>
-        <p class="info">
-          <strong class="info-title">Admission No.</strong>
-          <span>:</span>
-          <span>{{
-            studentDetails.studentAdmissionDetail[0]?.admissionNo
-          }}</span>
-        </p>
-        <p class="info">
-          <strong class="info-title">Username</strong>
-          <span>:</span>
-          <span>{{ studentDetails.studentAdmissionDetail[0]?.srNo }}</span>
-        </p>
-        <p class="info">
-          <strong class="info-title">Father Name </strong>
-          <span>:</span>
-          <span>{{ studentDetails.studentFatherDetail[0]?.name }} </span>
-        </p>
-        <p class="info">
-          <strong class="info-title">Class</strong>
-          <span>:</span>
-          <span>{{ className }}</span>
-        </p>
+      <div class="header-top">
+        <img
+          [src]="studentDetails.studentAdmissionDetail[0]?.studentImageURL"
+          alt="Student Image"
+          class="student-image"
+        />
+        <div class="student-info">
+          <h2 class="student-name" style="text-transform: capitalize">
+            {{ studentDetails.name }}
+          </h2>
+          <p class="info">
+            <strong class="info-title">Admission No.</strong>
+            <span>:</span>
+            <span>{{
+              studentDetails.studentAdmissionDetail[0]?.admissionNo
+            }}</span>
+          </p>
+          <p class="info">
+            <strong class="info-title">Username</strong>
+            <span>:</span>
+            <span>{{ studentDetails.studentAdmissionDetail[0]?.srNo }}</span>
+          </p>
+          <p class="info">
+            <strong class="info-title">Father Name </strong>
+            <span>:</span>
+            <span>{{ studentDetails.studentFatherDetail[0]?.name }} </span>
+          </p>
+          <p class="info">
+            <strong class="info-title">Class</strong>
+            <span>:</span>
+            <span>{{ className }}</span>
+          </p>
+        </div>
+        <!-- Material Icon Button for Edit/Delete -->
+        <button mat-icon-button [matMenuTriggerFor]="menu" class="menu-button">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="editStudent()">Edit</button>
+          <button mat-menu-item (click)="deleteStudent()">Delete</button>
+        </mat-menu>
       </div>
-      <!-- Material Icon Button for Edit/Delete -->
-      <button mat-icon-button [matMenuTriggerFor]="menu" class="menu-button">
-        <mat-icon>more_vert</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="editStudent()">Edit</button>
-        <button mat-menu-item (click)="deleteStudent()">Delete</button>
-      </mat-menu>
+      <div class="header-bottom">
+        <div class="header-tabs">
+          <div class="header-tab active">View Details</div>
+          <div class="header-tab">Fees</div>
+          <div class="header-tab">Download ID Card</div>
+          <div class="header-tab">Attendance</div>
+        </div>
+      </div>
     </div>
 
     <!-- Two column container -->

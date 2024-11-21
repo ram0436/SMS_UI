@@ -30,6 +30,12 @@ const routes: Routes = [
     // canActivate: [AuthGuard],
   },
   {
+    path: "staff",
+    loadChildren: () =>
+      import("./modules/staff/staff.module").then((m) => m.StaffModule),
+    // canActivate: [AuthGuard],
+  },
+  {
     path: "attendance",
     loadChildren: () =>
       import("./modules/attendance/attendance.module").then(

@@ -124,15 +124,15 @@ mat-card-content {
 }
 
 /* .camera {
-  margin: 20px;
-  margin-left: 35px;
-  border: none;
-  background-color: #ffff;
-  font-weight: 700;
-  font-size: 16px;
-  padding: 0;
-  width: 30px;
-} */
+      margin: 20px;
+      margin-left: 35px;
+      border: none;
+      background-color: #ffff;
+      font-weight: 700;
+      font-size: 16px;
+      padding: 0;
+      width: 30px;
+    } */
 
 .camera {
   padding: 7px 14px;
@@ -298,7 +298,7 @@ table {
 .qual-details-row {
   position: relative;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 0.8fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
   margin-bottom: 10px;
 }
@@ -334,7 +334,7 @@ table {
   height: 35px;
 }
 
-.add-student-btn {
+.add-staff-btn {
   width: 90%;
   background: var(--primary-app-color);
   color: #fff !important;
