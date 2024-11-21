@@ -33,7 +33,7 @@
 }
 
 .teacher-info .teacher-name {
-  color: #0099fe;
+  color: var(--primary-app-color);
 }
 
 .teacher-info p {
@@ -47,7 +47,7 @@
 }
 
 ::ng-deep .mat-icon {
-  color: #0099fe;
+  color: var(--primary-app-color);
 }
 
 .details-container {
@@ -69,7 +69,7 @@
 }
 
 .title-box {
-  background-color: #eff6ec;
+  background-color: var(--secondary-app-color);
 }
 
 h3 {

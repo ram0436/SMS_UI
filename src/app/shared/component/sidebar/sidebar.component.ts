@@ -20,6 +20,13 @@ export class SidebarComponent {
       dropdownOpen: false,
     },
     {
+      name: "Staff",
+      icon: "person_play",
+      hasDropdown: true,
+      subItems: [{ name: "All Staff", icon: "menu" }],
+      dropdownOpen: false,
+    },
+    {
       name: "Students",
       icon: "groups",
       hasDropdown: true,
@@ -72,6 +79,8 @@ export class SidebarComponent {
       this.router.navigate(["attendance/student-attendance"]);
     } else if (subItem.name === "Staff Attendance") {
       this.router.navigate(["attendance/staff-attendance"]);
+    } else if (subItem.name === "All Staff") {
+      this.router.navigate(["staff/all-staff"]);
     }
   }
 }

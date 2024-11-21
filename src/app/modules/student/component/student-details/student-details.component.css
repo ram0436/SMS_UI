@@ -4,21 +4,51 @@
 }
 
 .student-header {
-  display: flex;
-  gap: 20px;
-  background-color: #fff;
-  align-items: center;
   margin-bottom: 20px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 20px;
+  background-color: #fff;
   position: relative;
+}
+
+.student-header .header-top {
+  padding: 20px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.student-header .header-bottom {
+  padding: 0px;
+}
+
+.header-bottom .header-tabs {
+  display: flex;
+  align-items: center;
+}
+
+.header-bottom .header-tabs .header-tab {
+  padding: 10px 15px;
+  color: var(--primary-app-color);
+  border-right: 1px solid var(--primary-app-color);
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.header-tab.active {
+  background-color: var(--primary-app-color);
+  color: #fff !important;
+}
+
+.header-tab:hover {
+  background-color: var(--secondary-app-color);
+  color: #000 !important;
 }
 
 .student-header .student-image {
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  object-fit: cover;
+  object-fit: fill;
 }
 
 .student-info {
@@ -33,7 +63,7 @@
 }
 
 .student-info .student-name {
-  color: #0099fe;
+  color: var(--primary-app-color);
 }
 
 .student-info p {
@@ -47,7 +77,7 @@
 }
 
 ::ng-deep .mat-icon {
-  color: #0099fe;
+  color: var(--primary-app-color);
 }
 
 .details-container {
@@ -69,7 +99,7 @@
 }
 
 .title-box {
-  background-color: #eff6ec;
+  background-color: var(--secondary-app-color);
 }
 
 h3 {

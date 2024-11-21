@@ -41,14 +41,14 @@
 /* Active menu item styling */
 .menu-list li.active .main-item {
   background-color: #f2f2f2; /* Light gray background */
-  border-left: 4px solid #0099fe; /* Blue left border */
+  border-left: 4px solid var(--primary-app-color); /* Blue left border */
 }
 
 /* Icon styling */
 .icon-show-more,
 .menu-icon {
   font-size: 20px;
-  color: #0099fe;
+  color: var(--primary-app-color);
 }
 
 .dropdown-list {

@@ -48,7 +48,7 @@
 ::ng-deep
   .mat-mdc-progress-spinner
   .mdc-circular-progress__indeterminate-circle-graphic {
-  stroke: #0099fe !important;
+  stroke: var(--primary-app-color) !important;
 }
 
 table {
@@ -69,7 +69,7 @@ table {
 } */
 
 ::ng-deep .mat-mdc-raised-button.mat-primary {
-  --mdc-protected-button-container-color: #0099fe;
+  --mdc-protected-button-container-color: var(--primary-app-color);
   --mdc-protected-button-label-text-color: white;
   --mat-protected-button-state-layer-color: white;
   --mat-protected-button-ripple-color: rgba(255, 255, 255, 0.1);
