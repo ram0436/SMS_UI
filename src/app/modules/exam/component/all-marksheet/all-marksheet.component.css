@@ -1,0 +1,143 @@
+.all-marksheets-container {
+  padding: 20px 20px;
+  position: relative;
+}
+
+.all-marksheets-container .container-about {
+  margin-bottom: 20px;
+}
+
+.all-marksheets-container .container-about .title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.all-marksheets-container .container-about .descrpition {
+  font-size: 16px;
+  font-weight: normal;
+  margin-bottom: 10px;
+}
+
+.main-grid {
+  background: #fff;
+  padding: 0;
+  border-radius: 8px;
+  box-shadow: 0 0 19px -3px rgba(128, 117, 117, 0.4);
+  transition: 0.5s;
+}
+
+.main-grid .grid-options {
+  border-bottom: 2px solid #e8e2e2;
+  background: #f6f6ff;
+  padding: 15px 20px;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+  color: #000;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.grid-options .grid-btns {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.grid-options .grid-btns .grid-btn {
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary-app-color);
+  border-radius: 4px;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.grid-btn.delete-btn {
+  background-color: red !important;
+}
+
+.grid-options .grid-total .total {
+  font-size: 16px;
+}
+
+.grid-options .grid-total .total .total-text {
+  font-weight: 600 !important;
+}
+
+.grid-table {
+  margin: 10px 20px;
+}
+
+table {
+  width: 100%;
+}
+
+td {
+  font-size: 14px !important;
+}
+
+.mat-cell,
+.mat-header-cell {
+  text-align: left !important;
+  vertical-align: top !important;
+}
+
+.mat-mdc-cell,
+th {
+  padding: 10px;
+}
+
+th {
+  background-color: var(--secondary-app-color) !important;
+}
+
+mat-mdc-header-row {
+  border-radius: 12px !important;
+}
+
+.mdc-data-table__row {
+  vertical-align: top !important;
+}
+
+img {
+  border-radius: 50%;
+  margin-right: 8px;
+  /* position: relative !important;
+      left: auto !important; */
+}
+
+.marksheet-info .marksheet-details {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.green-text {
+  color: rgb(0, 128, 15);
+}
+
+.red-text {
+  color: red;
+}
+
+.marksheet-info-link {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.color-blue {
+  color: #0059ff;
+}
+
+.loading-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

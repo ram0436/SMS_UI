@@ -21,19 +21,16 @@ const routes: Routes = [
     path: "student",
     loadChildren: () =>
       import("./modules/student/student.module").then((m) => m.StudentModule),
-    // canActivate: [AuthGuard],
   },
   {
     path: "teacher",
     loadChildren: () =>
       import("./modules/teacher/teacher.module").then((m) => m.TeacherModule),
-    // canActivate: [AuthGuard],
   },
   {
     path: "staff",
     loadChildren: () =>
       import("./modules/staff/staff.module").then((m) => m.StaffModule),
-    // canActivate: [AuthGuard],
   },
   {
     path: "attendance",
@@ -41,7 +38,11 @@ const routes: Routes = [
       import("./modules/attendance/attendance.module").then(
         (m) => m.AttendanceModule
       ),
-    // canActivate: [AuthGuard],
+  },
+  {
+    path: "exam",
+    loadChildren: () =>
+      import("./modules/exam/exam.module").then((m) => m.ExamModule),
   },
 ];
 
