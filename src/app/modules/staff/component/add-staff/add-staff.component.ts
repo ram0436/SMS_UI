@@ -153,7 +153,7 @@ export class AddStaffComponent {
     });
   }
   deleteBackgroundImage(index: any, isFrom: string): void {
-    if (isFrom == "teacherImageUpload") {
+    if (isFrom == "staffImageUpload") {
       for (let i = index; i < this.staffImage.length - 1; i++) {
         this.staffImage[i] = this.staffImage[i + 1];
       }

@@ -10,6 +10,23 @@ export class SidebarComponent {
   menuItems = [
     { name: "Dashboard", icon: "dashboard", hasDropdown: false },
     {
+      name: "Students",
+      icon: "groups",
+      hasDropdown: true,
+      subItems: [
+        { name: "All Students", icon: "menu" },
+        { name: "Passed", icon: "school" },
+      ],
+      dropdownOpen: false,
+    },
+    {
+      name: "Exam",
+      icon: "note_add",
+      hasDropdown: true,
+      subItems: [{ name: "All Marksheets", icon: "menu" }],
+      dropdownOpen: false,
+    },
+    {
       name: "Teachers",
       icon: "school",
       hasDropdown: true,
@@ -26,16 +43,7 @@ export class SidebarComponent {
       subItems: [{ name: "All Staff", icon: "menu" }],
       dropdownOpen: false,
     },
-    {
-      name: "Students",
-      icon: "groups",
-      hasDropdown: true,
-      subItems: [
-        { name: "All Students", icon: "menu" },
-        { name: "Passed", icon: "school" },
-      ],
-      dropdownOpen: false,
-    },
+
     {
       name: "Attendance",
       icon: "edit_calendar",
@@ -81,6 +89,8 @@ export class SidebarComponent {
       this.router.navigate(["attendance/staff-attendance"]);
     } else if (subItem.name === "All Staff") {
       this.router.navigate(["staff/all-staff"]);
+    } else if (subItem.name === "All Marksheets") {
+      this.router.navigate(["exam/all-marksheets"]);
     }
   }
 }
