@@ -1,0 +1,125 @@
+<!-- Dialog Template for Adding staff -->
+<mat-card class="mat-elevation-z12 hidden-scrollbar">
+  <h2 mat-dialog-title class="popup-title">Add Marksheet</h2>
+  <div mat-dialog-content>
+    <div class="section-details">
+      <h3 class="details-title first">Exam Details:</h3>
+      <mat-form-field class="exam-field">
+        <mat-label>Exam Term</mat-label>
+        <mat-select [(ngModel)]="selectedExamTermId" name="examTerm">
+          <mat-option *ngFor="let examTerm of examTerms" [value]="examTerm.id">
+            {{ examTerm.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="section-details">
+      <div class="grid">
+        <mat-form-field class="input-field">
+          <mat-label>Class</mat-label>
+          <mat-select
+            [(ngModel)]="selectedClassId"
+            name="class"
+            (selectionChange)="onClassSelected($event.value)"
+            [disabled]="!selectedExamTermId"
+          >
+            <mat-option *ngFor="let class of classes" [value]="class.id">
+              {{ class.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="input-field">
+          <mat-label>Section</mat-label>
+          <mat-select
+            [(ngModel)]="selectedSectionId"
+            name="section"
+            [disabled]="!selectedExamTermId"
+          >
+            <mat-option *ngFor="let section of sections" [value]="section.id">
+              {{ section.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="input-field">
+          <mat-label>Activity</mat-label>
+          <mat-select
+            [(ngModel)]="selectedActivityId"
+            name="coScholosticActivity"
+            (selectionChange)="getCoScholosticActivityForEntry()"
+            [disabled]="!selectedExamTermId"
+          >
+            <mat-option
+              *ngFor="let activity of activities"
+              [value]="activity.activityId"
+            >
+              {{ activity.activityName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="marksheet-details" *ngIf="coScholosticActivities.length !== 0">
+      <h3 class="details-title">Marksheet Details:</h3>
+
+      <!-- Table for displaying subjects and marks -->
+      <table
+        mat-table
+        [dataSource]="coScholosticActivities"
+        class="mat-elevation-z8"
+      >
+        <ng-container matColumnDef="rollNo">
+          <th mat-header-cell *matHeaderCellDef>Roll No.</th>
+          <td mat-cell *matCellDef="let activity">{{ activity.rollNo }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="studentName">
+          <th mat-header-cell *matHeaderCellDef>Student Name</th>
+          <td mat-cell *matCellDef="let activity">
+            {{ activity.studentName }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="grade">
+          <th mat-header-cell *matHeaderCellDef>Grade</th>
+          <td mat-cell *matCellDef="let activity">
+            <mat-form-field appearance="outline">
+              <mat-label>Grade</mat-label>
+              <input matInput [(ngModel)]="activity.grade" />
+            </mat-form-field>
+          </td>
+        </ng-container>
+
+        <!-- Action Column -->
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+          <td mat-cell *matCellDef="let activity">
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item>Edit</button>
+              <button mat-menu-item>Delete</button>
+            </mat-menu>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+  </div>
+
+  <div mat-dialog-actions>
+    <button
+      mat-button
+      color="primary"
+      class="add-marksheet-btn"
+      (click)="addMarksheet()"
+      [disabled]="!selectedActivityId"
+    >
+      Add Marksheet
+    </button>
+  </div>
+</mat-card>

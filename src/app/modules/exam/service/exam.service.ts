@@ -22,6 +22,18 @@ export class ExamService {
     );
   }
 
+  getCoScholosticActivityByClassId(classId: number) {
+    return this.http.get(
+      `${this.baseUrl}Exam/GetCoScholosticActivityByClassId?classId=${classId}`
+    );
+  }
+
+  getDisciplineByClassId(classId: number) {
+    return this.http.get(
+      `${this.baseUrl}Exam/GetDisciplineByClassId?classId=${classId}`
+    );
+  }
+
   getAllSubjectByExamId(examId: number) {
     return this.http.get(
       `${this.baseUrl}Exam/GetAllSubjectByExamId?examId=${examId}`
@@ -39,9 +51,35 @@ export class ExamService {
     );
   }
 
+  getCoScholosticActivityForEntry(classId: number, sectionId: number) {
+    return this.http.get(
+      `${this.baseUrl}Exam/GetCoScholosticActivityForEntry?classId=${classId}&sectionId=${sectionId}`
+    );
+  }
+
+  getDisciplineElementForEntry(classId: number, sectionId: number) {
+    return this.http.get(
+      `${this.baseUrl}Exam/GetDisciplineElementForEntry?classId=${classId}&sectionId=${sectionId}`
+    );
+  }
+
   addScholasticExamResult(payload: any): Observable<any> {
     return this.http.post(
       `${this.baseUrl}Exam/AddScholasticExamResult`,
+      payload
+    );
+  }
+
+  addCoScholasticAssessmentResult(payload: any): Observable<any> {
+    return this.http.post(
+      `${this.baseUrl}Exam/AddCoScholasticAssessmentResult`,
+      payload
+    );
+  }
+
+  addDisciplineAssessmentResult(payload: any): Observable<any> {
+    return this.http.post(
+      `${this.baseUrl}Exam/AddDisciplineAssessmentResult`,
       payload
     );
   }
