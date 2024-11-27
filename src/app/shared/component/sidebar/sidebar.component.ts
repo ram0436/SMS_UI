@@ -23,7 +23,11 @@ export class SidebarComponent {
       name: "Exam",
       icon: "note_add",
       hasDropdown: true,
-      subItems: [{ name: "All Marksheets", icon: "menu" }],
+      subItems: [
+        { name: "Scholastic", icon: "history_edu" },
+        { name: "Co-Scholastic", icon: "sprint" },
+        { name: "Discipline", icon: "man" },
+      ],
       dropdownOpen: false,
     },
     {
@@ -89,8 +93,12 @@ export class SidebarComponent {
       this.router.navigate(["attendance/staff-attendance"]);
     } else if (subItem.name === "All Staff") {
       this.router.navigate(["staff/all-staff"]);
-    } else if (subItem.name === "All Marksheets") {
-      this.router.navigate(["exam/all-marksheets"]);
+    } else if (subItem.name === "Scholastic") {
+      this.router.navigate(["exam/scholastic"]);
+    } else if (subItem.name === "Co-Scholastic") {
+      this.router.navigate(["exam/co-scholastic"]);
+    } else if (subItem.name === "Discipline") {
+      this.router.navigate(["exam/discipline"]);
     }
   }
 }

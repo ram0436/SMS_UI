@@ -29,9 +29,22 @@ import {
 import { ExamRoutingModule } from "./exam-routing.module";
 import { AllMarksheetComponent } from "./component/all-marksheet/all-marksheet.component";
 import { AddMarksheetComponent } from "./component/add-marksheet/add-marksheet.component";
+import { CoscholosticExamComponent } from "./component/coscholostic-exam/coscholostic-exam.component";
+import { AddCoscholosticMarksheetComponent } from "./component/add-coscholostic-marksheet/add-coscholostic-marksheet.component";
+import { DisciplineActivityComponent } from "./component/discipline-activity/discipline-activity.component";
+import { AddDisciplineActivityComponent } from "./component/add-discipline-activity/add-discipline-activity.component";
+import { ScholosticExamComponent } from "./component/scholostic-exam/scholostic-exam.component";
 
 @NgModule({
-  declarations: [AllMarksheetComponent, AddMarksheetComponent],
+  declarations: [
+    AllMarksheetComponent,
+    AddMarksheetComponent,
+    CoscholosticExamComponent,
+    AddCoscholosticMarksheetComponent,
+    DisciplineActivityComponent,
+    AddDisciplineActivityComponent,
+    ScholosticExamComponent,
+  ],
   imports: [
     SharedModule,
     ExamRoutingModule,
