@@ -1,0 +1,43 @@
+<div class="all-structures-container">
+  <div *ngIf="isLoading" class="loading-spinner">
+    <!-- Loading Spinner or Text -->
+    <mat-spinner></mat-spinner>
+  </div>
+  <div *ngIf="!isLoading">
+    <div class="container-about">
+      <div class="title">Fee Deposit</div>
+      <div class="description">Following table shows all fee deposits</div>
+    </div>
+    <div class="main-grid">
+      <div class="grid-options">
+        <div class="grid-btns">
+          <span
+            class="material-symbols-outlined grid-btn"
+            (click)="openAddFeeDepositDialog()"
+          >
+            add
+          </span>
+          <span class="material-symbols-outlined grid-btn delete-btn">
+            delete
+          </span>
+          <span class="material-symbols-outlined grid-btn"> filter_alt </span>
+          <span class="material-symbols-outlined grid-btn"> search </span>
+        </div>
+        <div class="grid-total">
+          <span class="total"
+            ><span class="total-text">Total Fee Deposits:</span>
+            {{ feeDeposits.length }}</span
+          >
+        </div>
+      </div>
+      <div class="grid-table">
+        <!-- Paginator -->
+        <mat-paginator
+          [pageSize]="10"
+          [pageSizeOptions]="[5, 10, 20]"
+          showFirstLastButtons
+        ></mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>

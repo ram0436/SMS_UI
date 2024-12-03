@@ -1,0 +1,163 @@
+.row {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.mat-elevation-z12 {
+  scrollbar-width: 0px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.hidden-scrollbar {
+  overflow: hidden;
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hidden-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.mat-mdc-dialog-content.mdc-dialog__content {
+  overflow: hidden;
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.mat-mdc-dialog-content.mdc-dialog__content::-webkit-scrollbar {
+  display: none;
+}
+
+.mat-elevation-z12::-webkit-scrollbar {
+  display: none !important; /* Chrome, Safari, Edge */
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.input-field {
+  width: 100%;
+  min-width: 150px;
+}
+
+mat-card {
+  /* width: 30%; */
+  /* margin: 10% auto; */
+  border-radius: 8px;
+}
+mat-form-field,
+mat-checkbox {
+  width: 85%;
+  display: block;
+}
+mat-card-content {
+  margin-top: 20px;
+}
+
+::ng-deep .cdk-overlay-pane {
+  /* width: 500px; */
+  pointer-events: auto;
+  box-sizing: border-box;
+  z-index: 1000;
+  display: flex;
+  max-height: 100%;
+}
+
+.mat-mdc-tab-group {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  margin-top: 10px;
+}
+.mat-mdc-dialog-actions {
+  justify-content: start;
+  margin-left: 80%;
+}
+.mat-mdc-card-title {
+  margin-top: 15px;
+}
+
+::ng-deep .cdk-overlay-pane {
+  overflow: auto;
+  scrollbar-width: none;
+}
+
+.popup-title {
+  padding: 10px 24px 10px 24px;
+  background-color: var(--secondary-app-color);
+  margin-bottom: 10px !important;
+}
+
+.mat-mdc-dialog-content {
+  padding-top: 0px !important;
+}
+
+.details-title {
+  font-weight: 500;
+  font-size: 16px;
+  color: #000;
+  margin-top: 70px;
+}
+
+.details-title.first {
+  margin-top: 0px !important;
+}
+
+table {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.add-row {
+  margin-top: 10px;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.add-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-button .btn {
+  background: var(--primary-app-color) !important;
+  color: #fff;
+  padding: 0px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+}
+
+.add-deposit-btn {
+  width: 90%;
+  background: var(--primary-app-color);
+  color: #fff !important;
+}
+
+.calculated-fields {
+  margin-top: 20px;
+  padding: 10px;
+}
+.calculated-fields p {
+  margin: 0px 0 10px 0;
+  font-size: 14px;
+  font-weight: bold;
+  color: #000;
+}
+.calculated-fields strong {
+  color: #007bff;
+}

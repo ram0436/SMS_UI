@@ -1,0 +1,73 @@
+<mat-card class="mat-elevation-z12 hidden-scrollbar">
+  <div *ngIf="isLoading" class="loading-spinner">
+    <!-- Loading Spinner or Text -->
+    <mat-spinner></mat-spinner>
+  </div>
+  <div *ngIf="!isLoading">
+    <h2 mat-dialog-title class="popup-title">Add Fee Amount Slab</h2>
+    <div mat-dialog-content>
+      <div class="section-details">
+        <h3 class="details-title first">Class Details:</h3>
+        <mat-form-field class="input-field class-field">
+          <mat-label>Class</mat-label>
+          <mat-select [(ngModel)]="selectedClassId" name="class">
+            <mat-option *ngFor="let class of classes" [value]="class.id">
+              {{ class.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="section-details">
+        <h3 class="details-title">Fee Structure Details:</h3>
+        <div class="grid" *ngFor="let structure of structures; let i = index">
+          <!-- Fee Structure Name -->
+          <div class="input-field structure-name">
+            <strong>{{ structure.name }}</strong>
+          </div>
+
+          <!-- Fee Amount Input -->
+          <mat-form-field class="input-field fee-amount">
+            <mat-label>Amount</mat-label>
+            <input
+              matInput
+              type="number"
+              [(ngModel)]="structures[i].feeAmount"
+            />
+          </mat-form-field>
+
+          <!-- Fee Mode Dropdown -->
+          <mat-form-field class="input-field fee-mode">
+            <mat-label>Fee Mode</mat-label>
+            <mat-select [(ngModel)]="structures[i].feeModeId">
+              <mat-option *ngFor="let mode of feeModes" [value]="mode.id">
+                {{ mode.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <!-- Month Dropdown -->
+          <mat-form-field class="input-field fee-month">
+            <mat-label>Month (Optional)</mat-label>
+            <mat-select [(ngModel)]="structures[i].linkedMonthId">
+              <mat-option [value]="0">One Time</mat-option>
+              <mat-option *ngFor="let month of months" [value]="month.id">
+                {{ month.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div mat-dialog-actions>
+      <button
+        mat-button
+        color="primary"
+        class="add-slab-btn"
+        (click)="addFeeAmountSlab()"
+      >
+        Add Fee Amount Slab
+      </button>
+    </div>
+  </div>
+</mat-card>
