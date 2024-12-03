@@ -64,6 +64,10 @@ export class MasterService {
     return this.http.get(`${this.baseUrl}Master/GetStaffCategories`);
   }
 
+  getMonths() {
+    return this.http.get(`${this.baseUrl}Master/GetMonths`);
+  }
+
   getSectionByClassId(classId: number) {
     return this.http.get(
       `${this.baseUrl}Master/GetSectionByClassId?classId=${classId}`

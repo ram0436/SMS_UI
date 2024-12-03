@@ -1,0 +1,88 @@
+<!-- Dialog Template for Adding staff -->
+<mat-card class="mat-elevation-z12 hidden-scrollbar">
+  <h2 mat-dialog-title class="popup-title">Add Fee Structure</h2>
+  <div mat-dialog-content>
+    <div class="section-details">
+      <h3 class="details-title first">Enter Fee Structure:</h3>
+      <div class="structure-grid">
+        <mat-form-field class="input-field">
+          <mat-label>Structure</mat-label>
+          <input matInput [(ngModel)]="feeStructure" name="feeStructure" />
+        </mat-form-field>
+        <!-- <mat-form-field class="input-field">
+          <mat-label>Fee Mode</mat-label>
+          <mat-select [(ngModel)]="selectedFeeModeId" name="feeMode">
+            <mat-option *ngFor="let feeMode of feeModes" [value]="feeMode.id">
+              {{ feeMode.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field> -->
+      </div>
+    </div>
+
+    <!-- <button class="add-fee-structure" (click)="addFeeStructure()">
+          <span class="add-photo">Add Structure</span>
+        </button> -->
+    <!-- <div class="fee-structure-details">
+      <h3 class="details-title">Fee Structure Details:</h3>
+      <div *ngIf="isStructuresLoading" class="loading-spinner">
+        <mat-spinner></mat-spinner>
+      </div>
+      <div
+        *ngIf="!isStructuresLoading && structures.length > 0; else noStructures"
+      >
+        <table mat-table [dataSource]="structures" class="mat-elevation-z8">
+          <ng-container matColumnDef="srNo">
+            <th mat-header-cell *matHeaderCellDef>SR No.</th>
+            <td mat-cell *matCellDef="let structure; let i = index">
+              {{ i + 1 }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="structure">
+            <th mat-header-cell *matHeaderCellDef>Structure Name</th>
+            <td mat-cell *matCellDef="let structure">{{ structure.name }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="feeMode">
+            <th mat-header-cell *matHeaderCellDef>Fee Mode</th>
+            <td mat-cell *matCellDef="let structure">
+              {{ getFeeModeName(structure.feeModeId) }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef>Action</th>
+            <td mat-cell *matCellDef="let structure">
+              <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item>Edit</button>
+                <button mat-menu-item>Delete</button>
+              </mat-menu>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </div>
+
+      <ng-template #noStructures>
+        <p *ngIf="!isStructuresLoading">No Fee Structures Found</p>
+      </ng-template>
+    </div> -->
+  </div>
+
+  <div mat-dialog-actions>
+    <button
+      mat-button
+      color="primary"
+      class="add-structure-btn"
+      (click)="addFeeStructure()"
+    >
+      Add Structure
+    </button>
+  </div>
+</mat-card>

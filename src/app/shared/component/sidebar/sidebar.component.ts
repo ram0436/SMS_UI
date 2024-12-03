@@ -10,23 +10,17 @@ export class SidebarComponent {
   menuItems = [
     { name: "Dashboard", icon: "dashboard", hasDropdown: false },
     {
+      name: "Admission Enquiry",
+      icon: "person_raised_hand",
+      hasDropdown: false,
+    },
+    {
       name: "Students",
       icon: "groups",
       hasDropdown: true,
       subItems: [
         { name: "All Students", icon: "menu" },
         { name: "Passed", icon: "school" },
-      ],
-      dropdownOpen: false,
-    },
-    {
-      name: "Exam",
-      icon: "note_add",
-      hasDropdown: true,
-      subItems: [
-        { name: "Scholastic", icon: "history_edu" },
-        { name: "Co-Scholastic", icon: "sprint" },
-        { name: "Discipline", icon: "man" },
       ],
       dropdownOpen: false,
     },
@@ -58,10 +52,46 @@ export class SidebarComponent {
       ],
       dropdownOpen: false,
     },
-    { name: "Employees", icon: "work", hasDropdown: false },
-    { name: "Parents", icon: "family_restroom", hasDropdown: false },
-    { name: "Home Works", icon: "edit_note", hasDropdown: false },
-    { name: "Incomes", icon: "attach_money", hasDropdown: false },
+
+    {
+      name: "Fees",
+      icon: "receipt_long",
+      hasDropdown: true,
+      subItems: [
+        { name: "Fee Structure", icon: "flowsheet" },
+        { name: "Fee Amount Slab", icon: "slab_serif" },
+        { name: "Fee Discount", icon: "percent" },
+        { name: "Fee Deposit", icon: "receipt" },
+      ],
+      dropdownOpen: false,
+    },
+    {
+      name: "Exam",
+      icon: "note_add",
+      hasDropdown: true,
+      subItems: [
+        { name: "Scholastic", icon: "history_edu" },
+        { name: "Co-Scholastic", icon: "sprint" },
+        { name: "Discipline", icon: "man" },
+      ],
+      dropdownOpen: false,
+    },
+    { name: "Transport", icon: "directions_bus", hasDropdown: false },
+    {
+      name: "Miscellaneous",
+      icon: "mist",
+      hasDropdown: true,
+      subItems: [
+        { name: "ID Card", icon: "id_card" },
+        { name: "Admit Card", icon: "badge" },
+        { name: "Transfer Certificate", icon: "article" },
+        { name: "Character Certificate", icon: "demography" },
+        { name: "DOB Certificate", icon: "person_book" },
+      ],
+      dropdownOpen: false,
+    },
+    { name: "Masters", icon: "supervisor_account", hasDropdown: false },
+    { name: "Settings", icon: "settings", hasDropdown: false },
   ];
 
   selectedItem: any = null;
@@ -99,6 +129,14 @@ export class SidebarComponent {
       this.router.navigate(["exam/co-scholastic"]);
     } else if (subItem.name === "Discipline") {
       this.router.navigate(["exam/discipline"]);
+    } else if (subItem.name === "Fee Structure") {
+      this.router.navigate(["fee/fee-structure"]);
+    } else if (subItem.name === "Fee Amount Slab") {
+      this.router.navigate(["fee/fee-amount-slab"]);
+    } else if (subItem.name === "Fee Deposit") {
+      this.router.navigate(["fee/fee-deposit"]);
+    } else if (subItem.name === "Fee Discount") {
+      this.router.navigate(["fee/fee-discount"]);
     }
   }
 }

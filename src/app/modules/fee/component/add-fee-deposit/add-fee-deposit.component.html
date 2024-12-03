@@ -1,0 +1,152 @@
+<mat-card class="mat-elevation-z12 hidden-scrollbar">
+  <div *ngIf="isLoading" class="loading-spinner">
+    <!-- Loading Spinner or Text -->
+    <mat-spinner></mat-spinner>
+  </div>
+  <div *ngIf="!isLoading">
+    <h2 mat-dialog-title class="popup-title">Add Fee Deposit</h2>
+    <div mat-dialog-content>
+      <div class="section-details">
+        <h3 class="details-title first">Fee Details:</h3>
+        <div class="grid">
+          <mat-form-field class="input-field">
+            <mat-label>Admission No.</mat-label>
+            <input matInput [(ngModel)]="admissionNo" name="admissionNo" />
+          </mat-form-field>
+
+          <mat-form-field class="input-field">
+            <mat-label>Class</mat-label>
+            <mat-select
+              [(ngModel)]="selectedClassId"
+              name="class"
+              (selectionChange)="onClassSelected($event.value)"
+            >
+              <mat-option *ngFor="let class of classes" [value]="class.id">
+                {{ class.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="input-field">
+            <mat-label>Section</mat-label>
+            <mat-select [(ngModel)]="selectedSectionId" name="section">
+              <mat-option *ngFor="let section of sections" [value]="section.id">
+                {{ section.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="input-field">
+            <mat-label>Student Name</mat-label>
+            <input matInput [(ngModel)]="studentName" name="studentName" />
+          </mat-form-field>
+
+          <mat-form-field class="input-field">
+            <mat-label>Roll No.</mat-label>
+            <input matInput [(ngModel)]="rollNo" name="rollNo" type="number" />
+          </mat-form-field>
+
+          <mat-form-field class="input-field">
+            <mat-label>Month</mat-label>
+            <mat-select [(ngModel)]="monthId" name="month">
+              <mat-option *ngFor="let month of months" [value]="month.id">
+                {{ month.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="input-field">
+            <mat-label>Tution Fee</mat-label>
+            <input
+              matInput
+              [(ngModel)]="tutionFee"
+              (ngModelChange)="updateCalculations()"
+              name="tutionFee"
+              type="number"
+            />
+          </mat-form-field>
+
+          <mat-form-field class="input-field">
+            <mat-label>Old Balance</mat-label>
+            <input
+              matInput
+              [(ngModel)]="oldBalance"
+              (ngModelChange)="updateCalculations()"
+              name="oldBalance"
+              type="number"
+            />
+          </mat-form-field>
+
+          <mat-form-field class="input-field">
+            <mat-label>Late Fee</mat-label>
+            <input
+              matInput
+              [(ngModel)]="lateFee"
+              (ngModelChange)="updateCalculations()"
+              name="lateFee"
+              type="number"
+            />
+          </mat-form-field>
+
+          <mat-form-field class="input-field">
+            <mat-label>Concession</mat-label>
+            <input
+              matInput
+              [(ngModel)]="concession"
+              (ngModelChange)="updateCalculations()"
+              name="concession"
+              type="number"
+            />
+          </mat-form-field>
+
+          <mat-form-field class="input-field">
+            <mat-label>Received Amount</mat-label>
+            <input
+              matInput
+              [(ngModel)]="receivedAmount"
+              (ngModelChange)="updateCalculations()"
+              name="receivedAmount"
+              type="number"
+            />
+          </mat-form-field>
+
+          <mat-form-field class="input-field">
+            <mat-label>Payment Mode</mat-label>
+            <mat-select [(ngModel)]="selectedPaymentModeId" name="paymentMode">
+              <mat-option [value]="1">Cash</mat-option>
+              <mat-option [value]="2">Online</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="input-field">
+            <mat-label>Remark</mat-label>
+            <input matInput [(ngModel)]="remark" name="remark" />
+          </mat-form-field>
+        </div>
+      </div>
+      <!-- Calculated Fields Display -->
+      <div class="calculated-fields">
+        <p>
+          Total Amount: <strong>{{ totalAmount }}</strong>
+        </p>
+        <p>
+          Grand Total: <strong>{{ grantTotal }}</strong>
+        </p>
+        <p>
+          Balance: <strong>{{ balance }}</strong>
+        </p>
+      </div>
+    </div>
+
+    <div mat-dialog-actions>
+      <button
+        mat-button
+        color="primary"
+        class="add-deposit-btn"
+        (click)="addFeeDeposit()"
+      >
+        Add Fee Deposit
+      </button>
+    </div>
+  </div>
+</mat-card>
