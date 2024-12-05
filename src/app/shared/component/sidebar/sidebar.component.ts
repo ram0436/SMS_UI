@@ -73,6 +73,7 @@ export class SidebarComponent {
         { name: "Scholastic", icon: "history_edu" },
         { name: "Co-Scholastic", icon: "sprint" },
         { name: "Discipline", icon: "man" },
+        { name: "Report Card", icon: "contract" },
       ],
       dropdownOpen: false,
     },
@@ -137,6 +138,8 @@ export class SidebarComponent {
       this.router.navigate(["fee/fee-deposit"]);
     } else if (subItem.name === "Fee Discount") {
       this.router.navigate(["fee/fee-discount"]);
+    } else if (subItem.name === "Report Card") {
+      this.router.navigate(["exam/report-card"]);
     }
   }
 }

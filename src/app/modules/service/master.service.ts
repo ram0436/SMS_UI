@@ -20,6 +20,10 @@ export class MasterService {
     return this.http.get(`${this.baseUrl}Master/GetDepartment`);
   }
 
+  getSchoolDetail() {
+    return this.http.get(`${this.baseUrl}Master/GetSchoolDetail`);
+  }
+
   getDesignation() {
     return this.http.get(`${this.baseUrl}Master/GetDesignation`);
   }

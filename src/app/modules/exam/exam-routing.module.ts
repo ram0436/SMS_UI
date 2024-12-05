@@ -5,11 +5,13 @@ import { AddMarksheetComponent } from "./component/add-marksheet/add-marksheet.c
 import { CoscholosticExamComponent } from "./component/coscholostic-exam/coscholostic-exam.component";
 import { DisciplineActivityComponent } from "./component/discipline-activity/discipline-activity.component";
 import { ScholosticExamComponent } from "./component/scholostic-exam/scholostic-exam.component";
+import { ReportCardComponent } from "./component/report-card/report-card.component";
 
 const routes: Routes = [
   { path: "scholastic", component: ScholosticExamComponent },
   { path: "co-scholastic", component: CoscholosticExamComponent },
   { path: "discipline", component: DisciplineActivityComponent },
+  { path: "report-card", component: ReportCardComponent },
 ];
 
 @NgModule({

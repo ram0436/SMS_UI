@@ -1,0 +1,295 @@
+<div class="all-marksheets-container">
+  <div *ngIf="isLoading" class="loading-spinner">
+    <!-- Loading Spinner or Text -->
+    <mat-spinner></mat-spinner>
+  </div>
+  <div *ngIf="!isLoading">
+    <div class="container-about">
+      <div class="title">Report Card</div>
+      <div class="description">Following table shows all report cards</div>
+    </div>
+    <div class="main-grid">
+      <div class="grid-options">
+        <div class="grid-btns">
+          <span class="material-symbols-outlined grid-btn"> add </span>
+          <span class="material-symbols-outlined grid-btn delete-btn">
+            delete
+          </span>
+          <span class="material-symbols-outlined grid-btn"> filter_alt </span>
+          <span class="material-symbols-outlined grid-btn"> search </span>
+        </div>
+        <div class="grid-total"></div>
+      </div>
+      <div class="grid-content">
+        <div class="school-details-container">
+          <div class="school-details-grid">
+            <!-- First Column: CBSE Logo -->
+            <div class="logo-images">
+              <div class="school-logo">
+                <img [src]="schoolDetails?.cbseLogoURL" alt="CBSE Logo" />
+              </div>
+            </div>
+
+            <!-- Second Column: School Details -->
+            <div class="school-info">
+              <h2>{{ schoolDetails?.name }}</h2>
+              <p>
+                Affiliated To: {{ schoolDetails?.affliatedTo }}, Affiliation No:
+                {{ schoolDetails?.affiliationNo }}
+              </p>
+              <p>Address: {{ schoolDetails?.address }}</p>
+              <p>
+                Phone No: {{ schoolDetails?.phone }}, Website:
+                <a
+                  [href]="'http://' + schoolDetails?.website"
+                  target="_blank"
+                  >{{ schoolDetails?.website }}</a
+                >
+              </p>
+            </div>
+
+            <!-- Third Column: School Logo -->
+            <div class="logo-images">
+              <div class="school-logo">
+                <img [src]="schoolDetails?.schoolLogoURL" alt="School Logo" />
+              </div>
+            </div>
+          </div>
+          <div class="report-card-details">
+            <div class="card-title">Report Card</div>
+            <div class="card-class sub-title">Class: 1st A</div>
+            <div class="card-class sub-title">
+              Academic Session: 2017 - 2018 (Term 1)
+            </div>
+          </div>
+          <div class="student-details">
+            <div class="student-grid">
+              <div class="student-column">
+                <div class="column-detail">
+                  <p><strong>Name:</strong> {{ studentDetails.name }}</p>
+                  <p>
+                    <strong>Father Name:</strong>
+                    {{ studentDetails.fatherName }}
+                  </p>
+                  <p>
+                    <strong>Mother Name:</strong>
+                    {{ studentDetails.motherName }}
+                  </p>
+                  <p>
+                    <strong>Date of Birth:</strong>
+                    {{ studentDetails.dateOfBirth }}
+                  </p>
+                  <p><strong>Address:</strong> {{ studentDetails.address }}</p>
+                </div>
+              </div>
+
+              <!-- Second Column -->
+              <div class="student-column">
+                <div class="column-detail">
+                  <p><strong>Roll No:</strong> {{ studentDetails.rollNo }}</p>
+                  <p>
+                    <strong>Admission No:</strong>
+                    {{ studentDetails.admissionNo }}
+                  </p>
+                  <p>
+                    <strong>Blood Group:</strong>
+                    {{ studentDetails.bloodGroup }}
+                  </p>
+                  <p>
+                    <strong>Contact No:</strong> {{ studentDetails.contactNo }}
+                  </p>
+                </div>
+              </div>
+
+              <!-- Third Column -->
+              <div class="student-column profile-picture">
+                <div class="column-detail">
+                  <img
+                    [src]="studentDetails.profilePictureUrl"
+                    alt="Student Profile Picture"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="academic-details">
+            <h3>Scholastic Area</h3>
+            <table class="scholastic-table">
+              <thead>
+                <tr>
+                  <th rowspan="2">Subjects</th>
+                  <th colspan="4">Term 1 (100 Marks)</th>
+                  <th rowspan="2">Total</th>
+                  <th rowspan="2">Grade</th>
+                </tr>
+                <tr>
+                  <th>Per. Test (10)</th>
+                  <th>Notebook (5)</th>
+                  <th>SEA (5)</th>
+                  <th>Half Yearly (80)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let subject of subjects">
+                  <td>{{ subject.name }}</td>
+                  <td>{{ subject.perTest }}</td>
+                  <td>{{ subject.notebook }}</td>
+                  <td>{{ subject.sea }}</td>
+                  <td>{{ subject.halfYearly }}</td>
+                  <td>{{ subject.total }}</td>
+                  <td>{{ subject.grade }}</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="overall-summary">
+              <p class="summary-box">
+                <strong>Overall Marks:</strong> {{ overallMarks }} / 600
+              </p>
+              <p class="summary-box">
+                <strong>Percentage:</strong> {{ percentage }}%
+              </p>
+              <p class="summary-box"><strong>Grade:</strong> {{ grade }}</p>
+            </div>
+          </div>
+          <div class="tables-container">
+            <!-- Co-Scholastic Areas Table -->
+            <div class="table-section">
+              <h3>Co-Scholastic Areas</h3>
+              <p>(3 Point Grading Scale A, B, C)</p>
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Term 1</th>
+                    <th>Grade</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of coScholasticData">
+                    <td>{{ item.term }}</td>
+                    <td>{{ item.grade }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Discipline Table -->
+            <div class="table-section">
+              <h3>Discipline</h3>
+              <p>(3 Point Grading Scale A, B, C)</p>
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Term 1</th>
+                    <th>Grade</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of disciplineData">
+                    <td>{{ item.term }}</td>
+                    <td>{{ item.grade }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="grading-remarks-section">
+            <h3>Class Teacher's Remarks and Promotion</h3>
+            <div class="remarks-promotion">
+              <label for="remarks" class="font-600"
+                >Class Teacher's Remarks:</label
+              >
+              <input
+                type="text"
+                id="remarks"
+                class="remarks-input report-card-input"
+              />
+            </div>
+            <div class="signatures">
+              <div class="box">
+                <label>Date:</label>
+                <input type="text" class="date-input report-card-input" />
+              </div>
+              <div class="signature-block box">
+                <label>Signature of Class Teacher:</label>
+                <input type="text" class="signature-input report-card-input" />
+              </div>
+              <div class="signature-block box">
+                <label>Signature of Principal:</label>
+                <input type="text" class="signature-input report-card-input" />
+              </div>
+            </div>
+          </div>
+
+          <div class="grading-scale">
+            <h3 class="grading-title">Instructions</h3>
+            <p class="grading-desc">
+              Grading scale for scholastic areas: Grades are awarded on an
+              8-point grading scale as follows:
+            </p>
+            <table class="grading-table">
+              <thead>
+                <tr>
+                  <th>Marks Range</th>
+                  <th>Grade</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>91-100</td>
+                  <td>A1</td>
+                </tr>
+                <tr>
+                  <td>81-90</td>
+                  <td>A2</td>
+                </tr>
+                <tr>
+                  <td>71-80</td>
+                  <td>B1</td>
+                </tr>
+                <tr>
+                  <td>61-70</td>
+                  <td>B2</td>
+                </tr>
+                <tr>
+                  <td>51-60</td>
+                  <td>C1</td>
+                </tr>
+                <tr>
+                  <td>41-50</td>
+                  <td>C2</td>
+                </tr>
+                <tr>
+                  <td>33-40</td>
+                  <td>D</td>
+                </tr>
+                <tr>
+                  <td>32 & Below</td>
+                  <td>E (Needs improvement)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 
+Name
+Class
+Section
+Father Name
+Mother Name
+Date of Birth
+Address
+
+Roll No
+Admission No
+Blood Group
+Contact No
+
+
+Student Photo
+-->
