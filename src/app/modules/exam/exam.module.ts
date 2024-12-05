@@ -34,6 +34,7 @@ import { AddCoscholosticMarksheetComponent } from "./component/add-coscholostic-
 import { DisciplineActivityComponent } from "./component/discipline-activity/discipline-activity.component";
 import { AddDisciplineActivityComponent } from "./component/add-discipline-activity/add-discipline-activity.component";
 import { ScholosticExamComponent } from "./component/scholostic-exam/scholostic-exam.component";
+import { ReportCardComponent } from "./component/report-card/report-card.component";
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { ScholosticExamComponent } from "./component/scholostic-exam/scholostic-
     DisciplineActivityComponent,
     AddDisciplineActivityComponent,
     ScholosticExamComponent,
+    ReportCardComponent,
   ],
   imports: [
     SharedModule,
