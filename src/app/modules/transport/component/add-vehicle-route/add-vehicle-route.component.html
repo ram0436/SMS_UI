@@ -1,0 +1,27 @@
+<!-- Dialog Template for Adding Teacher -->
+<mat-card class="mat-elevation-z12 hidden-scrollbar">
+  <h2 mat-dialog-title class="popup-title">Add Route</h2>
+  <div mat-dialog-content>
+    <!-- Personal Details Section -->
+    <div class="personal-details">
+      <h3 class="details-title">Route Details:</h3>
+      <div>
+        <mat-form-field class="input-field">
+          <mat-label>Route Name</mat-label>
+          <input matInput [(ngModel)]="vehicleRoute.routeName" />
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+
+  <div mat-dialog-actions>
+    <button
+      mat-button
+      color="primary"
+      class="add-vehicle-btn"
+      (click)="addVehicleRoute()"
+    >
+      Add Vehicle Route
+    </button>
+  </div>
+</mat-card>

@@ -113,7 +113,7 @@ img {
   border-radius: 50%;
   margin-right: 8px;
   /* position: relative !important;
-            left: auto !important; */
+                left: auto !important; */
 }
 
 .marksheet-info .marksheet-details {
@@ -175,3 +175,12 @@ table .student-fees {
   align-items: center;
   justify-content: center;
 }
+
+.mat-column-action {
+  width: 120px;
+  text-align: center;
+}
+
+/* .mat-column-route {
+  width: 200px;
+} */

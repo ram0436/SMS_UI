@@ -1,43 +1,34 @@
 import { Component, TemplateRef, ViewChild } from "@angular/core";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
-import { AddFeeStructureComponent } from "../add-fee-structure/add-fee-structure.component";
 import { MasterService } from "../../../service/master.service";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
 import { TeacherService } from "../../../teacher/service/teacher.service";
 import { Subscription } from "rxjs";
-import { FeeService } from "../../service/fee.service";
-import { AddFeeAmountSlabComponent } from "../add-fee-amount-slab/add-fee-amount-slab.component";
-import { AddFeeDepositComponent } from "../add-fee-deposit/add-fee-deposit.component";
+import { TransportService } from "../../service/transport.service";
+import { AddVehicleComponent } from "../add-vehicle/add-vehicle.component";
+import { AddVehicleRouteComponent } from "../add-vehicle-route/add-vehicle-route.component";
+import { AddVehicleRouteMappingComponent } from "../add-vehicle-route-mapping/add-vehicle-route-mapping.component";
 
 @Component({
-  selector: "app-fee-deposit",
-  templateUrl: "./fee-deposit.component.html",
-  styleUrl: "./fee-deposit.component.css",
+  selector: "app-vehicle-route-mappings",
+  templateUrl: "./vehicle-route-mappings.component.html",
+  styleUrl: "./vehicle-route-mappings.component.css",
 })
-export class FeeDepositComponent {
-  @ViewChild("addFeeDepositDialog")
-  addFeeDepositDialog!: TemplateRef<any>;
+export class VehicleRouteMappingsComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   dialogRef: MatDialogRef<any> | null = null;
 
   dataSource = new MatTableDataSource<any>([]);
   isLoading: boolean = false;
 
-  feeDeposits: any[] = [];
-  feeList: any[] = [];
-  feeModes: any[] = [];
-  classes: any[] = [];
+  routeMappings: any[] = [];
 
   displayedColumns: string[] = [
     "no",
-    "admissionNo",
-    "rollNo",
-    "class",
-    "paymentMode",
-    "remark",
-    "feeDetails",
-    "month",
+    "vehicle",
+    "route",
+    "transportFee",
     "action",
   ];
 
@@ -46,18 +37,18 @@ export class FeeDepositComponent {
   constructor(
     public dialog: MatDialog,
     private masterService: MasterService,
-    private feeService: FeeService
+    private transportService: TransportService
   ) {}
 
   ngOnInit() {
-    this.subscriptions.add(this.getAllFeeRecepit());
+    this.subscriptions.add(this.getAllVehicleRouteMappings());
     // this.subscriptions.add(this.getFeeAmountSlabs());
   }
 
-  getAllFeeRecepit() {
+  getAllVehicleRouteMappings() {
     this.isLoading = true;
-    this.feeService.getFeeReceipt().subscribe((data: any) => {
-      this.feeList = data;
+    this.transportService.getVehiclesRootMapping().subscribe((data: any) => {
+      this.routeMappings = data;
       this.dataSource.data = data;
       this.isLoading = false;
     });
@@ -77,16 +68,16 @@ export class FeeDepositComponent {
     }
   }
 
-  editFee() {}
+  editRouteMapping() {}
 
-  deleteFee() {}
+  deleteRouteMapping() {}
 
-  openAddFeeDepositDialog(): void {
+  openAddVehicleRouteMappingsDialog(): void {
     if (this.dialogRef) {
       this.dialogRef.close();
     }
 
-    this.dialogRef = this.dialog.open(AddFeeDepositComponent, {
+    this.dialogRef = this.dialog.open(AddVehicleRouteMappingComponent, {
       width: "1050px",
     });
   }
