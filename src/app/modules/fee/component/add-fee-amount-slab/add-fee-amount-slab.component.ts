@@ -123,7 +123,7 @@ export class AddFeeAmountSlabComponent {
       },
     ];
 
-    console.log(JSON.stringify(payload, null, 2));
+    // console.log(JSON.stringify(payload, null, 2));
 
     // Call the API
     this.feeService.addClassFeeMapping(payload).subscribe(

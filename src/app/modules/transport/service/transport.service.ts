@@ -33,6 +33,10 @@ export class TransportService {
     return this.httpClient.get(`${this.baseUrl}Transport/GetVehicleTypes`);
   }
 
+  getVehicles() {
+    return this.httpClient.get(`${this.baseUrl}Transport/GetVehicles`);
+  }
+
   getVehiclesRoute() {
     return this.httpClient.get(`${this.baseUrl}Transport/GetVehiclesRoute`);
   }

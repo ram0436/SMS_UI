@@ -23,7 +23,14 @@ export class AllVehicleComponent {
 
   vehicles: any[] = [];
 
-  displayedColumns: string[] = ["no", "vehicle", "action"];
+  displayedColumns: string[] = [
+    "no",
+    "vehicleType",
+    "regNo",
+    "seats",
+    "driverDetails",
+    "action",
+  ];
 
   private subscriptions: Subscription = new Subscription();
 
@@ -49,7 +56,7 @@ export class AllVehicleComponent {
 
   getAllVehicles() {
     this.isLoading = true;
-    this.transportService.getVehiclesNameList().subscribe((data: any) => {
+    this.transportService.getVehicles().subscribe((data: any) => {
       this.vehicles = data;
       this.dataSource.data = data;
       this.isLoading = false;

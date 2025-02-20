@@ -1,9 +1,6 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { DOCUMENT } from "@angular/common";
-import { MasterService } from "../../../service/master.service";
-import { provideNativeDateAdapter } from "@angular/material/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { Vehicle } from "../../../../shared/model/vehicle.payload";
 import { Subscription } from "rxjs";
 import { TransportService } from "../../service/transport.service";
 
@@ -12,7 +9,7 @@ import { TransportService } from "../../service/transport.service";
   templateUrl: "./add-vehicle-route-mapping.component.html",
   styleUrl: "./add-vehicle-route-mapping.component.css",
 })
-export class AddVehicleRouteMappingComponent {
+export class AddVehicleRouteMappingComponent implements OnInit {
   vehicleRouteMapping = {
     createdBy: 0,
     createdOn: new Date().toISOString(),
@@ -24,33 +21,58 @@ export class AddVehicleRouteMappingComponent {
     transportFee: 0,
   };
 
-  vehicleTypes: any[] = [];
-  selectedVehicleTypeId: number = 0;
-  joiningDateTemp: Date | null = null;
-  dobDateTemp: Date | null = null;
+  isLoading: boolean = true;
+  vehicleNames: any[] = [];
+  vehicleRoutes: any[] = [];
 
   private subscriptions: Subscription = new Subscription();
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private transportService: TransportService,
-    private masterService: MasterService,
     private snackBar: MatSnackBar
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getVehiclesNames();
+    this.getVehiclesRoutes();
+  }
 
   ngOnDestroy(): void {
-    // Unsubscribe from all subscriptions to prevent memory leaks
     this.subscriptions.unsubscribe();
+  }
+
+  getVehiclesNames() {
+    this.isLoading = true;
+    this.transportService.getVehiclesNameList().subscribe(
+      (data: any) => {
+        this.vehicleNames = data;
+        this.isLoading = false;
+      },
+      (error) => {}
+    );
+  }
+
+  getVehiclesRoutes() {
+    this.isLoading = true;
+    this.transportService.getVehiclesRootList().subscribe(
+      (data: any) => {
+        this.vehicleRoutes = data;
+        this.isLoading = false;
+      },
+      (error) => {}
+    );
   }
 
   addVehicleRouteMapping(): void {
     this.transportService
       .addVehicleRouteMapping(this.vehicleRouteMapping)
-      .subscribe((response) => {
-        this.showNotification("Vehicle Route Mapping Added Succesfully");
-      });
+      .subscribe(
+        (response) => {
+          this.showNotification("Vehicle Route Mapping Added Successfully");
+        },
+        (error) => {}
+      );
   }
 
   showNotification(message: string): void {
