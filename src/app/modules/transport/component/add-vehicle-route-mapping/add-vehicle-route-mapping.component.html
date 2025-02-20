@@ -1,22 +1,43 @@
-<!-- Dialog Template for Adding Teacher -->
 <mat-card class="mat-elevation-z12 hidden-scrollbar">
   <h2 mat-dialog-title class="popup-title">Add Route</h2>
   <div mat-dialog-content>
-    <!-- Personal Details Section -->
     <div class="personal-details">
       <h3 class="details-title">Route Mapping Details:</h3>
       <div class="grid">
+        <!-- Vehicle Dropdown -->
         <mat-form-field class="input-field">
           <mat-label>Vehicle</mat-label>
-          <input matInput [(ngModel)]="vehicleRouteMapping.vehicle" />
+          <mat-select [(ngModel)]="vehicleRouteMapping.vehicle">
+            <mat-option
+              *ngFor="let vehicleName of vehicleNames"
+              [value]="vehicleName.vehicle"
+            >
+              {{ vehicleName.vehicle }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
+
+        <!-- Vehicle Route Dropdown -->
         <mat-form-field class="input-field">
           <mat-label>Vehicle Route</mat-label>
-          <input matInput [(ngModel)]="vehicleRouteMapping.vehicleRoute" />
+          <mat-select [(ngModel)]="vehicleRouteMapping.vehicleRoute">
+            <mat-option
+              *ngFor="let vehicleRoute of vehicleRoutes"
+              [value]="vehicleRoute.routeName"
+            >
+              {{ vehicleRoute.routeName }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
+
+        <!-- Transport Fee -->
         <mat-form-field class="input-field">
           <mat-label>Transport Fee</mat-label>
-          <input matInput [(ngModel)]="vehicleRouteMapping.transportFee" />
+          <input
+            matInput
+            type="number"
+            [(ngModel)]="vehicleRouteMapping.transportFee"
+          />
         </mat-form-field>
       </div>
     </div>
