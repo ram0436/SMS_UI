@@ -77,7 +77,17 @@ export class SidebarComponent {
       ],
       dropdownOpen: false,
     },
-    { name: "Transport", icon: "directions_bus", hasDropdown: false },
+    {
+      name: "Transport",
+      icon: "directions_bus",
+      hasDropdown: true,
+      subItems: [
+        { name: "Vehicle", icon: "directions_car" },
+        { name: "Vehicle Route Name", icon: "directions_alt" },
+        { name: "Vehicle Route Mapping", icon: "linked_services" },
+      ],
+      dropdownOpen: false,
+    },
     {
       name: "Miscellaneous",
       icon: "mist",
@@ -140,6 +150,12 @@ export class SidebarComponent {
       this.router.navigate(["fee/fee-discount"]);
     } else if (subItem.name === "Report Card") {
       this.router.navigate(["exam/report-card"]);
+    } else if (subItem.name === "Vehicle") {
+      this.router.navigate(["transport/all-vehicles"]);
+    } else if (subItem.name === "Vehicle Route Name") {
+      this.router.navigate(["transport/vehicle-route"]);
+    } else if (subItem.name === "Vehicle Route Mapping") {
+      this.router.navigate(["transport/vehicle-route-mapping"]);
     }
   }
 }

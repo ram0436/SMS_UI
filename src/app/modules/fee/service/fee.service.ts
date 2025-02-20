@@ -39,4 +39,8 @@ export class FeeService {
   addFeeDeposite(payload: any): Observable<any> {
     return this.http.post(`${this.baseUrl}Fee/AddFeeDeposite`, payload);
   }
+
+  getFeeReceipt() {
+    return this.http.get(`${this.baseUrl}Fee/GetFeeReceipt`);
+  }
 }

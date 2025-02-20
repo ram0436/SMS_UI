@@ -19,7 +19,7 @@ export class AllStaffComponent {
 
   teacherList: any = [];
   dataSource = new MatTableDataSource<any>([]);
-  isLoading: boolean = true;
+  isLoading: boolean = false;
 
   classes: any[] = [];
   sections: any[] = [];
@@ -63,7 +63,7 @@ export class AllStaffComponent {
   }
 
   getAllTeacherList() {
-    this.isLoading = true;
+    this.isLoading = false;
     this.teacherService.getTeacherList().subscribe((data: any) => {
       this.teacherList = data;
       this.dataSource.data = data;

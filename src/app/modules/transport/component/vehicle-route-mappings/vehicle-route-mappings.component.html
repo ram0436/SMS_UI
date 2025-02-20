@@ -1,0 +1,94 @@
+<div class="all-structures-container">
+  <div *ngIf="isLoading" class="loading-spinner">
+    <!-- Loading Spinner or Text -->
+    <mat-spinner></mat-spinner>
+  </div>
+  <div *ngIf="!isLoading">
+    <div class="container-about">
+      <div class="title">Vehicle Route Mappings</div>
+      <div class="description">
+        Following table shows all vehicle route mappings
+      </div>
+    </div>
+    <div class="main-grid">
+      <div class="grid-options">
+        <div class="grid-btns">
+          <span
+            class="material-symbols-outlined grid-btn"
+            (click)="openAddVehicleRouteMappingsDialog()"
+          >
+            add
+          </span>
+          <span class="material-symbols-outlined grid-btn delete-btn">
+            delete
+          </span>
+          <span class="material-symbols-outlined grid-btn"> filter_alt </span>
+          <span class="material-symbols-outlined grid-btn"> search </span>
+        </div>
+        <div class="grid-total">
+          <span class="total"
+            ><span class="total-text">Total Route Mappings:</span>
+            {{ routeMappings.length }}</span
+          >
+        </div>
+      </div>
+      <div class="grid-table">
+        <table mat-table [dataSource]="dataSource" matSort>
+          <ng-container matColumnDef="no">
+            <th mat-header-cell *matHeaderCellDef>#</th>
+            <td mat-cell *matCellDef="let routeMapping; let i = index">
+              <b>{{ i + 1 }}.</b>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="vehicle">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Vehicle</th>
+            <td mat-cell *matCellDef="let routeMapping">
+              {{ routeMapping?.vehicle || "-" }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="route">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Vehicle Route
+            </th>
+            <td mat-cell *matCellDef="let routeMapping">
+              {{ routeMapping?.vehicleRoute || "-" }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="transportFee">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Transport Fee
+            </th>
+            <td mat-cell *matCellDef="let routeMapping">
+              {{ routeMapping?.transportFee || "-" }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+            <td mat-cell *matCellDef="let vehicle">
+              <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="editRouteMapping()">Edit</button>
+                <button mat-menu-item (click)="deleteRouteMapping()">
+                  Delete
+                </button>
+              </mat-menu>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+        <mat-paginator
+          [pageSize]="10"
+          [pageSizeOptions]="[5, 10, 20]"
+          showFirstLastButtons
+        ></mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>
