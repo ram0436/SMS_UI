@@ -172,6 +172,7 @@ export class AddStudentComponent implements OnInit {
       schoolName: "",
       schoolCode: "",
       boardName: "",
+      studentId: 0,
     };
 
     this.student.studentPreviousQualification.push(newQualification);
@@ -508,6 +509,7 @@ export class AddStudentComponent implements OnInit {
         studentImageURL: this.student.studentAdmissionDetail[0].studentImageURL, // assuming 1 image
         referredBy: 0, // Set 'RAM' or relevant value
         isRTEStudent: this.student.studentAdmissionDetail[0].isRTEStudent,
+        studentId: 0,
       },
     ];
 
@@ -528,6 +530,7 @@ export class AddStudentComponent implements OnInit {
         mobileNo: this.fatherDetails["mobileNo"],
         aadharNo: this.fatherDetails["aadharNo"],
         fatherImageURL: this.student.studentFatherDetail[0]?.fatherImageURL,
+        studentId: 0,
       },
     ];
 
@@ -548,6 +551,7 @@ export class AddStudentComponent implements OnInit {
         mobileNo: this.motherDetails["mobileNo"],
         aadharNo: this.motherDetails["aadharNo"],
         motherImageURL: this.student.studentMotherDetail[0]?.motherImageURL,
+        studentId: 0,
       },
     ];
 
@@ -569,8 +573,11 @@ export class AddStudentComponent implements OnInit {
         aadharNo: this.guardianDetails["aadharNo"],
         guardianImageURL:
           this.student.studentGuardianDetail[0]?.guardianImageURL,
+        studentId: 0,
       },
     ];
+
+    // console.log(JSON.stringify(this.student, null, 2));
 
     this.studentService.addStudent(this.student).subscribe((response) => {
       this.showNotification("Student Added Succesfully");
