@@ -31,6 +31,7 @@ export class Student {
     id: number;
     adharCardNo: string;
     aadharCardImageURL: string;
+    studentId: number;
   }[] = [
     {
       createdBy: 0,
@@ -40,6 +41,7 @@ export class Student {
       id: 0,
       adharCardNo: "",
       aadharCardImageURL: "",
+      studentId: 0,
     },
   ];
 
@@ -66,6 +68,7 @@ export class Student {
     studentImageURL: string;
     referredBy: number;
     isRTEStudent: boolean;
+    studentId: number;
   }[] = [
     {
       createdBy: 0,
@@ -89,6 +92,7 @@ export class Student {
       studentImageURL: "",
       referredBy: 0,
       isRTEStudent: true,
+      studentId: 0,
     },
   ];
 
@@ -104,6 +108,7 @@ export class Student {
     ifscCode: string;
     accountNo: string;
     panNo: string;
+    studentId: number;
   }[] = [
     {
       createdBy: 0,
@@ -116,6 +121,7 @@ export class Student {
       ifscCode: "",
       accountNo: "",
       panNo: "",
+      studentId: 0,
     },
   ];
 
@@ -136,6 +142,7 @@ export class Student {
     mobileNo: string;
     aadharNo: string;
     fatherImageURL: string;
+    studentId: number;
   }[] = [
     {
       createdBy: 0,
@@ -153,6 +160,7 @@ export class Student {
       mobileNo: "",
       aadharNo: "",
       fatherImageURL: "",
+      studentId: 0,
     },
   ];
 
@@ -173,6 +181,7 @@ export class Student {
     mobileNo: string;
     aadharNo: string;
     guardianImageURL: string;
+    studentId: number;
   }[] = [
     {
       createdBy: 0,
@@ -190,6 +199,7 @@ export class Student {
       mobileNo: "",
       aadharNo: "",
       guardianImageURL: "",
+      studentId: 0,
     },
   ];
 
@@ -207,6 +217,7 @@ export class Student {
     affiliatedTo: string;
     lastSession: string;
     isDropout: boolean;
+    studentId: number;
   }[] = [
     {
       createdBy: 0,
@@ -221,6 +232,7 @@ export class Student {
       affiliatedTo: "",
       lastSession: "",
       isDropout: true,
+      studentId: 0,
     },
   ];
 
@@ -241,6 +253,7 @@ export class Student {
     mobileNo: string;
     aadharNo: string;
     motherImageURL: string;
+    studentId: number;
   }[] = [
     {
       createdBy: 0,
@@ -258,6 +271,7 @@ export class Student {
       mobileNo: "",
       aadharNo: "",
       motherImageURL: "",
+      studentId: 0,
     },
   ];
 
@@ -273,6 +287,7 @@ export class Student {
     city: string;
     state: string;
     country: string;
+    studentId: number;
   }[] = [
     {
       createdBy: 0,
@@ -285,6 +300,7 @@ export class Student {
       city: "",
       state: "",
       country: "",
+      studentId: 0,
     },
   ];
 
@@ -300,6 +316,7 @@ export class Student {
     city: string;
     state: string;
     country: string;
+    studentId: number;
   }[] = [
     {
       createdBy: 0,
@@ -312,6 +329,7 @@ export class Student {
       city: "",
       state: "",
       country: "",
+      studentId: 0,
     },
   ];
 
@@ -330,6 +348,7 @@ export class Student {
     schoolName: string;
     schoolCode: string;
     boardName: string;
+    studentId: number;
   }[] = [
     {
       createdBy: 0,
@@ -345,6 +364,7 @@ export class Student {
       schoolName: "",
       schoolCode: "",
       boardName: "",
+      studentId: 0,
     },
   ];
 
@@ -360,6 +380,7 @@ export class Student {
     category: string;
     caste: string;
     casteCertificateImageURL: string;
+    studentId: number;
   }[] = [
     {
       createdBy: 0,
@@ -372,6 +393,7 @@ export class Student {
       category: "",
       caste: "",
       casteCertificateImageURL: "",
+      studentId: 0,
     },
   ];
 
@@ -384,6 +406,7 @@ export class Student {
     certificateNo: string;
     dateOfIssue: string;
     certificateImageURL: string;
+    studentId: number;
   }[] = [
     {
       createdBy: 0,
@@ -392,8 +415,9 @@ export class Student {
       modifiedOn: new Date().toISOString(),
       id: 0,
       certificateNo: "",
-      dateOfIssue: "",
+      dateOfIssue: new Date().toISOString(),
       certificateImageURL: "",
+      studentId: 0,
     },
   ];
 }
