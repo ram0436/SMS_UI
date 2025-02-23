@@ -70,8 +70,20 @@
   font-weight: 600 !important;
 }
 
-.grid-table {
+.grid-table,
+.grid-filters {
   margin: 10px 20px;
+}
+
+.grid-filters {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  padding: 16px 0px;
+}
+
+.active-filter-btn {
+  background-color: goldenrod !important;
 }
 
 table {

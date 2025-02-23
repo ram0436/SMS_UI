@@ -20,7 +20,13 @@
           <span class="material-symbols-outlined grid-btn delete-btn">
             delete
           </span>
-          <span class="material-symbols-outlined grid-btn"> filter_alt </span>
+          <span
+            class="material-symbols-outlined grid-btn"
+            [ngClass]="{ 'active-filter-btn': isFilterVisible }"
+            (click)="toggleFilters()"
+          >
+            filter_alt
+          </span>
           <span class="material-symbols-outlined grid-btn"> search </span>
         </div>
         <div class="grid-total">
@@ -29,6 +35,84 @@
             {{ studentList.length }}</span
           >
         </div>
+      </div>
+      <div class="grid-filters" *ngIf="isFilterVisible">
+        <mat-form-field class="input-field">
+          <mat-label>Class</mat-label>
+          <mat-select
+            [(ngModel)]="selectedClassId"
+            name="class"
+            (selectionChange)="onClassSelected($event.value)"
+          >
+            <mat-option *ngFor="let class of classes" [value]="class.id">
+              {{ class.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="input-field">
+          <mat-label>Section</mat-label>
+          <mat-select
+            [(ngModel)]="selectedSectionId"
+            name="section"
+            (selectionChange)="onSectionSelected($event.value)"
+          >
+            <mat-option *ngFor="let section of sections" [value]="section.id">
+              {{ section.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="input-field">
+          <mat-label>Stream</mat-label>
+          <mat-select
+            [(ngModel)]="selectedStreamId"
+            name="stream"
+            (selectionChange)="onStreamSelected($event.value)"
+          >
+            <mat-option *ngFor="let stream of streams" [value]="stream.id">
+              {{ stream.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div class="input-field">
+          <div class="input-field-title">Is RTE Student?</div>
+          <mat-radio-group
+            name="isRTEStudent"
+            (change)="setRTEStudent($event.value)"
+          >
+            <mat-radio-button value="yes">Yes</mat-radio-button>
+            <mat-radio-button value="no">No</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <mat-form-field class="input-field">
+          <mat-label>Admission No.</mat-label>
+          <input matInput [(ngModel)]="admissionNo" (keyup)="onInputChange()" />
+        </mat-form-field>
+
+        <mat-form-field class="input-field">
+          <mat-label>Registration No.</mat-label>
+          <input
+            matInput
+            [(ngModel)]="registrationNo"
+            (keyup)="onInputChange()"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="input-field">
+          <mat-label>Education Medium</mat-label>
+          <input
+            matInput
+            [(ngModel)]="educationMedium"
+            (keyup)="onInputChange()"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="input-field">
+          <mat-label>Religion</mat-label>
+          <input matInput [(ngModel)]="religion" (keyup)="onInputChange()" />
+        </mat-form-field>
       </div>
       <div class="grid-table">
         <table mat-table [dataSource]="dataSource" matSort>
