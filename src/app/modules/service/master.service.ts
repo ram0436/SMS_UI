@@ -77,4 +77,8 @@ export class MasterService {
       `${this.baseUrl}Master/GetSectionByClassId?classId=${classId}`
     );
   }
+
+  getAddress(pinCode: any) {
+    return this.http.get("https://api.postalpincode.in/pincode/" + pinCode);
+  }
 }

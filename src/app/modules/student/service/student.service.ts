@@ -31,4 +31,8 @@ export class StudentService {
       `${this.baseUrl}Student/GetStudentDetailByTabRefGuid?tabRefGuid=` + id
     );
   }
+
+  deleteStudent(studentId: any) {
+    return this.httpClient.delete(`${this.baseUrl}Student/` + studentId);
+  }
 }

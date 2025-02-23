@@ -122,7 +122,9 @@
               </button>
               <mat-menu #menu="matMenu">
                 <button mat-menu-item (click)="editTeacher()">Edit</button>
-                <button mat-menu-item (click)="deleteTeacher()">Delete</button>
+                <button mat-menu-item (click)="deleteTeacher(teacher.id)">
+                  Delete
+                </button>
               </mat-menu>
             </td>
           </ng-container>

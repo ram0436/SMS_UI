@@ -1075,32 +1075,51 @@
           />
         </mat-form-field>
         <mat-form-field class="input-field">
-          <mat-label>Country</mat-label>
-          <input
-            matInput
-            [(ngModel)]="student.studentPermanentAddress[0].country"
-          />
-        </mat-form-field>
-        <mat-form-field class="input-field">
           <mat-label>Pincode</mat-label>
           <input
             matInput
+            placeholder="Enter your pincode"
+            (input)="
+              getPermanentAddress($event); allowOnlyNumbersPincode($event)
+            "
             [(ngModel)]="student.studentPermanentAddress[0].pincode"
+            maxlength="6"
           />
         </mat-form-field>
-        <mat-form-field class="input-field">
+        <mat-form-field
+          *ngIf="student.studentPermanentAddress[0].state != ''"
+          class="input-field"
+        >
           <mat-label>State</mat-label>
           <input
             matInput
+            placeholder="State"
             [(ngModel)]="student.studentPermanentAddress[0].state"
+            readonly
           />
         </mat-form-field>
-
-        <mat-form-field class="input-field">
+        <mat-form-field
+          *ngIf="student.studentPermanentAddress[0].state != ''"
+          class="input-field"
+        >
           <mat-label>City</mat-label>
           <input
             matInput
+            placeholder="City"
             [(ngModel)]="student.studentPermanentAddress[0].city"
+            readonly
+          />
+        </mat-form-field>
+        <mat-form-field
+          *ngIf="student.studentPermanentAddress[0].state != ''"
+          class="input-field"
+        >
+          <mat-label>Country</mat-label>
+          <input
+            matInput
+            placeholder="City"
+            [(ngModel)]="student.studentPermanentAddress[0].country"
+            readonly
           />
         </mat-form-field>
       </div>
@@ -1118,32 +1137,51 @@
           />
         </mat-form-field>
         <mat-form-field class="input-field">
-          <mat-label>Country</mat-label>
-          <input
-            matInput
-            [(ngModel)]="student.studentTemporaryAddress[0].country"
-          />
-        </mat-form-field>
-        <mat-form-field class="input-field">
           <mat-label>Pincode</mat-label>
           <input
             matInput
+            placeholder="Enter your pincode"
+            (input)="
+              getTemporaryAddress($event); allowOnlyNumbersPincode($event)
+            "
             [(ngModel)]="student.studentTemporaryAddress[0].pincode"
+            maxlength="6"
           />
         </mat-form-field>
-        <mat-form-field class="input-field">
+        <mat-form-field
+          *ngIf="student.studentTemporaryAddress[0].state != ''"
+          class="input-field"
+        >
           <mat-label>State</mat-label>
           <input
             matInput
+            placeholder="State"
             [(ngModel)]="student.studentTemporaryAddress[0].state"
+            readonly
           />
         </mat-form-field>
-
-        <mat-form-field class="input-field">
+        <mat-form-field
+          *ngIf="student.studentTemporaryAddress[0].state != ''"
+          class="input-field"
+        >
           <mat-label>City</mat-label>
           <input
             matInput
+            placeholder="City"
             [(ngModel)]="student.studentTemporaryAddress[0].city"
+            readonly
+          />
+        </mat-form-field>
+        <mat-form-field
+          *ngIf="student.studentTemporaryAddress[0].state != ''"
+          class="input-field"
+        >
+          <mat-label>Country</mat-label>
+          <input
+            matInput
+            placeholder="City"
+            [(ngModel)]="student.studentTemporaryAddress[0].country"
+            readonly
           />
         </mat-form-field>
       </div>

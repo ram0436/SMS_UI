@@ -36,6 +36,8 @@ export class AddTeacherComponent implements OnInit {
 
   passingDates: any[] = [];
 
+  numericValue: number = 0;
+
   private subscriptions: Subscription = new Subscription();
 
   constructor(
@@ -113,6 +115,44 @@ export class AddTeacherComponent implements OnInit {
 
   onDepartmentSelect(departmentId: number): void {
     this.teacher.departmentId = departmentId;
+  }
+
+  getPermanentAddress(event: any) {
+    let pincode = event.target.value;
+    if (pincode.length === 6) {
+      this.masterService.getAddress(pincode).subscribe((data: any) => {
+        if (data[0].PostOffice != null) {
+          var address = data[0].PostOffice[0];
+          this.teacher.teacherPermanentAddress[0].state = address.State;
+          this.teacher.teacherPermanentAddress[0].city = address.District;
+          this.teacher.teacherPermanentAddress[0].country = address.Country;
+          // this.postOffices = data[0].PostOffice;
+        }
+      });
+    }
+  }
+
+  getTemporaryAddress(event: any) {
+    let pincode = event.target.value;
+    if (pincode.length === 6) {
+      this.masterService.getAddress(pincode).subscribe((data: any) => {
+        if (data[0].PostOffice != null) {
+          var address = data[0].PostOffice[0];
+
+          this.teacher.teacherTemporaryAddress[0].state = address.State;
+          this.teacher.teacherTemporaryAddress[0].city = address.District;
+          this.teacher.teacherTemporaryAddress[0].country = address.Country;
+        }
+      });
+    }
+  }
+
+  allowOnlyNumbersPincode(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    const inputValue = inputElement.value;
+    const numericInput = inputValue.replace(/[^0-9.-]/g, "");
+    inputElement.value = numericInput;
+    this.numericValue = parseFloat(numericInput);
   }
 
   selectFile(isFrom: String) {
