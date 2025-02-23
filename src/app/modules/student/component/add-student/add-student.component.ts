@@ -41,6 +41,7 @@ export class AddStudentComponent implements OnInit {
   admissionDateTemp: Date | null = null;
   dobDateTemp: Date | null = null;
   issueDateTemp: Date | null = null;
+  numericValue: number = 0;
 
   passingDates: any[] = [];
 
@@ -475,6 +476,43 @@ export class AddStudentComponent implements OnInit {
       }
       this.guardianImage[this.guardianImage.length - 1] = "";
     }
+  }
+
+  getPermanentAddress(event: any) {
+    let pincode = event.target.value;
+    if (pincode.length === 6) {
+      this.masterService.getAddress(pincode).subscribe((data: any) => {
+        if (data[0].PostOffice != null) {
+          var address = data[0].PostOffice[0];
+          this.student.studentPermanentAddress[0].state = address.State;
+          this.student.studentPermanentAddress[0].city = address.District;
+          this.student.studentPermanentAddress[0].country = address.Country;
+          // this.postOffices = data[0].PostOffice;
+        }
+      });
+    }
+  }
+
+  getTemporaryAddress(event: any) {
+    let pincode = event.target.value;
+    if (pincode.length === 6) {
+      this.masterService.getAddress(pincode).subscribe((data: any) => {
+        if (data[0].PostOffice != null) {
+          var address = data[0].PostOffice[0];
+          this.student.studentTemporaryAddress[0].state = address.State;
+          this.student.studentTemporaryAddress[0].city = address.District;
+          this.student.studentTemporaryAddress[0].country = address.Country;
+        }
+      });
+    }
+  }
+
+  allowOnlyNumbersPincode(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    const inputValue = inputElement.value;
+    const numericInput = inputValue.replace(/[^0-9.-]/g, "");
+    inputElement.value = numericInput;
+    this.numericValue = parseFloat(numericInput);
   }
 
   setDropout(value: string): void {

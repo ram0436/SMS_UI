@@ -363,27 +363,52 @@
           />
         </mat-form-field>
         <mat-form-field class="input-field">
-          <mat-label>Country</mat-label>
-          <input
-            matInput
-            [(ngModel)]="staff.staffPermanentAddress[0].country"
-          />
-        </mat-form-field>
-        <mat-form-field class="input-field">
           <mat-label>Pincode</mat-label>
           <input
             matInput
+            placeholder="Enter your pincode"
+            (input)="
+              getPermanentAddress($event); allowOnlyNumbersPincode($event)
+            "
             [(ngModel)]="staff.staffPermanentAddress[0].pincode"
+            maxlength="6"
           />
         </mat-form-field>
-        <mat-form-field class="input-field">
+        <mat-form-field
+          *ngIf="staff.staffPermanentAddress[0].state != ''"
+          class="input-field"
+        >
           <mat-label>State</mat-label>
-          <input matInput [(ngModel)]="staff.staffPermanentAddress[0].state" />
+          <input
+            matInput
+            placeholder="State"
+            [(ngModel)]="staff.staffPermanentAddress[0].state"
+            readonly
+          />
         </mat-form-field>
-
-        <mat-form-field class="input-field">
+        <mat-form-field
+          *ngIf="staff.staffPermanentAddress[0].state != ''"
+          class="input-field"
+        >
           <mat-label>City</mat-label>
-          <input matInput [(ngModel)]="staff.staffPermanentAddress[0].city" />
+          <input
+            matInput
+            placeholder="City"
+            [(ngModel)]="staff.staffPermanentAddress[0].city"
+            readonly
+          />
+        </mat-form-field>
+        <mat-form-field
+          *ngIf="staff.staffPermanentAddress[0].state != ''"
+          class="input-field"
+        >
+          <mat-label>Country</mat-label>
+          <input
+            matInput
+            placeholder="City"
+            [(ngModel)]="staff.staffPermanentAddress[0].country"
+            readonly
+          />
         </mat-form-field>
       </div>
     </div>
@@ -400,27 +425,52 @@
           />
         </mat-form-field>
         <mat-form-field class="input-field">
-          <mat-label>Country</mat-label>
-          <input
-            matInput
-            [(ngModel)]="staff.staffTemporaryAddress[0].country"
-          />
-        </mat-form-field>
-        <mat-form-field class="input-field">
           <mat-label>Pincode</mat-label>
           <input
             matInput
+            placeholder="Enter your pincode"
+            (input)="
+              getTemporaryAddress($event); allowOnlyNumbersPincode($event)
+            "
             [(ngModel)]="staff.staffTemporaryAddress[0].pincode"
+            maxlength="6"
           />
         </mat-form-field>
-        <mat-form-field class="input-field">
+        <mat-form-field
+          *ngIf="staff.staffTemporaryAddress[0].state != ''"
+          class="input-field"
+        >
           <mat-label>State</mat-label>
-          <input matInput [(ngModel)]="staff.staffTemporaryAddress[0].state" />
+          <input
+            matInput
+            placeholder="State"
+            [(ngModel)]="staff.staffTemporaryAddress[0].state"
+            readonly
+          />
         </mat-form-field>
-
-        <mat-form-field class="input-field">
+        <mat-form-field
+          *ngIf="staff.staffTemporaryAddress[0].state != ''"
+          class="input-field"
+        >
           <mat-label>City</mat-label>
-          <input matInput [(ngModel)]="staff.staffTemporaryAddress[0].city" />
+          <input
+            matInput
+            placeholder="City"
+            [(ngModel)]="staff.staffTemporaryAddress[0].city"
+            readonly
+          />
+        </mat-form-field>
+        <mat-form-field
+          *ngIf="staff.staffTemporaryAddress[0].state != ''"
+          class="input-field"
+        >
+          <mat-label>Country</mat-label>
+          <input
+            matInput
+            placeholder="City"
+            [(ngModel)]="staff.staffTemporaryAddress[0].country"
+            readonly
+          />
         </mat-form-field>
       </div>
     </div>

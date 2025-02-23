@@ -6,6 +6,7 @@ import { MasterService } from "../../../service/master.service";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
 import { Subscription } from "rxjs";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: "app-all-students",
@@ -57,7 +58,8 @@ export class AllStudentsComponent {
   constructor(
     public dialog: MatDialog,
     private studentService: StudentService,
-    private masterService: MasterService
+    private masterService: MasterService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -232,9 +234,25 @@ export class AllStudentsComponent {
     // Implement edit functionality
   }
 
-  deleteStudent() {
-    // console.log("Deleting student");
-    // Implement delete functionality
+  deleteStudent(studentId: any): void {
+    if (confirm("Are you sure you want to delete this student?")) {
+      this.studentService.deleteStudent(studentId).subscribe(
+        () => {
+          console.log("Hi");
+          this.showNotification("Student deleted successfully!");
+          window.location.reload();
+        },
+        (error) => {}
+      );
+    }
+  }
+
+  showNotification(message: string): void {
+    this.snackBar.open(message, "Close", {
+      duration: 5000,
+      horizontalPosition: "end",
+      verticalPosition: "top",
+    });
   }
 
   openAddStudentDialog(): void {
